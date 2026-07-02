@@ -73,6 +73,31 @@
     .preview-card.grid{display:grid!important;grid-template-columns:1fr!important;gap:6px!important}
     .preview-card.focus{border:2px solid var(--orange-5)!important;background:rgba(232,70,66,0.15)!important}
     @keyframes splashFadeIn{0%{opacity:0;transform:scale(0.9) translateY(10px)}100%{opacity:1;transform:scale(1) translateY(0)}}
+    .bottom-nav .voice-btn {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: white;
+      border: 1px solid var(--grey-3);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: transform 0.15s, background-color 0.15s, box-shadow 0.15s;
+      user-select: none;
+      -webkit-user-select: none;
+      padding: 0;
+    }
+    .bottom-nav .voice-btn:active, .bottom-nav .voice-btn.pressed {
+      background-color: var(--orange-1) !important;
+      transform: scale(0.92) !important;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.12), inset 0 0 0 1.5px var(--orange-4) !important;
+    }
+    @keyframes voiceBar {
+      0% { transform: scaleY(0.4); }
+      100% { transform: scaleY(1.3); }
+    }
   </style>
 </head>
 <body>
@@ -92,6 +117,21 @@
 
     <div class="device" aria-label="iPhone 17 prototype">
       <div class="phone">
+        <!-- Voice Listening Overlay -->
+        <div id="voiceListeningOverlay" style="position: absolute; inset: 0; z-index: 9998; background: rgba(0, 0, 0, 0.4); backdrop-filter: blur(8px); display: none; flex-direction: column; align-items: center; justify-content: flex-end; padding-bottom: 120px; transition: opacity 0.3s ease; pointer-events: none; opacity: 0; border-radius: inherit; overflow: hidden;">
+          <div class="voice-card" style="background: white; width: 90%; border-radius: 28px; padding: 24px; box-shadow: 0 20px 40px rgba(0,0,0,0.3); display: flex; flex-direction: column; align-items: center; gap: 16px; transform: translateY(20px); transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);">
+            <!-- Voice Wave Animation -->
+            <div class="voice-wave" style="display: flex; align-items: center; gap: 4px; height: 32px;">
+              <span style="display:block; width:4px; height:12px; background:var(--orange-5); border-radius:2px; animation: voiceBar 0.6s ease-in-out infinite alternate;"></span>
+              <span style="display:block; width:4px; height:24px; background:var(--orange-5); border-radius:2px; animation: voiceBar 0.6s ease-in-out infinite alternate 0.12s;"></span>
+              <span style="display:block; width:4px; height:16px; background:var(--orange-5); border-radius:2px; animation: voiceBar 0.6s ease-in-out infinite alternate 0.24s;"></span>
+              <span style="display:block; width:4px; height:28px; background:var(--orange-5); border-radius:2px; animation: voiceBar 0.6s ease-in-out infinite alternate 0.36s;"></span>
+              <span style="display:block; width:4px; height:10px; background:var(--orange-5); border-radius:2px; animation: voiceBar 0.6s ease-in-out infinite alternate 0.48s;"></span>
+            </div>
+            <b style="font-size: var(--type-lg); color: var(--grey-7); letter-spacing:-0.02em;">In ascolto...</b>
+            <p style="font-size: var(--type-sm); color: var(--grey-6); margin: 0; text-align: center; line-height: 1.4;">Tieni premuto e parla per controllare luci, clima e scenari.</p>
+          </div>
+        </div>
         <div class="status"><span>9:41</span><div class="island"></div><span class="signals"><b></b><i></i></span></div>
 
         <section class="view active" data-view="dashboard">
@@ -115,7 +155,7 @@
               <div class="facts"><div class="fact"><b>−11%</b><span>Consumi inutili evitati</span></div><div class="fact"><b>3</b><span>Stanze mantenute nel comfort ideale</span></div></div>
             </section>
           </div>
-          <nav class="bottom-nav"><button class="active" data-go="dashboard"><b>◉</b>Oggi</button><button data-go="learn"><b>◌</b>Impara</button><button data-go="homes"><b>⌂</b>Case</button><button data-go="widgets"><b>▣</b>Widget</button></nav>
+          <nav class="bottom-nav"><button class="active" data-go="dashboard"><b>◉</b>Oggi</button><button data-go="learn"><b>◌</b>Impara</button><button class="voice-btn"><img src="casper.png" alt="Casper" style="width:24px;height:24px;filter:brightness(0);object-fit:contain;pointer-events:none;"></button><button data-go="homes"><b>⌂</b>Case</button><button data-go="widgets"><b>▣</b>Widget</button></nav>
         </section>
 
         <section class="view" data-view="learn">
@@ -128,7 +168,7 @@
             <article class="question"><span class="qtag">Serve una conferma</span><h3>La stanza in fondo è uno studio o una camera degli ospiti?</h3><div class="answers"><button data-answer="Studio">È uno studio</button><button class="primary" data-answer="Camera ospiti">È una camera</button></div></article>
             <section class="section learning-log"><div class="section-head"><h2>Cosa ha già imparato</h2><span>Aggiornato di recente</span></div><div class="card"><div class="logrow"><i>✓</i><div><b>Gli orari di rientro cambiano spesso</b><span>Casper adatterà il comfort senza creare una regola rigida.</span></div></div><div class="logrow"><i>↗</i><div><b>Di notte preferisci aria più fresca</b><span>Sta verificando questa preferenza prima di usarla.</span></div></div></div></section>
           </div>
-          <nav class="bottom-nav"><button data-go="dashboard"><b>◉</b>Oggi</button><button class="active" data-go="learn"><b>◌</b>Impara</button><button data-go="homes"><b>⌂</b>Case</button><button data-go="widgets"><b>▣</b>Widget</button></nav>
+          <nav class="bottom-nav"><button data-go="dashboard"><b>◉</b>Oggi</button><button class="active" data-go="learn"><b>◌</b>Impara</button><button class="voice-btn"><img src="casper.png" alt="Casper" style="width:24px;height:24px;filter:brightness(0);object-fit:contain;pointer-events:none;"></button><button data-go="homes"><b>⌂</b>Case</button><button data-go="widgets"><b>▣</b>Widget</button></nav>
         </section>
 
         <section class="view" data-view="homes" style="--home-color:#B25B3C;--home-dark:#573027">
@@ -140,7 +180,7 @@
             <section class="section"><div class="section-head"><h2>Stanze e dispositivi</h2><span id="connectionLabel">Tutto connesso</span></div><div class="device-list" id="homeDevices"><div class="device-row"><i>⌁</i><div><b>Zona giorno</b><span>Comfort e illuminazione</span></div><span class="badge live">Pronta</span></div><div class="device-row"><i>◉</i><div><b>Ingresso</b><span>Sicurezza e presenza</span></div><span class="badge live">Protetto</span></div><div class="device-row"><i>∿</i><div><b>Clima</b><span>Routine adattiva attiva</span></div><span class="badge live">20.5°</span></div></div></section>
             <section class="section"><div class="section-head"><h2>Contesto</h2><span>Da Casper</span></div><div class="card"><div class="logrow"><i>C</i><div><b id="contextTitle">È tutto come ti aspetti</b><span id="contextBody">Non è richiesta alcuna azione.</span></div></div></div></section>
           </div>
-          <nav class="bottom-nav"><button data-go="dashboard"><b>◉</b>Oggi</button><button data-go="learn"><b>◌</b>Impara</button><button class="active" data-go="homes"><b>⌂</b>Case</button><button data-go="widgets"><b>▣</b>Widget</button></nav>
+          <nav class="bottom-nav"><button data-go="dashboard"><b>◉</b>Oggi</button><button data-go="learn"><b>◌</b>Impara</button><button class="voice-btn"><img src="casper.png" alt="Casper" style="width:24px;height:24px;filter:brightness(0);object-fit:contain;pointer-events:none;"></button><button class="active" data-go="homes"><b>⌂</b>Case</button><button data-go="widgets"><b>▣</b>Widget</button></nav>
         </section>
 
         <section class="view" data-view="widgets">
@@ -152,14 +192,14 @@
             <section class="section"><div class="card"><div class="setting-row"><div><b>Priorità agli aggiornamenti importanti</b><span>Dai maggiore peso visivo dei contesti urgenti</span></div><button class="switch on" data-switch></button></div><div class="setting-row"><div><b>Densità adattiva</b><span>Riduci il rumore quando c’è poco da mostrare</span></div><button class="switch on" data-switch></button></div><div class="setting-row"><div><b>Animazioni</b><span>Usa transizioni leggere quando cambia il contesto</span></div><button class="switch" data-switch></button></div></div></section>
             <button class="add-home" data-go="lock" style="margin-top:14px;border-color:var(--grey-4);background:transparent;color:var(--grey-6);">Anteprima su Schermata di Blocco</button>
           </div>
-          <nav class="bottom-nav"><button data-go="dashboard"><b>◉</b>Oggi</button><button data-go="learn"><b>◌</b>Impara</button><button data-go="homes"><b>⌂</b>Case</button><button class="active" data-go="widgets"><b>▣</b>Widget</button></nav>
+          <nav class="bottom-nav"><button data-go="dashboard"><b>◉</b>Oggi</button><button data-go="learn"><b>◌</b>Impara</button><button class="voice-btn"><img src="casper.png" alt="Casper" style="width:24px;height:24px;filter:brightness(0);object-fit:contain;pointer-events:none;"></button><button data-go="homes"><b>⌂</b>Case</button><button class="active" data-go="widgets"><b>▣</b>Widget</button></nav>
         </section>
 
         <section class="view" data-view="profile">
           <div class="scroll"><div class="appbar"><button class="mini-btn" data-go="dashboard">Torna alla home</button><span class="brand">PROFILO</span></div><div class="profile-head"><span class="avatar">SR</span><div><h1>Simone</h1><p>Gestisci case e posizione</p></div></div><section class="section"><div class="section-head"><h2>Case registrate</h2><span>2 case</span></div><div class="card"><div class="home-edit"><i class="home-color" style="--item-color:#B25B3C"></i><div><b>Casa principale</b><span>Sei qui · Posizione riconosciuta</span></div><button class="icon-btn" data-edit>•••</button></div><div class="logrow"></div><div class="home-edit"><i class="home-color" style="--item-color:#467C78"></i><div><b>Casa relax</b><span>Indirizzo salvato · Sei altrove</span></div><button class="icon-btn" data-edit>•••</button></div></div><button class="add-home" data-add-home>＋ Aggiungi una casa</button><form class="home-form" novalidate><input required placeholder="Nome della casa"><input required placeholder="Indirizzo completo"><p class="form-feedback" aria-live="polite"></p><button type="submit">Salva la casa</button></form></section><section class="section"><div class="section-head"><h2>Rilevamento della casa</h2><span>Automatico</span></div><div class="card"><div class="setting-row"><div><b>Riconosci dove mi trovo</b><span>La posizione serve solo a identificare una casa registrata.</span></div><button class="switch on" data-switch></button></div><div class="setting-row"><div><b>Suggerimenti per le altre case</b><span>Casper ti avvisa quando una casa lontana richiede attenzione.</span></div><button class="switch on" data-switch></button></div></div></section></div>
         </section>
 
-        <section class="view offline-view" data-view="emergency"><div class="status"><span>9:41</span><div class="island"></div><span class="signals"><b></b><i></i></span></div><div class="scroll"><div class="appbar"><span class="brand">GEWISS</span><button class="avatar" data-go="profile" style="background:#302725;color:#ff765b">C</button></div><article class="state-banner"><div class="state-line"><span class="state-dot"></span><div class="eyebrow" style="margin:0;color:#ff9c86">MODALITÀ ESSENZIALE AUTOMATICA</div></div><h1>Casper continua a<br>vegliare su questa casa.</h1><p>Il Wi‑Fi non è disponibile nella casa in cui ti trovi. Sicurezza e controlli essenziali continuano a funzionare in locale.</p><div class="since">Attivata automaticamente · Connessione RF locale</div></article><section class="section"><div class="section-head"><h2>Controlli locali</h2><span>Disponibili qui</span></div><div class="local-grid"><button class="control on" data-toggle><div class="cicon">◉</div><b>Luci</b><span>4 accese</span></button><button class="control on" data-toggle><div class="cicon">▥</div><b>Tapparelle</b><span>Chiuse al 72%</span></button><button class="control" data-toggle><div class="cicon">∿</div><b>Clima</b><span>20.5°</span></button><button class="control on" data-toggle><div class="cicon">⌁</div><b>Sensori</b><span>Protezione attiva</span></button></div></section><div class="emergency"><i>!</i><div><b>Le emergenze seguono un percorso separato</b><p>Gli allarmi gas e fumo restano sempre disponibili.</p></div></div></div><nav class="bottom-nav" style="background:rgba(34,31,30,.88);border-color:#403a38"><button data-go="dashboard"><b>◉</b>Oggi</button><button data-go="learn"><b>◌</b>Impara</button><button data-go="homes"><b>⌂</b>Case</button><button data-go="widgets"><b>▣</b>Widget</button></nav></section>
+        <section class="view offline-view" data-view="emergency"><div class="status"><span>9:41</span><div class="island"></div><span class="signals"><b></b><i></i></span></div><div class="scroll"><div class="appbar"><span class="brand">GEWISS</span><button class="avatar" data-go="profile" style="background:#302725;color:#ff765b">C</button></div><article class="state-banner"><div class="state-line"><span class="state-dot"></span><div class="eyebrow" style="margin:0;color:#ff9c86">MODALITÀ ESSENZIALE AUTOMATICA</div></div><h1>Casper continua a<br>vegliare su questa casa.</h1><p>Il Wi‑Fi non è disponibile nella casa in cui ti trovi. Sicurezza e controlli essenziali continuano a funzionare in locale.</p><div class="since">Attivata automaticamente · Connessione RF locale</div></article><section class="section"><div class="section-head"><h2>Controlli locali</h2><span>Disponibili qui</span></div><div class="local-grid"><button class="control on" data-toggle><div class="cicon">◉</div><b>Luci</b><span>4 accese</span></button><button class="control on" data-toggle><div class="cicon">▥</div><b>Tapparelle</b><span>Chiuse al 72%</span></button><button class="control" data-toggle><div class="cicon">∿</div><b>Clima</b><span>20.5°</span></button><button class="control on" data-toggle><div class="cicon">⌁</div><b>Sensori</b><span>Protezione attiva</span></button></div></section><div class="emergency"><i>!</i><div><b>Le emergenze seguono un percorso separato</b><p>Gli allarmi gas e fumo restano sempre disponibili.</p></div></div></div><nav class="bottom-nav" style="background:rgba(34,31,30,.88);border-color:#403a38"><button data-go="dashboard"><b>◉</b>Oggi</button><button data-go="learn"><b>◌</b>Impara</button><button class="voice-btn"><img src="casper.png" alt="Casper" style="width:24px;height:24px;filter:brightness(0);object-fit:contain;pointer-events:none;"></button><button data-go="homes"><b>⌂</b>Case</button><button data-go="widgets"><b>▣</b>Widget</button></nav></section>
 
         <!-- Lock view / Home screen widget preview -->
         <section class="view lock-view" data-view="lock">
@@ -285,6 +325,60 @@
         go('dashboard');
         triggerSplash();
       });
+    });
+
+    // Press-and-hold voice button control
+    const voiceButtons = document.querySelectorAll('.voice-btn');
+    const voiceOverlay = document.getElementById('voiceListeningOverlay');
+    const voiceCard = voiceOverlay ? voiceOverlay.querySelector('.voice-card') : null;
+    let isListening = false;
+
+    function startVoiceListening(e) {
+      if (isListening) return;
+      isListening = true;
+      e.preventDefault();
+
+      // Add pressed state class
+      voiceButtons.forEach(btn => btn.classList.add('pressed'));
+
+      if (voiceOverlay && voiceCard) {
+        voiceOverlay.style.display = 'flex';
+        // Force reflow
+        voiceOverlay.offsetHeight;
+        voiceOverlay.style.opacity = '1';
+        voiceCard.style.transform = 'translateY(0)';
+      }
+    }
+
+    function stopVoiceListening(e) {
+      if (!isListening) return;
+      isListening = false;
+      e.preventDefault();
+
+      // Remove pressed state class
+      voiceButtons.forEach(btn => btn.classList.remove('pressed'));
+
+      if (voiceOverlay && voiceCard) {
+        voiceOverlay.style.opacity = '0';
+        voiceCard.style.transform = 'translateY(20px)';
+        setTimeout(() => {
+          if (!isListening) {
+            voiceOverlay.style.display = 'none';
+          }
+        }, 300);
+      }
+    }
+
+    voiceButtons.forEach(btn => {
+      // Desktop mouse events
+      btn.addEventListener('mousedown', startVoiceListening);
+      btn.addEventListener('mouseup', stopVoiceListening);
+      btn.addEventListener('mouseleave', stopVoiceListening);
+
+      // Mobile touch events
+      btn.addEventListener('touchstart', startVoiceListening, { passive: false });
+      btn.addEventListener('touchend', stopVoiceListening, { passive: false });
+      btn.addEventListener('touchcancel', stopVoiceListening, { passive: false });
     });
   </script>
 </body>
