@@ -264,13 +264,17 @@
 
 
 
-  /* ── Global slide animation (ease both) ── */
+  /* ── Slide animations ── */
   @keyframes slideIn {
-    from { opacity: 0; transform: translateY(14px); }
-    to   { opacity: 1; transform: translateY(0); }
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+  @keyframes slideOut {
+    from { opacity: 1; }
+    to   { opacity: 0; }
   }
   @keyframes cardIn {
-    from { opacity: 0; transform: translateY(10px); }
+    from { opacity: 0; transform: translateY(8px); }
     to   { opacity: 1; transform: translateY(0); }
   }
   @keyframes fadeIn {
@@ -278,26 +282,36 @@
     to   { opacity: 1; }
   }
 
-  /* Every slide: invisible by default, animated when .active is added */
-  .slide { opacity: 0; }
+  /* Slides: hidden by default */
+  .slide { display: none; }
+
+  /* Active slide: fade in fast, then cards animate */
   .slide.active {
-    animation: slideIn .5s cubic-bezier(.45,.05,.55,.95) forwards;
+    display: block;
+    animation: slideIn .2s ease forwards;
+  }
+
+  /* Leaving slide: fade out, stays visible until JS removes class */
+  .slide.leaving {
+    display: block !important;
+    animation: slideOut .3s ease forwards;
+    pointer-events: none;
   }
 
 
   /* ══════════════════════════════════════════════════════════
      SLIDE 7 · USER JOURNEY — final clean version
      Typographic scale:
-       7px  → chrome / system / decorative (num, rail labels, kicker)
-      10px  → caption (mech label, jtag, goal)
-      11px  → bubble italic
+       7px  → chrome / system / kicker / counter / tags / rail
+      10px  → caption / jtag / goal / jtab-role / p-mech-label
+      11px  → speech bubble
       12px  → scenario (secondary body)
-      14px  → tab names, trust statement (base body)
+      14px  → tab names, trust statement
       15px  → phase name (above body, primary)
       46px  → h2 (unchanged)
   ══════════════════════════════════════════════════════════ */
 
-  /* Container: absolute, pinned */
+  /* Pinned container to prevent vertical stretch */
   .journey-container {
     position: absolute;
     top:    137px;
@@ -330,7 +344,7 @@
 
   .jtab-name {
     font-family: var(--sans);
-    font-size: 14px;          /* base body */
+    font-size: 14px;
     font-weight: 700;
     color: var(--faint);
     line-height: 1.2;
@@ -339,8 +353,8 @@
 
   .jtab-role {
     font-family: var(--mono);
-    font-size: 7px;           /* chrome tier */
-    letter-spacing: .1em;
+    font-size: 10px;          /* caption at 10px */
+    letter-spacing: .08em;
     text-transform: uppercase;
     color: var(--faint);
     line-height: 1;
@@ -356,7 +370,7 @@
   }
   .journey-panel.active { display: flex; }
 
-  /* ── Meta row: goal + tags, single line ── */
+  /* ── Meta row ── */
   .journey-meta {
     flex-shrink: 0;
     display: flex;
@@ -367,7 +381,7 @@
   }
   .journey-goal {
     font-family: var(--sans);
-    font-size: 10px;          /* caption tier */
+    font-size: 10px;          /* caption at 10px */
     color: var(--muted);
     white-space: nowrap;
     overflow: hidden;
@@ -378,7 +392,7 @@
   .journey-tags { display: flex; gap: 6px; flex-shrink: 0; }
   .jtag {
     font-family: var(--mono);
-    font-size: 8px;           /* between chrome and caption */
+    font-size: 10px;          /* caption at 10px */
     letter-spacing: .07em;
     text-transform: uppercase;
     color: var(--brand);
@@ -400,30 +414,22 @@
   /* ── Phase card ── */
   .p-col {
     flex: 1; min-width: 0;
-    display: flex; flex-direction: column; gap: 12px;
+    display: flex; flex-direction: column; gap: 8px; /* gap reduced to 8px */
     background: var(--surface);
     border: 1px solid var(--line);
     border-radius: 10px;
-    padding: 20px;
+    padding: 16px 14px 12px; /* padding reduced to fit text */
     overflow: hidden;
     position: relative;
-    /* Card enter animation — staggered by nth-child */
     opacity: 0;
     transition: box-shadow .2s ease;
   }
-  .journey-panel.active .p-col { animation: cardIn .4s cubic-bezier(.45,.05,.55,.95) forwards; }
-  .journey-panel.active .p-col:nth-child(1) { animation-delay: .05s; }
-  .journey-panel.active .p-col:nth-child(2) { animation-delay: .10s; }
-  .journey-panel.active .p-col:nth-child(3) { animation-delay: .15s; }
-  .journey-panel.active .p-col:nth-child(4) { animation-delay: .20s; }
-  .journey-panel.active .p-col:nth-child(5) { animation-delay: .25s; }
-
   .p-col:hover { box-shadow: 0 6px 24px rgba(0,0,0,.07); }
 
-  /* Phase number — chrome tier */
+  /* Phase number */
   .p-num {
     font-family: var(--mono);
-    font-size: 7px;           /* chrome tier */
+    font-size: 7px;           /* chrome at 7px */
     letter-spacing: .14em;
     text-transform: uppercase;
     color: var(--faint);
@@ -431,7 +437,7 @@
     line-height: 1;
   }
 
-  /* Phase name — above base body */
+  /* Phase name */
   .p-name {
     font-family: var(--sans);
     font-size: 15px;
@@ -448,35 +454,40 @@
     height: 1px;
     background: var(--line);
     flex-shrink: 0;
-    margin: -4px 0;   /* tighten: uses the gap spacing */
+    margin: -2px 0;
   }
 
-  /* Scenario — secondary body */
+  /* Scenario — secondary body, 2 lines max */
   .p-scenario {
     font-family: var(--sans);
-    font-size: 12px;          /* secondary body */
+    font-size: 12px;
     color: var(--muted);
-    line-height: 1.55;
+    line-height: 1.4;         /* line-height reduced to 1.4 */
     flex-shrink: 0;
-    /* Hard-stop at 2 lines — use overflow hidden with fixed height */
-    height: calc(12px * 1.55 * 2);
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
     overflow: hidden;
+    height: calc(12px * 1.4 * 2);
   }
 
-  /* AI speech bubble */
+  /* AI speech bubble, 2 lines max */
   .p-bubble {
     font-family: var(--sans);
     font-size: 11px;
     font-style: italic;
     color: var(--ink);
-    line-height: 1.5;
+    line-height: 1.4;         /* line-height reduced to 1.4 */
     background: var(--g2);
     border-left: 2px solid var(--brand);
-    padding: 7px 10px;
+    padding: 6px 10px;
     border-radius: 0 6px 6px 0;
     flex-shrink: 0;
-    height: calc(11px * 1.5 * 2 + 14px);  /* 2 lines + padding */
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
     overflow: hidden;
+    height: calc(11px * 1.4 * 2 + 12px);
   }
 
   /* Flex spacer */
@@ -486,8 +497,8 @@
   .p-mechanic { flex-shrink: 0; }
   .p-mech-label {
     font-family: var(--mono);
-    font-size: 8px;           /* between chrome and caption */
-    letter-spacing: .1em;
+    font-size: 10px;          /* caption at 10px */
+    letter-spacing: .08em;
     text-transform: uppercase;
     color: var(--brand);
     font-weight: 600;
@@ -510,7 +521,7 @@
   .p-crit-badge {
     position: absolute; top: -10px; right: 12px;
     background: var(--brand); color: #fff;
-    font-family: var(--mono); font-size: 7px;
+    font-family: var(--mono); font-size: 7px;     /* chrome at 7px */
     font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
     padding: 2px 8px; border-radius: 4px;
   }
@@ -543,32 +554,126 @@
     font-style: italic; color: var(--muted); line-height: 1.5;
     padding: 7px 14px; background: var(--g2);
     border-radius: 6px; border-left: 3px solid var(--brand);
-    overflow: hidden; white-space: nowrap; text-overflow: ellipsis;
-    /* Animate after cards */
-    animation: fadeIn .4s ease .35s both;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    animation: fadeIn .38s ease .6s both;
   }
   .trust-statement strong { font-style: normal; font-weight: 700; color: var(--brand); }
 
-  /* Tab switch: panel fades in */
-  .journey-panel.active {
-    animation: fadeIn .25s ease forwards;
+  /* ── Chrome/system overrides (7px) ── */
+  .kicker,
+  .tag,
+  .rail,
+  .rail .tag,
+  .counter,
+  .chrome,
+  .chrome button {
+    font-size: 7px !important;
   }
 
-  /* ── 7px override for global chrome elements on all slides ── */
-  .tag { font-size: 7px !important; letter-spacing: .12em; }
-  .kicker { font-size: 8px !important; }
   .node { width: 5px !important; height: 5px !important; }
 
-
-  @media print{
-    body{ background:#fff; overflow:visible; }
-    #viewport{ position:static; }
-    #scaler{ transform:none!important; width:auto; height:auto; }
-    .slide{ display:block!important; position:relative; page-break-after:always; box-shadow:none; }
-    .chrome{ display:none; }
-    .rail{ bottom:40px; }
+  /* ── Slide transition animations (ease ease) ── */
+  @keyframes slideIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
   }
-</style>
+  @keyframes slideOut {
+    from { opacity: 1; }
+    to   { opacity: 0; }
+  }
+  @keyframes elementFadeIn {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes cardIn {
+    from { opacity: 0; transform: translateY(14px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+
+  /* Hide slides by default */
+  .slide {
+    display: none;
+    position: absolute;
+    top: 0; left: 0;
+    width: var(--stage-w);
+    height: var(--stage-h);
+    opacity: 0;
+  }
+
+  /* Enter transition for active slide */
+  .slide.active {
+    display: block;
+    animation: slideIn 0.25s ease forwards;
+  }
+
+  /* Exit transition for leaving slide */
+  .slide.leaving {
+    display: block !important;
+    animation: slideOut 0.25s ease forwards;
+    pointer-events: none;
+  }
+
+  /* ── Element entry animation (staggered on active slides) ── */
+  .slide.active .agenda .row,
+  .slide.active .mcol,
+  .slide.active .step,
+  .slide.active .card,
+  .slide.active .ins,
+  .slide.active .opp-card {
+    opacity: 0;
+    animation: elementFadeIn 0.5s ease both;
+  }
+
+  /* Agenda row stagger */
+  .slide.active .agenda .row:nth-child(1) { animation-delay: 0.08s; }
+  .slide.active .agenda .row:nth-child(2) { animation-delay: 0.14s; }
+  .slide.active .agenda .row:nth-child(3) { animation-delay: 0.20s; }
+  .slide.active .agenda .row:nth-child(4) { animation-delay: 0.26s; }
+  .slide.active .agenda .row:nth-child(5) { animation-delay: 0.32s; }
+  .slide.active .agenda .row:nth-child(6) { animation-delay: 0.38s; }
+
+  /* Method stagger */
+  .slide.active .mcol:nth-child(1) { animation-delay: 0.08s; }
+  .slide.active .mcol:nth-child(2) { animation-delay: 0.18s; }
+
+  .slide.active .step:nth-child(1) { animation-delay: 0.12s; }
+  .slide.active .step:nth-child(2) { animation-delay: 0.22s; }
+  .slide.active .step:nth-child(3) { animation-delay: 0.32s; }
+
+  /* Archetype card stagger */
+  .slide.active .card:nth-child(1) { animation-delay: 0.08s; }
+  .slide.active .card:nth-child(2) { animation-delay: 0.18s; }
+  .slide.active .card:nth-child(3) { animation-delay: 0.28s; }
+
+  /* Insight card stagger */
+  .slide.active .ins:nth-child(1) { animation-delay: 0.08s; }
+  .slide.active .ins:nth-child(2) { animation-delay: 0.18s; }
+  .slide.active .ins:nth-child(3) { animation-delay: 0.28s; }
+
+  /* Opportunities card stagger */
+  .slide.active .opp-card:nth-child(1) { animation-delay: 0.08s; }
+  .slide.active .opp-card:nth-child(2) { animation-delay: 0.18s; }
+  .slide.active .opp-card:nth-child(3) { animation-delay: 0.28s; }
+
+  /* User journey card stagger */
+  .journey-panel.active .p-col {
+    opacity: 0;
+    animation: cardIn 0.5s ease both;
+  }
+  .journey-panel.active .p-col:nth-child(1) { animation-delay: 0.12s; }
+  .journey-panel.active .p-col:nth-child(2) { animation-delay: 0.18s; }
+  .journey-panel.active .p-col:nth-child(3) { animation-delay: 0.24s; }
+  .journey-panel.active .p-col:nth-child(4) { animation-delay: 0.30s; }
+  .journey-panel.active .p-col:nth-child(5) { animation-delay: 0.36s; }
+
+  </style>
 </head>
 <body>
 
@@ -869,7 +974,7 @@
       </div>
     </section>
 
-                    <!-- ============ SLIDE 7 · USER JOURNEY ============ -->
+                        <!-- ============ SLIDE 7 · USER JOURNEY ============ -->
     <section class="slide" data-name="User journey">
       <div class="head">
         <h2>User Journey</h2>
@@ -902,10 +1007,10 @@
             <div class="p-col">
               
               <span class="p-num">01 · Osserva</span>
-              <div class="p-name">Apprendimento silenzioso</div>
+              <div class="p-name">Apprendimento</div>
               <div class="p-divider"></div>
-              <div class="p-scenario">L'AI registra le abitudini per 10 giorni senza modificare nulla.</div>
-              <div class="p-bubble">"Sto imparando — non cambio nulla senza avertelo detto prima."</div>
+              <div class="p-scenario">L'AI osserva 10 giorni in silenzio per apprendere le routine.</div>
+              <div class="p-bubble">"Sto imparando le tue abitudini, non farò modifiche."</div>
               <div class="p-spacer"></div>
               <div class="p-mechanic"><span class="p-mech-label">Progressive Autonomy · Manual</span></div>
             </div>
@@ -914,8 +1019,8 @@
               <span class="p-num">02 · Valuta</span>
               <div class="p-name">Prima proposta</div>
               <div class="p-divider"></div>
-              <div class="p-scenario">Insight preciso: il riscaldamento di casa 2 rimane acceso 4h ogni giovedì senza nessuno.</div>
-              <div class="p-bubble">"Casa 2: riscaldamento acceso per 4h di giovedì senza nessuno. Spegno alle 20:00 → ~€18/mese?"</div>
+              <div class="p-scenario">Rilevato riscaldamento attivo senza presenza in casa 2.</div>
+              <div class="p-bubble">"Riscaldamento attivo in casa 2 vuota. Spegno alle 20:00?"</div>
               <div class="p-spacer"></div>
               <div class="p-mechanic"><span class="p-mech-label">Value Center · Insight</span></div>
             </div>
@@ -924,18 +1029,18 @@
               <span class="p-num">03 · Conferma</span>
               <div class="p-name">Fiducia progressiva</div>
               <div class="p-divider"></div>
-              <div class="p-scenario">Per 3 settimane avvisa prima di agire. Alla quarta, agisce in silenzio e riporta il giorno dopo.</div>
-              <div class="p-bubble">"Tra 5 min spengo casa 2 come concordato. Blocco questa volta?"</div>
+              <div class="p-scenario">Dopo 3 conferme manuali, l'AI agisce in autonomia.</div>
+              <div class="p-bubble">"Tra 5 minuti spengo casa 2. Vuoi bloccare l'azione?"</div>
               <div class="p-spacer"></div>
               <div class="p-mechanic"><span class="p-mech-label">Autonomy: Assisted → Collaborative</span></div>
             </div>
             <div class="p-col">
               
               <span class="p-num">04 · Testa</span>
-              <div class="p-name">Override rispettato</div>
+              <div class="p-name">Override</div>
               <div class="p-divider"></div>
-              <div class="p-scenario">Marco rientra prima e accende il riscaldamento. L'AI registra e chiede: eccezione o nuova regola?</div>
-              <div class="p-bubble">"Accensione manuale registrata — salto questa settimana. Eccezione o cambio la regola?"</div>
+              <div class="p-scenario">Rientro anticipato di Marco: l'AI adatta la regola.</div>
+              <div class="p-bubble">"Accensione manuale rilevata. Salto la regola per oggi?"</div>
               <div class="p-spacer"></div>
               <div class="p-mechanic"><span class="p-mech-label">Human-in-the-Loop · Override</span></div>
             </div>
@@ -943,7 +1048,7 @@
               <span class="p-num">05 · Affida</span>
               <div class="p-name">Report mensile</div>
               <div class="p-divider"></div>
-              <div class="p-scenario">Dopo 6 settimane il Value Center genera un report narrativo. Marco lo manda a un collega.</div>
+              <div class="p-scenario">Sintesi dei risparmi e dell'autonomia raggiunta.</div>
               <div class="p-spacer"></div>
               <div class="p-metric">−€43 · Collaborative Home ✓</div>
               <div class="p-mechanic"><span class="p-mech-label">Value Center · Ottimizzazione</span></div>
@@ -962,8 +1067,8 @@
               <span class="p-num">01 · Mappa</span>
               <div class="p-name">Vista unificata</div>
               <div class="p-divider"></div>
-              <div class="p-scenario">Per la prima volta CO2, umidità, consumi e qualità dell'aria in un'unica schermata.</div>
-              <div class="p-bubble">"Ho unito 6 dispositivi — qualche giorno per stabilizzarsi, intanto puoi già esplorare."</div>
+              <div class="p-scenario">Unificazione di CO2, umidità e consumi in una sola schermata.</div>
+              <div class="p-bubble">"Ho unito 6 sensori. Esplora pure mentre calibro."</div>
               <div class="p-spacer"></div>
               <div class="p-mechanic"><span class="p-mech-label">Learning · Integrazione multi-sorgente</span></div>
             </div>
@@ -972,8 +1077,8 @@
               <span class="p-num">02 · Connette</span>
               <div class="p-name">Causa–effetto</div>
               <div class="p-divider"></div>
-              <div class="p-scenario">L'AI rileva che cucinare a finestre chiuse fa salire la CO2 del 40% — 4 sere su 5.</div>
-              <div class="p-bubble">"Cucini a finestre chiuse: CO2 +40% in 20 min. Vuoi che ti avvisi al superamento soglia?"</div>
+              <div class="p-scenario">Picchi di CO2 rilevati durante la cottura a finestre chiuse.</div>
+              <div class="p-bubble">"CO2 +40% in cucina a finestre chiuse. Ti avviso se risale?"</div>
               <div class="p-spacer"></div>
               <div class="p-mechanic"><span class="p-mech-label">Notification Center · Insight</span></div>
             </div>
@@ -982,26 +1087,26 @@
               <span class="p-num">03 · Bilancia</span>
               <div class="p-name">Tatto contestuale</div>
               <div class="p-divider"></div>
-              <div class="p-scenario">Cena con ospiti, CO2 a 1.200 ppm. Nessun push — micro-badge silenzioso sul lock screen.</div>
-              <div class="p-bubble">"Aria: attenzione — apri una finestra quando vuoi."</div>
+              <div class="p-scenario">Cena con ospiti: avviso silenzioso per non disturbare.</div>
+              <div class="p-bubble">"Livello CO2 elevato. Apri la finestra quando preferisci."</div>
               <div class="p-spacer"></div>
               <div class="p-mechanic"><span class="p-mech-label">Notification · Adaptive Delivery</span></div>
             </div>
             <div class="p-col">
               
               <span class="p-num">04 · Agisce</span>
-              <div class="p-name">Delega autonomia</div>
+              <div class="p-name">Delega</div>
               <div class="p-divider"></div>
-              <div class="p-scenario">Dopo 14 giorni di standby spento ogni notte da Chiara, l'AI propone di farlo in autonomia.</div>
-              <div class="p-bubble">"Hai fatto questa azione ogni notte per 14 giorni. Posso occuparmene io alle 23:00?"</div>
+              <div class="p-scenario">Proposta di automazione intelligente dello standby notturno.</div>
+              <div class="p-bubble">"Hai spento lo standby per 14 notti. Posso farlo io alle 23?"</div>
               <div class="p-spacer"></div>
               <div class="p-mechanic"><span class="p-mech-label">Autonomy: Manual → Assisted</span></div>
             </div>
             <div class="p-col success">
               <span class="p-num">05 · Racconta</span>
-              <div class="p-name">Report ambientale</div>
+              <div class="p-name">Report</div>
               <div class="p-divider"></div>
-              <div class="p-scenario">Fine mese: report narrativo con CO2 evitata. Chiara lo salva nel suo archivio di ricerca.</div>
+              <div class="p-scenario">Report mensile sull'impatto e il risparmio ecologico.</div>
               <div class="p-spacer"></div>
               <div class="p-metric">−14 kg CO2 · Air Quality 22/30 gg ✓</div>
               <div class="p-mechanic"><span class="p-mech-label">Value Center · Narrazione CO2</span></div>
@@ -1018,48 +1123,48 @@
             <div class="p-col">
               
               <span class="p-num">01 · Accoglie</span>
-              <div class="p-name">Benvenuto accessibile</div>
+              <div class="p-name">Benvenuto</div>
               <div class="p-divider"></div>
-              <div class="p-scenario">Il figlio installa l'app con Pina. Testo grande, italiano semplice, zero tecnicismi.</div>
-              <div class="p-bubble">"Ciao Pina, sono l'Agente di Casa. Non faccio niente senza prima dirtelo."</div>
+              <div class="p-scenario">Onboarding facilitato con testo grande e lingua semplice.</div>
+              <div class="p-bubble">"Ciao Pina, sono il tuo Agente. Ti avviso se necessario."</div>
               <div class="p-spacer"></div>
               <div class="p-mechanic"><span class="p-mech-label">Inclusion by Design · Onboarding</span></div>
             </div>
             <div class="p-col">
               
               <span class="p-num">02 · Abitua</span>
-              <div class="p-name">Dialogo quotidiano</div>
+              <div class="p-name">Dialogo</div>
               <div class="p-divider"></div>
-              <div class="p-scenario">Nei primi giorni solo buongiorno e promemoria facoltativi. Pina inizia a rispondere.</div>
-              <div class="p-bubble">"Buongiorno Pina! Termostato a 21°, tutto ok. Buona finestra per arieggiare oggi."</div>
+              <div class="p-scenario">Piccoli consigli quotidiani per stabilire una routine.</div>
+              <div class="p-bubble">"Buongiorno Pina! Casa a 21°. Ottimo momento per arieggiare."</div>
               <div class="p-spacer"></div>
               <div class="p-mechanic"><span class="p-mech-label">Learning · Calibrazione al ritmo</span></div>
             </div>
             <div class="p-col critical">
               <span class="p-crit-badge">⚡ Critical</span>
               <span class="p-num">03 · Percepisce</span>
-              <div class="p-name">Emergenza graduata</div>
+              <div class="p-name">Emergenza</div>
               <div class="p-divider"></div>
-              <div class="p-scenario">Fumo in cucina. L'AI avvisa prima Pina. Aspetta 60 s, poi informa il figlio solo dell'esito.</div>
-              <div class="p-bubble">"Fumo in cucina, Pina — vai a controllare. Se ok, premi 'Sto bene'."</div>
+              <div class="p-scenario">Fumo in cucina: l'AI avvisa prima Pina, poi il figlio.</div>
+              <div class="p-bubble">"Rilevato fumo, Pina. Se va tutto bene premi 'Sto bene'."</div>
               <div class="p-spacer"></div>
               <div class="p-mechanic"><span class="p-mech-label">Safety · Notification graduato</span></div>
             </div>
             <div class="p-col">
               
               <span class="p-num">04 · Protegge</span>
-              <div class="p-name">Resilienza offline</div>
+              <div class="p-name">Resilienza</div>
               <div class="p-divider"></div>
-              <div class="p-scenario">Wi-Fi cade per 3 ore. I sensori continuano via RF locale. Pina non se ne accorge.</div>
-              <div class="p-bubble">"Connessione caduta 3h 32m — i sensori hanno continuato. Tutto ok, tuo figlio sa già."</div>
+              <div class="p-scenario">Wi-Fi assente per 3 ore: i sensori continuano via RF locale.</div>
+              <div class="p-bubble">"Wi-Fi assente 3h. I sensori hanno continuato a proteggerti."</div>
               <div class="p-spacer"></div>
               <div class="p-mechanic"><span class="p-mech-label">Continuità Offline · Backup RF</span></div>
             </div>
             <div class="p-col success">
               <span class="p-num">05 · Condivide</span>
-              <div class="p-name">Orgoglio ritrovato</div>
+              <div class="p-name">Orgoglio</div>
               <div class="p-divider"></div>
-              <div class="p-scenario">Pina racconta al figlio l'episodio del fumo con orgoglio. Poi lo suggerisce a Rosaria.</div>
+              <div class="p-scenario">Pina gestisce l'allarme e racconta l'accaduto al figlio.</div>
               <div class="p-spacer"></div>
               <div class="p-metric">Sicurezza offline · Autonomia ✓</div>
               <div class="p-mechanic"><span class="p-mech-label">Human-in-the-Loop + Inclusion</span></div>
@@ -1085,8 +1190,6 @@
         <span class="tag right">07 / 08</span>
       </div>
     </section>
-
-
 
     <!-- ============ SLIDE 7 · OPPORTUNITÀ DI DESIGN ============ -->
     <section class="slide" data-name="Opportunità di design">
@@ -1154,13 +1257,24 @@
   const cur=document.getElementById('cur');
   document.getElementById('tot').textContent=slides.length;
 
+  // Navigation
   function show(n){
-    slides[i].classList.remove('active');
-    i=(n+slides.length)%slides.length;
-    // Reset animation by forcing reflow
-    void slides[i].offsetWidth;
-    slides[i].classList.add('active');
-    cur.textContent=i+1;
+    var prev = i;
+    i = (n + slides.length) % slides.length;
+    if (prev === i) return;
+
+    // Exit old slide: add leaving, remove active
+    slides[prev].classList.add('leaving');
+    slides[prev].classList.remove('active');
+    (function(p){ setTimeout(function(){ p.classList.remove('leaving'); }, 250); })(slides[prev]);
+
+    // Enter new slide: force reflow to trigger staggered animations of elements
+    var enterSlide = slides[i];
+    enterSlide.classList.remove('active');
+    void enterSlide.offsetWidth;
+    enterSlide.classList.add('active');
+
+    cur.textContent = i + 1;
   }
   document.getElementById('next').onclick=()=>show(i+1);
   document.getElementById('prev').onclick=()=>show(i-1);
@@ -1170,17 +1284,20 @@
   });
 
 
-  // Journey tab switcher (with fade)
+  // Journey tab switcher — restarts card animations
   function switchJourney(name) {
     document.querySelectorAll('.journey-panel').forEach(function(c){
       c.classList.remove('active');
-      c.style.animation = 'none';
     });
-    document.querySelectorAll('.journey-panel').forEach(function(c){ c.classList.remove('active'); });
     document.querySelectorAll('.jtab-btn').forEach(function(b){ b.classList.remove('active'); });
     var p = document.getElementById('content-' + name);
     var t = document.getElementById('tab-' + name);
-    if (p) p.classList.add('active');
+    if (p) {
+      p.querySelectorAll('.p-col').forEach(function(col) {
+        col.style.animation = 'none'; void col.offsetHeight; col.style.animation = '';
+      });
+      p.classList.add('active');
+    }
     if (t) t.classList.add('active');
   }
 
