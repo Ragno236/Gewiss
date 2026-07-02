@@ -120,15 +120,20 @@
     display: none !important;
   }
 
-  /* ---------- Slide 1 · Cover (Asymmetric Split Screen) ---------- */
+  /* ---------- Slide 1 · Cover ---------- */
+  .slide[data-name="Copertina"] {
+    background:
+      radial-gradient(circle at 88% 18%, rgba(227, 72, 38, .18) 0, rgba(227, 72, 38, 0) 34%),
+      radial-gradient(circle at 70% 92%, rgba(249, 197, 178, .55) 0, rgba(249, 197, 178, 0) 38%),
+      linear-gradient(135deg, #ffffff 0%, #fdf5f1 56%, #f8ded4 100%);
+  }
   .cover-split {
-    display: flex;
-    gap: 48px;
+    display: block;
     height: 100%;
-    align-items: stretch;
   }
   .cover-left {
-    flex: 1.25;
+    width: 100%;
+    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -138,50 +143,6 @@
     margin-top: auto;
     margin-bottom: auto;
   }
-  .cover-right {
-    flex: 0.95;
-    border-radius: var(--radius);
-    border: 1px solid var(--line);
-    background: var(--brand-grad);
-    position: relative;
-    overflow: hidden;
-    box-shadow: 0 20px 50px rgba(227, 72, 38, 0.15);
-  }
-  .cover-right::before {
-    content: "";
-    position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background-image: linear-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px),
-                      linear-gradient(90deg, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
-    background-size: 24px 24px;
-    opacity: 0.6;
-  }
-  .cover-right::after {
-    content: "";
-    position: absolute;
-    top: -20%; right: -20%;
-    width: 90%; height: 90%;
-    background: radial-gradient(circle, rgba(255, 255, 255, 0.15) 0%, transparent 70%);
-    filter: blur(30px);
-  }
-  .cover-right:hover {
-    filter: grayscale(0%) contrast(1) brightness(1);
-  }
-  .cover-badge {
-    position: absolute;
-    bottom: 24px;
-    left: 24px;
-    background: var(--brand);
-    color: #ffffff;
-    font-family: var(--mono);
-    font-size: 8px;
-    letter-spacing: .08em;
-    padding: 6px 16px;
-    border-radius: 20px;
-    text-transform: uppercase;
-    font-weight: 700;
-  }
-
   .brandmark {
     font-family: var(--mono); font-weight: 600; font-size: 11px; letter-spacing: .22em;
     color: var(--ink); text-transform: uppercase;
@@ -193,12 +154,12 @@
     color: var(--brand); margin-bottom: 20px;
   }
   .cover-left h1 {
-    font-size: 76px; line-height: 1.08; font-weight: 800; letter-spacing: -0.035em;
-    margin: 0; color: var(--ink); max-width: 15ch;
+    font-size: 68px; line-height: 1.04; font-weight: 800; letter-spacing: -0.04em;
+    margin: 0; color: var(--ink); max-width: 14ch;
   }
   .cover-left h1 em { font-style: normal; font-weight: 400; color: var(--faint); }
   .cover-left .lead {
-    margin-top: 24px; font-size: 18px; color: var(--muted); max-width: 52ch; line-height: 1.5;
+    margin-top: 22px; font-size: 17px; color: var(--muted); max-width: 56ch; line-height: 1.5;
   }
   .cover-left .meta {
     display: flex; gap: 56px; margin-top: 36px;
@@ -896,7 +857,7 @@
     width: auto !important;
   }
   .logo-tag {
-    height: 38px !important;
+    height: 68px !important;
     width: auto !important;
   }
 
@@ -980,9 +941,6 @@
               <span class="val ph" style="font-size: 12px; font-weight: 600; color: var(--ink);">Simone, Alessia, Lorenzo, Erica, Tommaso</span>
             </div>
           </div>
-        </div>
-        <div class="cover-right">
-          <div class="cover-badge">www.gewiss.com</div>
         </div>
       </div>
     </section>
