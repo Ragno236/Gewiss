@@ -76,14 +76,6 @@
   </style>
 </head>
 <body>
-  <!-- Splash Screen overlay -->
-  <div id="splashScreen" style="position: absolute; inset: 0; z-index: 9999; background: var(--orange-5); display: flex; flex-direction: column; align-items: center; justify-content: center; transition: opacity 0.5s ease; pointer-events: none;">
-    <div style="display: flex; flex-direction: column; align-items: center; gap: 20px; animation: splashFadeIn 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;">
-      <img src="casper.png" alt="Casper Mascot" style="width: 120px; height: 120px; object-fit: contain; filter: brightness(0);">
-      <span style="font-size: 32px; font-weight: 800; color: white; letter-spacing: -0.03em;">Ciao.</span>
-      <span style="font-size: var(--type-sm); font-weight: 800; color: white; letter-spacing: 0.2em; text-transform: uppercase;">GEWISS</span>
-    </div>
-  </div>
   <main class="stage">
     <aside class="side">
       <div class="eyebrow" style="color:#ff8066">GEWISS · CASPER</div>
@@ -175,7 +167,7 @@
           <div class="lock-content">
             <div class="lock-date">Giovedì 2 luglio</div>
             <div class="lock-time">18:24</div>
-            <article class="lock-widget" data-go="widgets" style="cursor: pointer; position: relative; overflow: hidden;">
+            <article class="lock-widget" style="cursor: pointer; position: relative; overflow: hidden;">
               <img src="casper.png" alt="Casper" style="position: absolute; width: 100px; height: 100px; right: -15px; bottom: -20px; opacity: 0.08; filter: brightness(0) invert(1); pointer-events: none; object-fit: contain;">
               <div class="widget-top">
                 <span class="agent-mark"><img src="casper.png" alt="Casper" style="width:20px;height:20px;filter:brightness(0) invert(1);object-fit:contain;margin-right:6px;">Casper</span>
@@ -256,14 +248,44 @@
       qrImg.style.display = 'block';
     }
 
-    // Splash Screen fade out
-    setTimeout(() => {
-      const splash = document.getElementById('splashScreen');
-      if (splash) {
+    // Dynamic Splash Screen inside the phone
+    function triggerSplash(callback) {
+      const existing = document.getElementById('splashScreen');
+      if (existing) existing.remove();
+      const phone = document.querySelector('.phone');
+      if (!phone) return;
+      const splash = document.createElement('div');
+      splash.id = 'splashScreen';
+      splash.style.cssText = 'position: absolute; inset: 0; z-index: 9999; background: var(--orange-5); border-radius: inherit; display: flex; flex-direction: column; align-items: center; justify-content: center; transition: opacity 0.5s ease; pointer-events: none; overflow: hidden;';
+      splash.innerHTML = `
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 20px; animation: splashFadeIn 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;">
+          <img src="casper.png" alt="Casper Mascot" style="width: 120px; height: 120px; object-fit: contain; filter: brightness(0);">
+          <span style="font-size: 32px; font-weight: 800; color: white; letter-spacing: -0.03em;">Ciao.</span>
+          <span style="font-size: var(--type-sm); font-weight: 800; color: white; letter-spacing: 0.2em; text-transform: uppercase;">GEWISS</span>
+        </div>
+      `;
+      phone.appendChild(splash);
+      setTimeout(() => {
         splash.style.opacity = '0';
-        setTimeout(() => splash.remove(), 500);
-      }
-    }, 2200);
+        setTimeout(() => {
+          splash.remove();
+          if (callback) callback();
+        }, 500);
+      }, 2200);
+    }
+
+    // Trigger splash screen on first page load
+    window.addEventListener('DOMContentLoaded', () => {
+      triggerSplash();
+    });
+
+    // Handle lock screen widget click (unlock phone and launch app with splash screen)
+    document.querySelectorAll('.lock-widget').forEach(widget => {
+      widget.addEventListener('click', () => {
+        go('dashboard');
+        triggerSplash();
+      });
+    });
   </script>
 </body>
 </html>
