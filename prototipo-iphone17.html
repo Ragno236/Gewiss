@@ -129,14 +129,9 @@
       100% { transform: scale(0.95); }
     }
     .anim-ghost { animation: floatGhost 3s ease-in-out infinite; transform-origin: center; }
-    .anim-can { animation: tiltCan 3s ease-in-out infinite; transform-origin: 65px 45px; }
-    .anim-drip { animation: waterDrip 1.5s linear infinite; }
     .anim-plant { animation: growPlant 3s ease-in-out infinite; transform-origin: bottom center; }
     .view[data-view="splash"].active {
       display: flex !important;
-    }
-    .view[data-view="notifications"].active {
-      display: block !important;
     }
   </style>
 </head>
@@ -190,27 +185,11 @@
               <div class="card decision"><div class="ico">⌁</div><div><h3>Prepara il soggiorno</h3><p>Partenza anticipata · Consumi invariati</p></div><button class="mini-btn" data-action="accept">Riscalda prima</button></div>
             </section>
             <article class="context-note"><p>Sei fuori da qualche giorno, nell’altra casa sono rimasti alcuni dispositivi accesi.</p><div class="note-actions"><button class="yes" data-action="remote-off">Spegni i dispositivi</button><button class="no" data-action="dismiss">Lascia accesi</button></div></article>
-            <section class="section">
-              <div class="section-head"><h2>Di cosa si è occupato Casper</h2></div>
-              <div class="facts">
-                <div class="fact" style="display:flex; flex-direction:column; align-items:center; text-align:center; padding: 12px 10px;">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--orange-5)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom:6px;"><path d="M3 3v18h18"/><path d="M18.7 8l-5.1 5.2-2.8-2.7L7 14.3"/></svg>
-                  <b>−11%</b>
-                  <span>Consumi evitati</span>
-                </div>
-                <div class="fact" style="display:flex; flex-direction:column; align-items:center; text-align:center; padding: 12px 10px;">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--orange-5)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom:6px;"><path d="M14 4v10.54a4 4 0 1 1-4 0V4a2 2 0 0 1 4 0Z"/><path d="M12 9v4"/></svg>
-                  <b>3</b>
-                  <span>Stanze regolate</span>
-                </div>
-              </div>
-            </section>
-
-            <!-- Risparmio Economico Callout with animated SVG -->
-            <section class="section" style="margin-top: 16px;">
-              <div style="background: #E8F5E9; border: 1px solid #C8E6C9; border-radius: 20px; padding: 14px 16px; display: grid; grid-template-columns: 74px 1fr; gap: 14px; align-items: center; overflow: hidden; position: relative;">
-                <!-- SVG Casper watering plant animation -->
-                <div style="width: 74px; height: 74px; background: rgba(255,255,255,0.4); border-radius: 16px; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(0,0,0,0.03);">
+            <section class="section" style="margin-top: 20px;">
+              <div class="section-head"><h2>Impatto di Casper</h2></div>
+              <div style="background: white; border: 1px solid var(--grey-3); border-radius: 20px; padding: 18px 16px; display: grid; grid-template-columns: 80px 1fr; gap: 16px; align-items: center; box-shadow: var(--shadow);">
+                <!-- Animated Casper + Plant -->
+                <div style="width: 80px; height: 80px; background: var(--grey-1); border-radius: 16px; display: flex; align-items: center; justify-content: center; border: 1px solid var(--grey-3); position: relative; overflow: hidden;">
                   <svg viewBox="0 0 100 100" style="width: 100%; height: 100%;">
                     <!-- Ghost Body -->
                     <g class="anim-ghost">
@@ -218,18 +197,6 @@
                       <circle cx="42" cy="42" r="3.5" fill="#006064"/>
                       <circle cx="58" cy="42" r="3.5" fill="#006064"/>
                       <path d="M47,48 Q50,52 53,48" stroke="#006064" stroke-width="2" fill="none" stroke-linecap="round"/>
-                      <!-- Watering Can -->
-                      <g class="anim-can">
-                        <rect x="62" y="42" width="14" height="10" rx="2" fill="#E84642"/>
-                        <path d="M62,44 C59,44 59,50 62,50" stroke="#E84642" stroke-width="2" fill="none"/>
-                        <line x1="76" y1="47" x2="84" y2="40" stroke="#E84642" stroke-width="2" stroke-linecap="round"/>
-                      </g>
-                    </g>
-                    <!-- Water drops -->
-                    <g>
-                      <circle cx="82" cy="45" r="1.5" fill="#42A5F5" class="anim-drip"/>
-                      <circle cx="84" cy="52" r="1.5" fill="#42A5F5" class="anim-drip" style="animation-delay: 0.5s;"/>
-                      <circle cx="81" cy="58" r="1.5" fill="#42A5F5" class="anim-drip" style="animation-delay: 1s;"/>
                     </g>
                     <!-- Plant in a pot -->
                     <g class="anim-plant">
@@ -240,32 +207,52 @@
                     </g>
                   </svg>
                 </div>
-                <!-- Right callout data -->
+                
+                <!-- Branded Info -->
                 <div>
                   <span style="font-size: 10px; color: #2E7D32; font-weight: 800; letter-spacing: 0.05em; text-transform: uppercase; display:block;">Risparmio Economico</span>
                   <div style="display: flex; align-items: baseline; gap: 6px; margin-top: 2px;">
-                    <span style="font-size: 22px; font-weight: 800; color: #1B5E20; letter-spacing:-0.02em;">12.40€</span>
-                    <span style="font-size: 11px; color: #388E3C; font-weight:700;">risparmiati questa settimana</span>
+                    <span style="font-size: 24px; font-weight: 800; color: var(--grey-7); letter-spacing:-0.02em;">12.40€</span>
+                    <span style="font-size: 11px; color: #2E7D32; font-weight:700;">risparmiati questa settimana</span>
                   </div>
-                  <p style="font-size: 11px; color: #455A64; margin: 3px 0 0; line-height: 1.3;">Grazie alle regolazioni orarie e allo spegnimento degli standby.</p>
+                  
+                  <!-- Horizontal Divider -->
+                  <div style="height: 1px; background: var(--grey-3); margin: 12px 0;"></div>
+                  
+                  <!-- Sub stats row -->
+                  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--orange-5)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M18.7 8l-5.1 5.2-2.8-2.7L7 14.3"/></svg>
+                      <div>
+                        <b style="font-size: var(--type-sm); color: var(--grey-7); display:block; line-height: 1.1;">−11%</b>
+                        <span style="font-size: 9px; color: var(--grey-5);">Consumi evitati</span>
+                      </div>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--orange-5)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4v10.54a4 4 0 1 1-4 0V4a2 2 0 0 1 4 0Z"/><path d="M12 9v4"/></svg>
+                      <div>
+                        <b style="font-size: var(--type-sm); color: var(--grey-7); display:block; line-height: 1.1;">3 stanze</b>
+                        <span style="font-size: 9px; color: var(--grey-5);">ottimizzate</span>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </section>
 
             <!-- Notifications System with Categories & Filters (Dual Taxonomy) -->
-            <section class="section" id="notificationsSection" style="margin-top: 24px;">
-              <div class="section-head">
+            <section class="section" id="notificationsSection" style="margin-top: 36px;">
+              <div class="section-head" style="margin-bottom: 14px;">
                 <h2>Avvisi da Casper</h2>
                 <span>Filtrati per urgenza e categoria</span>
               </div>
               
               <!-- Filter Chips -->
-              <div style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 12px;">
+              <div style="display: flex; flex-direction: column; gap: 10px; margin-bottom: 16px;">
                 <!-- Urgency Filters -->
                 <div style="display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none;">
-                  <button class="filter-chip active" data-filter="urgency-all" style="border: 1px solid var(--grey-3); background: white; border-radius: 99px; padding: 6px 12px; font-size: 10px; font-weight: 700; cursor: pointer; outline: none; flex-shrink: 0;">Qualsiasi urgenza</button>
-                  <button class="filter-chip" data-filter="urgency-high" style="border: 1px solid var(--grey-3); background: white; border-radius: 99px; padding: 6px 12px; font-size: 10px; font-weight: 700; cursor: pointer; outline: none; color: var(--orange-6); flex-shrink: 0;">Solo urgenze</button>
-                  <button class="filter-chip" data-filter="urgency-low" style="border: 1px solid var(--grey-3); background: white; border-radius: 99px; padding: 6px 12px; font-size: 10px; font-weight: 700; cursor: pointer; outline: none; color: var(--grey-6); flex-shrink: 0;">Avvisi normali</button>
+                  <button class="filter-chip active" data-filter="urgency-all" style="border: 1px solid var(--grey-3); background: white; border-radius: 99px; padding: 6px 12px; font-size: 10px; font-weight: 700; cursor: pointer; outline: none; flex-shrink: 0;">Tutte le notifiche</button>
+                  <button class="filter-chip" data-filter="urgency-high" style="border: 1px solid var(--grey-3); background: white; border-radius: 99px; padding: 6px 12px; font-size: 10px; font-weight: 700; cursor: pointer; outline: none; color: var(--orange-6); flex-shrink: 0;">Notifiche urgenti</button>
                 </div>
                 <!-- Type Filters -->
                 <div style="display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none; padding-bottom: 4px;">
@@ -366,55 +353,70 @@
             <section class="section"><div class="section-head"><h2>Stanze e dispositivi</h2><span id="connectionLabel">Tutto connesso</span></div><div class="device-list" id="homeDevices"><div class="device-row"><i>⌁</i><div><b>Zona giorno</b><span>Comfort e illuminazione</span></div><span class="badge live">Pronta</span></div><div class="device-row"><i>◉</i><div><b>Ingresso</b><span>Sicurezza e presenza</span></div><span class="badge live">Protetto</span></div><div class="device-row"><i>∿</i><div><b>Clima</b><span>Routine adattiva attiva</span></div><span class="badge live">20.5°</span></div></div></section>
             <section class="section"><div class="section-head"><h2>Contesto</h2><span>Da Casper</span></div><div class="card"><div class="logrow"><i>C</i><div><b id="contextTitle">È tutto come ti aspetti</b><span id="contextBody">Non è richiesta alcuna azione.</span></div></div></div></section>
 
-            <!-- Expandable Infographics Section -->
-            <section class="section" style="margin-top: 16px; margin-bottom: 24px;">
-              <button class="add-home" id="toggleInfographics" style="border-color: var(--grey-3); background: white; color: var(--grey-7); text-align: left; display: flex; justify-content: space-between; align-items: center; border-radius: 18px; width: 100%; padding: 12px 16px; font-weight:700; cursor:pointer;">
-                <span style="display:flex; align-items:center; gap:8px;">📊 Mostra Infografiche e Consumi</span>
-                <span id="infographicsArrow" style="transition: transform 0.2s; font-size:10px;">▼</span>
-              </button>
+            <!-- New Branded Infographics (Sostenibilità & Consumi) -->
+            <section class="section" style="margin-top: 24px; margin-bottom: 28px; display: flex; flex-direction: column; gap: 16px;">
+              <div class="section-head" style="margin-bottom: 2px;">
+                <h2>Analisi dei Luoghi</h2>
+                <span>Report energetico di Casper</span>
+              </div>
               
-              <div id="infographicsContainer" style="display: none; margin-top: 12px;">
-                <div class="card" style="padding: 16px; background: white; border: 1px solid var(--grey-3); border-radius: 16px;">
-                  <b style="display: block; font-size: var(--type-sm); color: var(--grey-7); margin-bottom: 12px;">Consumo Elettrico Rilevato vs Fatturato</b>
-                  <div style="display: flex; flex-direction: column; gap: 10px; margin-bottom: 18px;">
-                    <div>
-                      <div style="display:flex; justify-content:space-between; font-size:10px; margin-bottom:4px; color:var(--grey-6);">
-                        <span>Mese Corrente (Rilevato)</span>
-                        <b>180 kWh</b>
-                      </div>
-                      <div style="height: 10px; background: var(--grey-2); border-radius: 5px; overflow: hidden;">
-                        <div style="width: 72%; height: 100%; background: var(--orange-5); border-radius: 5px;"></div>
-                      </div>
+              <!-- Consumi Infographic Card -->
+              <div class="card" style="padding: 16px; background: white; border: 1px solid var(--grey-3); border-radius: 20px; box-shadow: var(--shadow); position: relative; overflow: hidden;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                  <b style="font-size: var(--type-sm); color: var(--grey-7); display: flex; align-items: center; gap: 6px;">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--orange-5)" stroke-width="2.5"><path d="M18 20V10M12 20V4M6 20v-6"/></svg>
+                    Efficienza Consumi
+                  </b>
+                  <span style="font-size: 10px; font-weight: 800; text-transform: uppercase; background: #FFF3E0; color: #E65100; padding: 3px 7px; border-radius: 6px;">Migliorato</span>
+                </div>
+                
+                <div style="display: flex; flex-direction: column; gap: 12px;">
+                  <div>
+                    <div style="display: flex; justify-content: space-between; font-size: 11px; margin-bottom: 4px; color: var(--grey-6);">
+                      <span>Consumo misurato da Casper</span>
+                      <b style="color: var(--grey-7);">180 kWh <span style="font-weight: normal; color: var(--grey-5);">(questo mese)</span></b>
                     </div>
-                    <div>
-                      <div style="display:flex; justify-content:space-between; font-size:10px; margin-bottom:4px; color:var(--grey-6);">
-                        <span>Mese Precedente (Fatturato)</span>
-                        <b>250 kWh</b>
-                      </div>
-                      <div style="height: 10px; background: var(--grey-2); border-radius: 5px; overflow: hidden;">
-                        <div style="width: 100%; height: 100%; background: var(--grey-4); border-radius: 5px;"></div>
-                      </div>
+                    <div style="height: 8px; background: var(--grey-2); border-radius: 4px; overflow: hidden;">
+                      <div style="width: 68%; height: 100%; background: var(--orange-5); border-radius: 4px;"></div>
                     </div>
                   </div>
                   
-                  <b style="display: block; font-size: var(--type-sm); color: var(--grey-7); margin-bottom: 10px;">Riduzione dei Rischi Domestici</b>
-                  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
-                    <div style="background: var(--grey-2); padding: 10px; border-radius: 12px; display: flex; align-items: center; gap: 10px;">
-                      <span style="font-size: 20px;">🛡️</span>
-                      <div>
-                        <b style="display: block; font-size: 13px; color: #2E7D32;">−34%</b>
-                        <span style="font-size: 9px; color: var(--grey-6);">Rischio Sovraccarico</span>
-                      </div>
+                  <div>
+                    <div style="display: flex; justify-content: space-between; font-size: 11px; margin-bottom: 4px; color: var(--grey-6);">
+                      <span>Soglia target impostata</span>
+                      <b style="color: var(--grey-7);">250 kWh <span style="font-weight: normal; color: var(--grey-5);">(consigliata)</span></b>
                     </div>
-                    <div style="background: var(--grey-2); padding: 10px; border-radius: 12px; display: flex; align-items: center; gap: 10px;">
-                      <span style="font-size: 20px;">⚡</span>
-                      <div>
-                        <b style="display: block; font-size: 13px; color: #2E7D32;">−50%</b>
-                        <span style="font-size: 9px; color: var(--grey-6);">Cortocircuito Clima</span>
-                      </div>
+                    <div style="height: 8px; background: var(--grey-2); border-radius: 4px; overflow: hidden;">
+                      <div style="width: 100%; height: 100%; background: var(--grey-4); border-radius: 4px;"></div>
                     </div>
                   </div>
                 </div>
+                <p style="font-size: 10px; color: var(--grey-5); margin: 10px 0 0; line-height: 1.35;">Grazie alla regolazione intelligente del riscaldamento, hai evitato lo sforamento della soglia del 28%.</p>
+              </div>
+              
+              <!-- Sostenibilità Infographic Card -->
+              <div class="card" style="padding: 16px; background: white; border: 1px solid var(--grey-3); border-radius: 20px; box-shadow: var(--shadow); position: relative; overflow: hidden;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                  <b style="font-size: var(--type-sm); color: var(--grey-7); display: flex; align-items: center; gap: 6px;">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#2E7D32" stroke-width="2.5"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 3.5 0 9.5a7 7 0 0 1-8 8.5Z"/></svg>
+                    Impatto Sostenibile
+                  </b>
+                  <span style="font-size: 10px; font-weight: 800; text-transform: uppercase; background: #E8F5E9; color: #1B5E20; padding: 3px 7px; border-radius: 6px;">Autosufficiente</span>
+                </div>
+                
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                  <div style="background: var(--grey-1); padding: 12px 10px; border-radius: 14px; border: 1px solid var(--grey-2); text-align: center;">
+                    <span style="font-size: 9px; color: var(--grey-5); text-transform: uppercase; font-weight:700; display:block; margin-bottom: 2px;">Autoproduzione</span>
+                    <b style="font-size: 18px; color: #2E7D32; display:block;">64%</b>
+                    <span style="font-size: 8px; color: var(--grey-5); display:block; margin-top:2px;">da solare termico</span>
+                  </div>
+                  <div style="background: var(--grey-1); padding: 12px 10px; border-radius: 14px; border: 1px solid var(--grey-2); text-align: center;">
+                    <span style="font-size: 9px; color: var(--grey-5); text-transform: uppercase; font-weight:700; display:block; margin-bottom: 2px;">CO₂ Evitata</span>
+                    <b style="font-size: 18px; color: #2E7D32; display:block;">42.8 kg</b>
+                    <span style="font-size: 8px; color: var(--grey-5); display:block; margin-top:2px;">pari a 4 alberi</span>
+                  </div>
+                </div>
+                <p style="font-size: 10px; color: var(--grey-5); margin: 10px 0 0; line-height: 1.35;">La casa sta immettendo in rete il surplus energetico rilevato durante le ore centrali del giorno.</p>
               </div>
             </section>
           </div>
@@ -424,7 +426,7 @@
         <section class="view" data-view="widgets">
           <div class="scroll">
             <div class="appbar"><span class="brand">GEWISS</span><button class="avatar" data-go="profile">SR</button></div><div class="eyebrow">ASPETTO E PRIORITÀ</div><h1 class="hero-title">Widget</h1><p class="hero-copy">Scegli come visualizzare gli aggiornamenti. Casper adatta i contenuti al contesto della casa.</p>
-            <div class="widget-preview"><div class="preview-card" id="widgetPreview" data-go="lock" style="position: relative; overflow: hidden; cursor: pointer;"><img src="casper.png" alt="Casper" style="position: absolute; width: 100px; height: 100px; right: -15px; bottom: -20px; opacity: 0.08; filter: brightness(0) invert(1); pointer-events: none; object-fit: contain;"><div class="casper"><span class="casper-copy"><b>Casper</b><span>Veglia sulla casa in cui ti trovi</span></span></div><h3>Il soggiorno sarà pronto quando rientrerai.</h3><p>Generato dal contesto della casa e dalle tue preferenze.</p><div class="talk-affordance" style="margin-top: 12px; border-top: 1px solid rgba(255,255,255,0.15); padding-top: 8px; display: flex; align-items: center; justify-content: space-between; font-size: var(--type-body); color: rgba(255,255,255,0.8); cursor: pointer;"><span style="display:flex;align-items:center;gap:6px;"><img src="casper.png" style="width:14px;height:14px;filter:brightness(0) invert(1);">Chiedi a Casper...</span><span style="font-weight:700;">Parla ➔</span></div></div></div>
+            <div class="widget-preview"><div class="preview-card" id="widgetPreview" data-go="lock" style="position: relative; overflow: hidden; cursor: pointer;"><img src="casper.png" alt="Casper" style="position: absolute; width: 100px; height: 100px; right: -15px; bottom: -20px; opacity: 0.08; filter: brightness(0) invert(1); pointer-events: none; object-fit: contain;"><div class="casper"><span class="casper-copy"><b>Casper</b><span>Veglia sulla casa in cui ti trovi</span></span></div><h3>Il soggiorno sarà pronto quando rientrerai.</h3><p>Generato dal contesto della casa e dalle tue preferenze.</p><div class="talk-affordance" style="margin: 14px -16px -16px; padding: 12px 16px; background: rgba(255,255,255,0.08); border-top: 1px solid rgba(255,255,255,0.12); display: flex; align-items: center; justify-content: space-between; font-size: var(--type-body); color: rgba(255,255,255,0.9); cursor: pointer;"><span style="display:flex;align-items:center;gap:8px;font-weight:600;"><img src="casper.png" style="width:16px;height:16px;filter:brightness(0) invert(1);object-fit:contain;">Chiedi a Casper...</span><span style="font-size:10px; font-weight:800; text-transform:uppercase; letter-spacing:0.05em; background: rgba(255,255,255,0.15); padding: 4px 8px; border-radius: 6px;">Parla ➔</span></div></div></div>
             <section class="section"><div class="section-head"><h2>Layout</h2><span>Anteprima in tempo reale</span></div><div class="segmented" data-setting="layout"><button class="active" data-value="Elenco">Elenco</button><button data-value="Griglia">Griglia</button><button data-value="Focus">Focus</button></div></section>
             <section class="section"><div class="section-head"><h2>Dimensione card</h2><span>Rilevanza visiva</span></div><div class="segmented" data-setting="size"><button data-value="Compatta">Compatta</button><button class="active" data-value="Bilanciata">Bilanciata</button><button data-value="Grande">Grande</button></div></section>
             <section class="section"><div class="card"><div class="setting-row"><div><b>Priorità agli aggiornamenti importanti</b><span>Dai maggiore peso visivo dei contesti urgenti</span></div><button class="switch on" data-switch></button></div><div class="setting-row"><div><b>Densità adattiva</b><span>Riduci il rumore quando c’è poco da mostrare</span></div><button class="switch on" data-switch></button></div><div class="setting-row"><div><b>Animazioni</b><span>Usa transizioni leggere quando cambia il contesto</span></div><button class="switch" data-switch></button></div></div></section>
@@ -538,18 +540,43 @@
               </div>
             </article>
 
-            <!-- Realistic Lock Screen Notification Banner -->
-            <div class="lock-notification" style="background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(20px); border-radius: 20px; padding: 14px; border: 1px solid rgba(255,255,255,0.18); box-shadow: var(--shadow); width: 100%; box-sizing: border-box; text-align: left;">
-              <div style="display: flex; gap: 10px; align-items: center;">
-                <img src="casper.png" alt="Casper" style="width: 20px; height: 20px; filter: brightness(0) invert(1); object-fit:contain;">
-                <b style="font-size: var(--type-sm); color: white;">Casper</b>
-                <span style="font-size: 10px; color: rgba(255,255,255,0.6); margin-left: auto;">Adesso</span>
+            <!-- Realistic Lock Screen Notifications Stack -->
+            <div class="lock-notifications-stack" style="display: flex; flex-direction: column; gap: 10px; width: 100%; box-sizing: border-box; max-height: 250px; overflow-y: auto; scrollbar-width: none; margin-top: 8px;">
+              
+              <!-- Notification 1 (Urgent, Safe) -->
+              <div class="lock-notification" style="background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(20px); border-radius: 20px; padding: 14px; border: 1px solid rgba(255,255,255,0.18); box-shadow: var(--shadow); width: 100%; box-sizing: border-box; text-align: left; transition: all 0.3s ease;">
+                <div style="display: flex; gap: 10px; align-items: center;">
+                  <img src="casper.png" alt="Casper" style="width: 20px; height: 20px; filter: brightness(0) invert(1); object-fit:contain;">
+                  <b style="font-size: var(--type-sm); color: white;">Casper · Sicurezza</b>
+                  <span style="font-size: 10px; color: rgba(255,255,255,0.6); margin-left: auto;">Adesso</span>
+                </div>
+                <p style="font-size: var(--type-sm); color: white; margin: 8px 0 10px; line-height: 1.35;">Ci sono 2 finestre aperte in camera e il clima è attivo.</p>
+                <div style="display: flex; gap: 8px;">
+                  <button class="lock-cta-btn" id="lockCtaClima" style="flex: 1; border: 0; background: rgba(255, 255, 255, 0.2); color: white; border-radius: 8px; padding: 6px; font-size: var(--type-body); font-weight: 700; cursor: pointer; outline: none; transition: background 0.15s;">Spegni clima</button>
+                  <button class="lock-cta-btn" id="lockCtaApri" style="flex: 1; border: 0; background: var(--orange-5); color: white; border-radius: 8px; padding: 6px; font-size: var(--type-body); font-weight: 700; cursor: pointer; outline: none; transition: background 0.15s;">Chiudi</button>
+                </div>
               </div>
-              <p style="font-size: var(--type-sm); color: white; margin: 8px 0 10px; line-height: 1.35;">Ci sono 2 finestre aperte in camera e il clima è attivo.</p>
-              <div style="display: flex; gap: 8px;">
-                <button class="lock-cta-btn" id="lockCtaClima" style="flex: 1; border: 0; background: rgba(255, 255, 255, 0.2); color: white; border-radius: 8px; padding: 6px; font-size: var(--type-body); font-weight: 700; cursor: pointer; outline: none; transition: background 0.15s;">Spegni clima</button>
-                <button class="lock-cta-btn" id="lockCtaApri" style="flex: 1; border: 0; background: var(--orange-5); color: white; border-radius: 8px; padding: 6px; font-size: var(--type-body); font-weight: 700; cursor: pointer; outline: none; transition: background 0.15s;">Chiudi</button>
+
+              <!-- Notification 2 (Urgent, Money) -->
+              <div class="lock-notification" style="background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(20px); border-radius: 20px; padding: 14px; border: 1px solid rgba(255,255,255,0.18); box-shadow: var(--shadow); width: 100%; box-sizing: border-box; text-align: left; transition: all 0.3s ease;">
+                <div style="display: flex; gap: 10px; align-items: center;">
+                  <img src="casper.png" alt="Casper" style="width: 20px; height: 20px; filter: brightness(0) invert(1); object-fit:contain;">
+                  <b style="font-size: var(--type-sm); color: white;">Casper · Risparmio</b>
+                  <span style="font-size: 10px; color: rgba(255,255,255,0.6); margin-left: auto;">5 min fa</span>
+                </div>
+                <p style="font-size: var(--type-sm); color: white; margin: 8px 0 0; line-height: 1.35;">Picco di consumo rilevato (3.8 kW). Consigliato spegnere la lavastoviglie.</p>
               </div>
+
+              <!-- Notification 3 (Info, Eco) -->
+              <div class="lock-notification" style="background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(20px); border-radius: 20px; padding: 14px; border: 1px solid rgba(255,255,255,0.18); box-shadow: var(--shadow); width: 100%; box-sizing: border-box; text-align: left; transition: all 0.3s ease;">
+                <div style="display: flex; gap: 10px; align-items: center;">
+                  <img src="casper.png" alt="Casper" style="width: 20px; height: 20px; filter: brightness(0) invert(1); object-fit:contain;">
+                  <b style="font-size: var(--type-sm); color: white;">Casper · Sostenibilità</b>
+                  <span style="font-size: 10px; color: rgba(255,255,255,0.6); margin-left: auto;">1 ora fa</span>
+                </div>
+                <p style="font-size: var(--type-sm); color: white; margin: 8px 0 0; line-height: 1.35;">Raggiunto l'obiettivo CO2 di oggi. Risparmiati 1.2 kg di emissioni.</p>
+              </div>
+              
             </div>
 
             <!-- Floating Casper Voice Button for Lock Screen -->
@@ -570,154 +597,7 @@
           </div>
         </section>
 
-        <!-- Centro Notifiche View -->
-        <section class="view" data-view="notifications">
-          <div class="scroll">
-            <div class="appbar"><button class="mini-btn" data-go="dashboard">Home</button><span class="brand" style="margin-left: auto; margin-right: auto; padding-right: 50px;">NOTIFICHE</span></div>
-            <div class="eyebrow" style="margin-top: 14px;">STORICO GENERALE</div>
-            <h1 class="hero-title">Centro Avvisi</h1>
-            <p class="hero-copy">Consulta tutti gli avvisi generati da Casper per ottimizzare l'efficienza e la sicurezza della tua abitazione.</p>
-            
-            <!-- Category & Filters (Dual Taxonomy) inside Notifications View -->
-            <section class="section" id="notifCenterSection" style="margin-top: 16px; padding: 0;">
-              <!-- Filter Chips -->
-              <div style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px;">
-                <!-- Urgency Filters -->
-                <div style="display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none;">
-                  <button class="filter-chip active" data-filter="urgency-all" style="border: 1px solid var(--grey-3); background: white; border-radius: 99px; padding: 6px 12px; font-size: 10px; font-weight: 700; cursor: pointer; outline: none; flex-shrink: 0;">Qualsiasi urgenza</button>
-                  <button class="filter-chip" data-filter="urgency-high" style="border: 1px solid var(--grey-3); background: white; border-radius: 99px; padding: 6px 12px; font-size: 10px; font-weight: 700; cursor: pointer; outline: none; color: var(--orange-6); flex-shrink: 0;">Solo urgenze</button>
-                  <button class="filter-chip" data-filter="urgency-low" style="border: 1px solid var(--grey-3); background: white; border-radius: 99px; padding: 6px 12px; font-size: 10px; font-weight: 700; cursor: pointer; outline: none; color: var(--grey-6); flex-shrink: 0;">Avvisi normali</button>
-                </div>
-                <!-- Type Filters -->
-                <div style="display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none; padding-bottom: 4px;">
-                  <button class="filter-chip active" data-filter="type-all" style="border: 1px solid var(--grey-3); background: white; border-radius: 99px; padding: 6px 12px; font-size: 10px; font-weight: 700; cursor: pointer; outline: none; flex-shrink: 0;">Tutti i temi</button>
-                  <button class="filter-chip" data-filter="type-money" style="display: inline-flex; align-items: center; border: 1px solid var(--grey-3); background: white; border-radius: 99px; padding: 6px 12px; font-size: 10px; font-weight: 700; cursor: pointer; outline: none; color: #D4AF37; flex-shrink: 0;">
-                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" stroke-width="3" style="margin-right:4px;"><circle cx="12" cy="12" r="10"/><path d="M12 8v8M9 12h6"/></svg>Risparmio
-                  </button>
-                  <button class="filter-chip" data-filter="type-eco" style="display: inline-flex; align-items: center; border: 1px solid var(--grey-3); background: white; border-radius: 99px; padding: 6px 12px; font-size: 10px; font-weight: 700; cursor: pointer; outline: none; color: #2E7D32; flex-shrink: 0;">
-                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#2E7D32" stroke-width="3" style="margin-right:4px;"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 3.5 0 9.5a7 7 0 0 1-8 8.5Z"/></svg>Ambiente
-                  </button>
-                  <button class="filter-chip" data-filter="type-safe" style="display: inline-flex; align-items: center; border: 1px solid var(--grey-3); background: white; border-radius: 99px; padding: 6px 12px; font-size: 10px; font-weight: 700; cursor: pointer; outline: none; color: #1565C0; flex-shrink: 0;">
-                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#1565C0" stroke-width="3" style="margin-right:4px;"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/></svg>Cura casa
-                  </button>
-                  <button class="filter-chip" data-filter="type-comfort" style="display: inline-flex; align-items: center; border: 1px solid var(--grey-3); background: white; border-radius: 99px; padding: 6px 12px; font-size: 10px; font-weight: 700; cursor: pointer; outline: none; color: #6A1B9A; flex-shrink: 0;">
-                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#6A1B9A" stroke-width="3" style="margin-right:4px;"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>Comfort
-                  </button>
-                </div>
-              </div>
-              
-              <!-- Center Notification list -->
-              <div id="notifCenterList" style="display: flex; flex-direction: column; gap: 10px; padding-bottom: 24px;">
-                <!-- Card 1 -->
-                <div class="notif-card" data-urgency="high" data-type="safe" style="background: white; border: 1px solid var(--grey-3); border-radius: 16px; padding: 14px; box-shadow: var(--shadow); display: flex; flex-direction: column; gap: 8px;">
-                  <div style="display: flex; justify-content: space-between; align-items: center;">
-                    <span style="display: inline-flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 700; color: #1565C0;">
-                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#1565C0" stroke-width="2.5" style="vertical-align:middle;"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/></svg>
-                      Cura della casa
-                    </span>
-                    <span style="font-size: 9px; font-weight: 800; text-transform: uppercase; background: #FFEBEE; color: #C62828; padding: 3px 7px; border-radius: 6px;">Urgente</span>
-                  </div>
-                  <b style="font-size: var(--type-sm); color: var(--grey-7);">Finestra aperta con riscaldamento attivo</b>
-                  <p style="font-size: var(--type-body); color: var(--grey-6); margin: 0; line-height: 1.35;">La finestra del soggiorno è rimasta aperta da 15 minuti mentre il clima è impostato a 21.5°.</p>
-                </div>
-                
-                <!-- Card 2 -->
-                <div class="notif-card" data-urgency="low" data-type="money" style="background: white; border: 1px solid var(--grey-3); border-radius: 16px; padding: 14px; box-shadow: var(--shadow); display: flex; flex-direction: column; gap: 8px;">
-                  <div style="display: flex; justify-content: space-between; align-items: center;">
-                    <span style="display: inline-flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 700; color: #8d6e63;">
-                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#8d6e63" stroke-width="2.5" style="vertical-align:middle;"><circle cx="12" cy="12" r="10"/><path d="M12 8v8M9 12h6"/></svg>
-                      Risparmio economico
-                    </span>
-                    <span style="font-size: 9px; font-weight: 800; text-transform: uppercase; background: var(--grey-2); color: var(--grey-6); padding: 3px 7px; border-radius: 6px;">Consiglio</span>
-                  </div>
-                  <b style="font-size: var(--type-sm); color: var(--grey-7);">Consigliato lavaggio alle ore 19:00</b>
-                  <p style="font-size: var(--type-body); color: var(--grey-6); margin: 0; line-height: 1.35;">Pianifica i consumi di elettrodomestici per stasera per risparmiare circa il 12% in tariffa bioraria.</p>
-                </div>
-                
-                <!-- Card 3 -->
-                <div class="notif-card" data-urgency="low" data-type="eco" style="background: white; border: 1px solid var(--grey-3); border-radius: 16px; padding: 14px; box-shadow: var(--shadow); display: flex; flex-direction: column; gap: 8px;">
-                  <div style="display: flex; justify-content: space-between; align-items: center;">
-                    <span style="display: inline-flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 700; color: #2E7D32;">
-                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#2E7D32" stroke-width="2.5" style="vertical-align:middle;"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 3.5 0 9.5a7 7 0 0 1-8 8.5Z"/></svg>
-                      Sostenibilità
-                    </span>
-                    <span style="font-size: 9px; font-weight: 800; text-transform: uppercase; background: var(--grey-2); color: var(--grey-6); padding: 3px 7px; border-radius: 6px;">Info</span>
-                  </div>
-                  <b style="font-size: var(--type-sm); color: var(--grey-7);">Modalità Eco attiva in cucina</b>
-                  <p style="font-size: var(--type-body); color: var(--grey-6); margin: 0; line-height: 1.35;">I consumi della cucina sono scesi del 5% grazie alle regolazioni automatiche di Casper.</p>
-                </div>
-                
-                <!-- Card 4 -->
-                <div class="notif-card" data-urgency="high" data-type="comfort" style="background: white; border: 1px solid var(--grey-3); border-radius: 16px; padding: 14px; box-shadow: var(--shadow); display: flex; flex-direction: column; gap: 8px;">
-                  <div style="display: flex; justify-content: space-between; align-items: center;">
-                    <span style="display: inline-flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 700; color: #6A1B9A;">
-                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#6A1B9A" stroke-width="2.5" style="vertical-align:middle;"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
-                      Comfort della persona
-                    </span>
-                    <span style="font-size: 9px; font-weight: 800; text-transform: uppercase; background: #FFEBEE; color: #C62828; padding: 3px 7px; border-radius: 6px;">Urgente</span>
-                  </div>
-                  <b style="font-size: var(--type-sm); color: var(--grey-7);">Umidità elevata rilevata in camera</b>
-                  <p style="font-size: var(--type-body); color: var(--grey-6); margin: 0; line-height: 1.35;">Umidità al 78% rilevata. Consiglio di ventilare la camera per ripristinare il livello ideale.</p>
-                </div>
 
-                <!-- Card 5 (Nuova: Urgent, Money) -->
-                <div class="notif-card" data-urgency="high" data-type="money" style="background: white; border: 1px solid var(--grey-3); border-radius: 16px; padding: 14px; box-shadow: var(--shadow); display: flex; flex-direction: column; gap: 8px;">
-                  <div style="display: flex; justify-content: space-between; align-items: center;">
-                    <span style="display: inline-flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 700; color: #D4AF37;">
-                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" stroke-width="2.5" style="vertical-align:middle;"><circle cx="12" cy="12" r="10"/><path d="M12 8v8M9 12h6"/></svg>
-                      Risparmio economico
-                    </span>
-                    <span style="font-size: 9px; font-weight: 800; text-transform: uppercase; background: #FFEBEE; color: #C62828; padding: 3px 7px; border-radius: 6px;">Urgente</span>
-                  </div>
-                  <b style="font-size: var(--type-sm); color: var(--grey-7);">Picco di assorbimento elettrico</b>
-                  <p style="font-size: var(--type-body); color: var(--grey-6); margin: 0; line-height: 1.35;">Il consumo ha superato i 3.8 kW. Consigliato spegnere la lavastoviglie per evitare il distacco.</p>
-                </div>
-
-                <!-- Card 6 (Nuova: Low, Safe) -->
-                <div class="notif-card" data-urgency="low" data-type="safe" style="background: white; border: 1px solid var(--grey-3); border-radius: 16px; padding: 14px; box-shadow: var(--shadow); display: flex; flex-direction: column; gap: 8px;">
-                  <div style="display: flex; justify-content: space-between; align-items: center;">
-                    <span style="display: inline-flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 700; color: #1565C0;">
-                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#1565C0" stroke-width="2.5" style="vertical-align:middle;"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/></svg>
-                      Cura della casa
-                    </span>
-                    <span style="font-size: 9px; font-weight: 800; text-transform: uppercase; background: var(--grey-2); color: var(--grey-6); padding: 3px 7px; border-radius: 6px;">Info</span>
-                  </div>
-                  <b style="font-size: var(--type-sm); color: var(--grey-7);">Standby prolungato in studio</b>
-                  <p style="font-size: var(--type-body); color: var(--grey-6); margin: 0; line-height: 1.35;">La TV e le console sono in standby da 4 giorni. Spegni la presa smart per ridurre lo spreco.</p>
-                </div>
-
-                <!-- Card 7 (Nuova: Urgent, Eco) -->
-                <div class="notif-card" data-urgency="high" data-type="eco" style="background: white; border: 1px solid var(--grey-3); border-radius: 16px; padding: 14px; box-shadow: var(--shadow); display: flex; flex-direction: column; gap: 8px;">
-                  <div style="display: flex; justify-content: space-between; align-items: center;">
-                    <span style="display: inline-flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 700; color: #2E7D32;">
-                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#2E7D32" stroke-width="2.5" style="vertical-align:middle;"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 3.5 0 9.5a7 7 0 0 1-8 8.5Z"/></svg>
-                      Sostenibilità
-                    </span>
-                    <span style="font-size: 9px; font-weight: 800; text-transform: uppercase; background: #FFEBEE; color: #C62828; padding: 3px 7px; border-radius: 6px;">Urgente</span>
-                  </div>
-                  <b style="font-size: var(--type-sm); color: var(--grey-7);">Consumo d'acqua anomalo</b>
-                  <p style="font-size: var(--type-body); color: var(--grey-6); margin: 0; line-height: 1.35;">Rilevato flusso d'acqua continuo in bagno nelle ultime 3 ore. Possibile perdita dello scarico.</p>
-                </div>
-
-                <!-- Card 8 (Nuova: Low, Comfort) -->
-                <div class="notif-card" data-urgency="low" data-type="comfort" style="background: white; border: 1px solid var(--grey-3); border-radius: 16px; padding: 14px; box-shadow: var(--shadow); display: flex; flex-direction: column; gap: 8px;">
-                  <div style="display: flex; justify-content: space-between; align-items: center;">
-                    <span style="display: inline-flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 700; color: #6A1B9A;">
-                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#6A1B9A" stroke-width="2.5" style="vertical-align:middle;"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
-                      Comfort della persona
-                    </span>
-                    <span style="font-size: 9px; font-weight: 800; text-transform: uppercase; background: var(--grey-2); color: var(--grey-6); padding: 3px 7px; border-radius: 6px;">Info</span>
-                  </div>
-                  <b style="font-size: var(--type-sm); color: var(--grey-7);">Riscaldamento in standby</b>
-                  <p style="font-size: var(--type-body); color: var(--grey-6); margin: 0; line-height: 1.35;">La temperatura impostata di 20.5° è stata raggiunta. Caldaia spenta per risparmio.</p>
-                </div>
-              </div>
-            </section>
-          </div>
-          <nav class="bottom-nav"><button data-go="dashboard"><b>◉</b>Oggi</button><button data-go="learn"><b>◌</b>Impara</button><button class="voice-btn"><img src="casper.png" alt="Casper" style="width:24px;height:24px;filter:brightness(0);object-fit:contain;pointer-events:none;"></button><button data-go="homes"><b>⌂</b>Case</button><button class="active" data-go="notifications"><b>▣</b>Avvisi</button></nav>
-        </section>
-
-        </section>
 
         <div class="toast" role="status"></div>
       </div>
@@ -733,7 +613,6 @@
         <button data-go="emergency"><b>06 · Modalità essenziale</b><small>Controlli locali senza Wi‑Fi</small></button>
         <button data-go="lock"><b>07 · Schermata di blocco</b><small>Anteprima del widget Casper</small></button>
         <button data-go="splash"><b>08 · Schermata di avvio</b><small>Animazione d'avvio di Casper</small></button>
-        <button data-go="notifications"><b>09 · Centro Notifiche</b><small>Tutti gli avvisi e lo storico</small></button>
       </div>
     </aside>
   </main>
@@ -772,7 +651,7 @@
 
     const addHome=document.querySelector('[data-add-home]');const homeForm=document.querySelector('.home-form');const formFeedback=homeForm.querySelector('.form-feedback');const homeInputs=[...homeForm.querySelectorAll('input')];addHome.addEventListener('click',()=>homeForm.classList.toggle('open'));homeInputs.forEach(input=>input.addEventListener('input',()=>input.classList.remove('invalid')));homeForm.addEventListener('submit',e=>{e.preventDefault();const missing=homeInputs.filter(input=>!input.value.trim());homeInputs.forEach(input=>input.classList.toggle('invalid',missing.includes(input)));formFeedback.className='form-feedback visible'+(missing.length?'':' success');formFeedback.textContent=missing.length?'Inserisci nome e indirizzo per salvare la casa.':'Casa salvata. Il rilevamento della posizione è attivo.';if(missing.length){missing[0].focus();return}showToast('Casa salvata.');setTimeout(()=>{homeForm.reset();homeForm.classList.remove('open');formFeedback.className='form-feedback'},900)});
     document.querySelectorAll('[data-edit]').forEach(button=>button.addEventListener('click',()=>showToast('Azioni di modifica ed eliminazione disponibili')));
-    document.addEventListener('keydown',e=>{if(e.key==='1')go('dashboard');if(e.key==='2')go('learn');if(e.key==='3')go('homes');if(e.key==='4')go('widgets');if(e.key==='5')go('profile');if(e.key==='6')go('emergency');if(e.key==='7')go('lock');if(e.key==='8')go('splash');if(e.key==='9')go('notifications');});
+    document.addEventListener('keydown',e=>{if(e.key==='1')go('dashboard');if(e.key==='2')go('learn');if(e.key==='3')go('homes');if(e.key==='4')go('widgets');if(e.key==='5')go('profile');if(e.key==='6')go('emergency');if(e.key==='7')go('lock');if(e.key==='8')go('splash');});
 
     // Dynamic QR Code generation for current page URL
     const qrImg = document.getElementById('qr-code-img');
@@ -971,23 +850,6 @@
       });
     }
 
-    // 3. Expandable Infographics Section
-    const toggleInfographics = document.getElementById('toggleInfographics');
-    const infographicsContainer = document.getElementById('infographicsContainer');
-    const infographicsArrow = document.getElementById('infographicsArrow');
-
-    if (toggleInfographics) {
-      toggleInfographics.addEventListener('click', () => {
-        if (infographicsContainer.style.display === 'none') {
-          infographicsContainer.style.display = 'block';
-          infographicsArrow.style.transform = 'rotate(180deg)';
-        } else {
-          infographicsContainer.style.display = 'none';
-          infographicsArrow.style.transform = 'rotate(0deg)';
-        }
-      });
-    }
-
     // 4. Notifications Dual Taxonomy Filtering with Dynamic Disabling
     let activeUrgency = 'urgency-all';
     let activeType = 'type-all';
@@ -1028,7 +890,8 @@
         }
       });
 
-      // 2. Check Type chips
+      // 2. Check Type chips - HIDE when 0 matching active urgency
+      let needReFilter = false;
       document.querySelectorAll('[data-filter^="type-"]').forEach(chip => {
         const filter = chip.getAttribute('data-filter');
         if (filter === 'type-all') return;
@@ -1049,18 +912,24 @@
           if (uMatch && tMatch) count++;
         });
         
-        if (count === 0 && filter !== activeType) {
-          chip.disabled = true;
-          chip.style.opacity = '0.35';
-          chip.style.pointerEvents = 'none';
-          chip.style.textDecoration = 'line-through';
+        if (count === 0) {
+          chip.style.display = 'none';
+          if (activeType === filter) {
+            activeType = 'type-all';
+            needReFilter = true;
+          }
         } else {
-          chip.disabled = false;
-          chip.style.opacity = '1';
-          chip.style.pointerEvents = 'auto';
-          chip.style.textDecoration = 'none';
+          chip.style.display = 'inline-flex';
         }
       });
+
+      if (needReFilter) {
+        document.querySelectorAll('[data-filter^="type-"]').forEach(c => {
+          if (c.getAttribute('data-filter') === 'type-all') c.classList.add('active');
+          else c.classList.remove('active');
+        });
+        filterNotifications();
+      }
     }
 
     function filterNotifications() {
@@ -1094,14 +963,12 @@
         
         // Find if we clicked an urgency chip or type chip
         if (filter.startsWith('urgency-')) {
-          // Remove active class from urgency chips in both dashboard and notification center
           document.querySelectorAll('[data-filter^="urgency-"]').forEach(c => {
             if (c.getAttribute('data-filter') === filter) c.classList.add('active');
             else c.classList.remove('active');
           });
           activeUrgency = filter;
         } else if (filter.startsWith('type-')) {
-          // Remove active class from type chips in both dashboard and notification center
           document.querySelectorAll('[data-filter^="type-"]').forEach(c => {
             if (c.getAttribute('data-filter') === filter) c.classList.add('active');
             else c.classList.remove('active');
