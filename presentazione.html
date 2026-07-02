@@ -311,6 +311,11 @@
       46px  → h2 (unchanged)
   ══════════════════════════════════════════════════════════ */
 
+  /* Force clip on scaler to prevent transition leakage */
+  #scaler {
+    overflow: hidden;
+  }
+
   /* Pinned container to prevent vertical stretch */
   .journey-container {
     position: absolute;
@@ -558,7 +563,7 @@
     display: -webkit-box;
     -webkit-line-clamp: 1;
     -webkit-box-orient: vertical;
-    animation: fadeIn .38s ease .6s both;
+    animation: fadeIn .38s ease .45s both;
   }
   .trust-statement strong { font-style: normal; font-weight: 700; color: var(--brand); }
 
@@ -575,14 +580,10 @@
 
   .node { width: 5px !important; height: 5px !important; }
 
-  /* ── Slide transition animations (ease ease) ── */
-  @keyframes slideIn {
+  /* ── Premium cross-fade transitions (zero black background flash) ── */
+  @keyframes slideCrossFadeIn {
     from { opacity: 0; }
     to   { opacity: 1; }
-  }
-  @keyframes slideOut {
-    from { opacity: 1; }
-    to   { opacity: 0; }
   }
   @keyframes elementFadeIn {
     from { opacity: 0; transform: translateY(12px); }
@@ -597,30 +598,22 @@
     to   { opacity: 1; }
   }
 
-  /* Hide slides by default */
-  .slide {
-    display: none;
-    position: absolute;
-    top: 0; left: 0;
-    width: var(--stage-w);
-    height: var(--stage-h);
-    opacity: 0;
-  }
-
-  /* Enter transition for active slide */
+  /* Entering slide: fades in on top (z-index: 2) */
   .slide.active {
     display: block;
-    animation: slideIn 0.25s ease forwards;
+    z-index: 2;
+    animation: slideCrossFadeIn 0.3s ease forwards;
   }
 
-  /* Exit transition for leaving slide */
+  /* Leaving slide: stays fully opaque below (z-index: 1) until removed */
   .slide.leaving {
     display: block !important;
-    animation: slideOut 0.25s ease forwards;
+    z-index: 1;
+    opacity: 1;
     pointer-events: none;
   }
 
-  /* ── Element entry animation (staggered on active slides) ── */
+  /* ── Element entry animation (staggered on active slides, delayed by 0.2s to stagger during slide fade-in) ── */
   .slide.active .agenda .row,
   .slide.active .mcol,
   .slide.active .step,
@@ -628,50 +621,50 @@
   .slide.active .ins,
   .slide.active .opp-card {
     opacity: 0;
-    animation: elementFadeIn 0.5s ease both;
+    animation: elementFadeIn 0.45s ease both;
   }
 
   /* Agenda row stagger */
-  .slide.active .agenda .row:nth-child(1) { animation-delay: 0.08s; }
-  .slide.active .agenda .row:nth-child(2) { animation-delay: 0.14s; }
-  .slide.active .agenda .row:nth-child(3) { animation-delay: 0.20s; }
-  .slide.active .agenda .row:nth-child(4) { animation-delay: 0.26s; }
-  .slide.active .agenda .row:nth-child(5) { animation-delay: 0.32s; }
-  .slide.active .agenda .row:nth-child(6) { animation-delay: 0.38s; }
+  .slide.active .agenda .row:nth-child(1) { animation-delay: 0.24s; }
+  .slide.active .agenda .row:nth-child(2) { animation-delay: 0.30s; }
+  .slide.active .agenda .row:nth-child(3) { animation-delay: 0.36s; }
+  .slide.active .agenda .row:nth-child(4) { animation-delay: 0.42s; }
+  .slide.active .agenda .row:nth-child(5) { animation-delay: 0.48s; }
+  .slide.active .agenda .row:nth-child(6) { animation-delay: 0.54s; }
 
   /* Method stagger */
-  .slide.active .mcol:nth-child(1) { animation-delay: 0.08s; }
-  .slide.active .mcol:nth-child(2) { animation-delay: 0.18s; }
+  .slide.active .mcol:nth-child(1) { animation-delay: 0.24s; }
+  .slide.active .mcol:nth-child(2) { animation-delay: 0.34s; }
 
-  .slide.active .step:nth-child(1) { animation-delay: 0.12s; }
-  .slide.active .step:nth-child(2) { animation-delay: 0.22s; }
-  .slide.active .step:nth-child(3) { animation-delay: 0.32s; }
+  .slide.active .step:nth-child(1) { animation-delay: 0.28s; }
+  .slide.active .step:nth-child(2) { animation-delay: 0.38s; }
+  .slide.active .step:nth-child(3) { animation-delay: 0.48s; }
 
   /* Archetype card stagger */
-  .slide.active .card:nth-child(1) { animation-delay: 0.08s; }
-  .slide.active .card:nth-child(2) { animation-delay: 0.18s; }
-  .slide.active .card:nth-child(3) { animation-delay: 0.28s; }
+  .slide.active .card:nth-child(1) { animation-delay: 0.24s; }
+  .slide.active .card:nth-child(2) { animation-delay: 0.34s; }
+  .slide.active .card:nth-child(3) { animation-delay: 0.44s; }
 
   /* Insight card stagger */
-  .slide.active .ins:nth-child(1) { animation-delay: 0.08s; }
-  .slide.active .ins:nth-child(2) { animation-delay: 0.18s; }
-  .slide.active .ins:nth-child(3) { animation-delay: 0.28s; }
+  .slide.active .ins:nth-child(1) { animation-delay: 0.24s; }
+  .slide.active .ins:nth-child(2) { animation-delay: 0.34s; }
+  .slide.active .ins:nth-child(3) { animation-delay: 0.44s; }
 
   /* Opportunities card stagger */
-  .slide.active .opp-card:nth-child(1) { animation-delay: 0.08s; }
-  .slide.active .opp-card:nth-child(2) { animation-delay: 0.18s; }
-  .slide.active .opp-card:nth-child(3) { animation-delay: 0.28s; }
+  .slide.active .opp-card:nth-child(1) { animation-delay: 0.24s; }
+  .slide.active .opp-card:nth-child(2) { animation-delay: 0.34s; }
+  .slide.active .opp-card:nth-child(3) { animation-delay: 0.44s; }
 
   /* User journey card stagger */
   .journey-panel.active .p-col {
     opacity: 0;
-    animation: cardIn 0.5s ease both;
+    animation: cardIn 0.45s ease both;
   }
-  .journey-panel.active .p-col:nth-child(1) { animation-delay: 0.12s; }
-  .journey-panel.active .p-col:nth-child(2) { animation-delay: 0.18s; }
-  .journey-panel.active .p-col:nth-child(3) { animation-delay: 0.24s; }
-  .journey-panel.active .p-col:nth-child(4) { animation-delay: 0.30s; }
-  .journey-panel.active .p-col:nth-child(5) { animation-delay: 0.36s; }
+  .journey-panel.active .p-col:nth-child(1) { animation-delay: 0.26s; }
+  .journey-panel.active .p-col:nth-child(2) { animation-delay: 0.32s; }
+  .journey-panel.active .p-col:nth-child(3) { animation-delay: 0.38s; }
+  .journey-panel.active .p-col:nth-child(4) { animation-delay: 0.44s; }
+  .journey-panel.active .p-col:nth-child(5) { animation-delay: 0.50s; }
 
   </style>
 </head>
@@ -1258,20 +1251,25 @@
   document.getElementById('tot').textContent=slides.length;
 
   // Navigation
+  // Navigation
+  // Navigation
   function show(n){
     var prev = i;
     i = (n + slides.length) % slides.length;
     if (prev === i) return;
 
-    // Exit old slide: add leaving, remove active
+    // Exit old slide: add leaving, remove active (keeps it fully opaque below new slide)
+    slides[prev].classList.remove('active-next', 'active-prev');
     slides[prev].classList.add('leaving');
     slides[prev].classList.remove('active');
-    (function(p){ setTimeout(function(){ p.classList.remove('leaving'); }, 250); })(slides[prev]);
+    (function(p){
+      setTimeout(function(){ p.classList.remove('leaving'); }, 300);
+    })(slides[prev]);
 
-    // Enter new slide: force reflow to trigger staggered animations of elements
+    // Enter new slide: clear directions, reflow, then activate (fades in cleanly on top)
     var enterSlide = slides[i];
-    enterSlide.classList.remove('active');
-    void enterSlide.offsetWidth;
+    enterSlide.classList.remove('active', 'active-next', 'active-prev', 'leaving');
+    void enterSlide.offsetWidth; // reflow to trigger cross-fade
     enterSlide.classList.add('active');
 
     cur.textContent = i + 1;
