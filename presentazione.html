@@ -1516,8 +1516,15 @@
 
     <!-- ============ SLIDE 7 · OPPORTUNITÀ DI DESIGN ============ -->
     <section class="slide" data-name="Opportunità di design">
-      <div class="head">
+      <div class="head" style="align-items: center;">
         <h2>Opportunità di design</h2>
+        <div class="qr-badge" style="display: flex; align-items: center; gap: 10px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-sm); padding: 8px 12px; margin-left: auto; margin-right: 24px;">
+          <img id="presQr" src="" alt="QR Prototipo" style="width: 44px; height: 44px; background: white; padding: 2px; border-radius: 4px; display: none;">
+          <div style="text-align: left; line-height: 1.2;">
+            <b style="display: block; font-size: 11px; color: var(--ink); font-weight: 700;">Prova il prototipo su mobile</b>
+            <span style="font-size: 9px; color: var(--muted); display: block; margin-top: 2px;">Inquadra per aprire l'app Casper</span>
+          </div>
+        </div>
         <div class="kicker"><span class="dot"></span>06 · Dal research al prodotto</div>
       </div>
 
@@ -1680,6 +1687,15 @@
     scaler.style.transform='scale('+Math.min(sw,sh)+')';
   }
   window.addEventListener('resize',fit); fit();
+
+  // Generate QR code dynamically pointing to the prototype
+  const presQrImg = document.getElementById('presQr');
+  if (presQrImg) {
+    const currentUrl = window.location.href;
+    const protoUrl = currentUrl.replace('presentazione.html', 'prototipo-iphone17.html');
+    presQrImg.src = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(protoUrl)}`;
+    presQrImg.style.display = 'block';
+  }
 </script>
 </body>
 </html>
