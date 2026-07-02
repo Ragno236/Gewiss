@@ -1600,6 +1600,30 @@
     if(e.key==='ArrowLeft'||e.key==='PageUp') show(i-1);
   });
 
+  // 1. Click-to-navigate (Right half -> Next, Left half -> Prev)
+  document.addEventListener('click', e => {
+    // Do not navigate if clicking interactive elements
+    if (e.target.closest('button') || e.target.closest('.jtab-btn') || e.target.closest('.card') || e.target.closest('.opp-card') || e.target.closest('.ins')) {
+      return;
+    }
+    if (e.clientX > window.innerWidth / 2) {
+      show(i + 1);
+    } else {
+      show(i - 1);
+    }
+  });
+
+  // 2. Mobile Swipe Gestures (Swipe left -> Next, Swipe right -> Prev)
+  let touchStartX = 0;
+  document.addEventListener('touchstart', e => {
+    touchStartX = e.changedTouches[0].screenX;
+  }, { passive: true });
+  document.addEventListener('touchend', e => {
+    let diffX = e.changedTouches[0].screenX - touchStartX;
+    if (diffX < -50) show(i + 1);
+    if (diffX > 50) show(i - 1);
+  }, { passive: true });
+
 
   // Journey tab switcher — restarts card animations
   function switchJourney(name) {
