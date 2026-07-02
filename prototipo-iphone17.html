@@ -132,6 +132,9 @@
     .anim-can { animation: tiltCan 3s ease-in-out infinite; transform-origin: 65px 45px; }
     .anim-drip { animation: waterDrip 1.5s linear infinite; }
     .anim-plant { animation: growPlant 3s ease-in-out infinite; transform-origin: bottom center; }
+    .view[data-view="splash"].active {
+      display: flex !important;
+    }
   </style>
 </head>
 <body>
@@ -533,7 +536,7 @@
         </section>
 
         <!-- Splash Screen View (Launch Screen selector page) -->
-        <section class="view" data-view="splash" style="background: var(--orange-5); display: flex; flex-direction: column; align-items: center; justify-content: center; border-radius: inherit; overflow: hidden; height: 100%; position: absolute; inset: 0;">
+        <section class="view" data-view="splash" style="background: var(--orange-5); flex-direction: column; align-items: center; justify-content: center; border-radius: inherit; overflow: hidden; height: 100%; position: absolute; inset: 0;">
           <div style="display: flex; flex-direction: column; align-items: center; gap: 20px; animation: splashFadeIn 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;">
             <img src="casper.png" alt="Casper Mascot" style="width: 120px; height: 120px; object-fit: contain; filter: brightness(0);">
             <span style="font-size: 32px; font-weight: 800; color: white; letter-spacing: -0.03em;">Ciao.</span>
