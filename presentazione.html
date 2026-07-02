@@ -260,81 +260,128 @@
   /* ---------- Print → one 16:9 slide per page ---------- */
   @page{ size:1280px 720px; margin:0; }
 
-  /* ---------- Slide · User Journeys ---------- */
-  .journey-container { display: flex; flex-direction: column; height: 100%; margin-top: 10px; }
-  .journey-tabs { display: flex; gap: 16px; border-bottom: 1px solid var(--line); padding-bottom: 10px; margin-bottom: 20px; }
-  .jtab-btn {
-    background: none; border: none; font-family: var(--sans); font-size: 15px; font-weight: 600;
-    color: var(--faint); padding: 8px 16px; border-radius: 8px; cursor: pointer; transition: all 0.2s;
-    text-align: left; display: flex; flex-direction: column; gap: 2px;
-  }
-  .jtab-btn:hover { color: var(--ink); background: var(--g2); }
-  .jtab-btn.active { color: var(--brand); background: var(--o1); }
-  .jtab-role { font-family: var(--mono); font-size: 10px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
-  
-  .journey-content { display: none; flex-direction: column; gap: 20px; }
-  .journey-content.active { display: flex; }
-  
-  /* Meta info top of journey */
-  .journey-meta { display: flex; justify-content: space-between; align-items: baseline; }
-  .journey-need { font-size: 15px; color: var(--muted); max-width: 65ch; line-height: 1.45; }
-  .journey-need strong { color: var(--ink); }
-  .journey-funcs { display: flex; gap: 12px; }
-  .jfunc-tag {
-    font-family: var(--mono); font-size: 9px; letter-spacing: .08em; text-transform: uppercase;
-    color: var(--brand); border: 1px solid var(--brand); padding: 4px 10px; border-radius: 999px;
-  }
-  
-  /* Flowchart timeline */
-  .journey-flow { display: flex; align-items: stretch; gap: 12px; width: 100%; position: relative; }
-  .journey-step {
-    flex: 1; background: var(--surface); border: 1px solid var(--line); border-radius: 12px;
-    padding: 14px 18px; display: flex; flex-direction: column; gap: 6px; position: relative;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.015);
-  }
-  .journey-step .step-num { font-family: var(--mono); font-size: 11px; color: var(--faint); }
-  .journey-step h4 { font-size: 14px; font-weight: 700; color: var(--ink); margin: 0; }
-  .journey-step p { font-size: 12.5px; line-height: 1.35; color: var(--muted); margin: 0; }
-  
-  /* Arrow separator */
-  .journey-flow-arrow { display: flex; align-items: center; color: var(--g4); font-size: 18px; }
-  
-  /* Critical Moment Node */
-  .journey-step.critical {
-    border-color: var(--brand);
-    background: linear-gradient(180deg, var(--surface), var(--o1) 150%);
-    box-shadow: 0 8px 24px rgba(232, 70, 66, 0.06);
-  }
-  .journey-step.critical .step-num { color: var(--brand); font-weight: 700; }
-  .journey-step.critical h4 { color: var(--o7); }
-  .journey-step.critical .badge {
-    position: absolute; top: -10px; right: 12px;
-    background: var(--brand); color: #fff; font-family: var(--mono);
-    font-size: 9px; font-weight: 700; letter-spacing: .08em;
-    text-transform: uppercase; padding: 2px 6px; border-radius: 4px;
-  }
-  
-  /* Success Card */
-  .journey-step.success {
-    background: var(--brand); border-color: var(--brand); color: #fff;
-    box-shadow: 0 8px 24px rgba(232, 70, 66, 0.12);
-  }
-  .journey-step.success .step-num { color: rgba(255,255,255,0.7); }
-  .journey-step.success h4 { color: #fff; }
-  .journey-step.success p { color: rgba(255,255,255,0.9); }
-  .journey-step.success .metric { font-size: 18px; font-weight: 800; color: #fff; margin-top: 2px; border-top: 1px solid rgba(255,255,255,0.2); padding-top: 4px; }
 
-  /* Branches */
-  .journey-branches-section { display: flex; flex-direction: column; gap: 8px; }
-  .journey-branches-title { font-family: var(--mono); font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--faint); }
-  .journey-branches { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
-  .jbranch-card {
-    background: var(--surface); border: 1px dashed var(--g4); border-radius: 10px;
-    padding: 12px 16px; display: flex; flex-direction: column; gap: 4px;
+  /* ═══════════════════════════════════════════════════════
+     SLIDE 7 · USER JOURNEY  ─  rich narrative version
+  ═══════════════════════════════════════════════════════ */
+
+  /* Layout wrapper */
+  .journey-container{display:flex;flex-direction:column;height:calc(100% - 70px);gap:0;overflow:hidden;}
+
+  /* ── Tab bar ── */
+  .journey-tabs{display:flex;gap:10px;border-bottom:1.5px solid var(--line);padding-bottom:10px;flex-shrink:0;}
+  .jtab-btn{
+    background:none;border:none;font-family:var(--sans);font-size:13px;font-weight:600;
+    color:var(--faint);padding:7px 14px;border-radius:8px;cursor:pointer;
+    transition:all .2s;display:flex;flex-direction:column;gap:1px;text-align:left;
   }
-  .jbranch-card .branch-code { font-family: var(--mono); font-size: 10px; color: var(--brand); font-weight: 600; }
-  .jbranch-card h5 { font-size: 13.5px; font-weight: 600; color: var(--ink); margin: 0; }
-  .jbranch-card p { font-size: 11.5px; line-height: 1.35; color: var(--muted); margin: 0; }
+  .jtab-btn:hover{color:var(--ink);background:var(--g2);}
+  .jtab-btn.active{color:var(--brand);background:var(--o1);}
+  .jtab-role{font-family:var(--mono);font-size:9px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);}
+  .jtab-tension{font-family:var(--mono);font-size:8px;letter-spacing:.04em;color:var(--faint);font-style:italic;max-width:22ch;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+
+  /* ── Journey panel ── */
+  .journey-panel{display:none;flex-direction:column;gap:10px;flex:1;overflow:hidden;}
+  .journey-panel.active{display:flex;}
+
+  /* ── Meta bar (goal + feature tags) ── */
+  .journey-meta{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex-shrink:0;}
+  .journey-goal{font-size:12px;color:var(--muted);line-height:1.4;max-width:60ch;}
+  .journey-goal strong{color:var(--ink);}
+  .journey-tags{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end;}
+  .jtag{
+    font-family:var(--mono);font-size:8px;letter-spacing:.08em;text-transform:uppercase;
+    color:var(--brand);border:1px solid var(--brand);padding:3px 8px;border-radius:999px;
+    white-space:nowrap;
+  }
+
+  /* ── Trust curve ── */
+  .trust-curve-wrap{display:flex;align-items:center;gap:8px;flex-shrink:0;}
+  .trust-label{font-family:var(--mono);font-size:8px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);white-space:nowrap;}
+  .trust-curve-track{flex:1;height:28px;position:relative;}
+  .trust-curve-svg{width:100%;height:28px;overflow:visible;}
+
+  /* ── Phase columns ── */
+  .journey-phases{display:flex;gap:8px;flex:1;overflow:hidden;min-height:0;}
+  .phase-col{
+    flex:1;background:var(--surface);border:1px solid var(--line);border-radius:10px;
+    padding:10px 12px;display:flex;flex-direction:column;gap:6px;overflow:hidden;
+    position:relative;transition:box-shadow .15s;
+  }
+  .phase-col:hover{box-shadow:0 6px 20px rgba(0,0,0,.06);}
+
+  /* Phase number + name */
+  .phase-num{font-family:var(--mono);font-size:9px;color:var(--faint);letter-spacing:.06em;}
+  .phase-name{font-size:13px;font-weight:800;color:var(--ink);line-height:1.15;text-transform:uppercase;letter-spacing:.02em;}
+
+  /* Scenario */
+  .phase-scenario{font-size:10.5px;color:var(--muted);line-height:1.35;border-left:2px solid var(--line);padding-left:7px;}
+
+  /* Speech bubble (copy naturale) */
+  .phase-bubble{
+    background:var(--g2);border-radius:8px;padding:7px 9px;
+    font-size:10px;color:var(--ink);line-height:1.35;font-style:italic;
+    position:relative;border:1px solid var(--line);
+  }
+  .phase-bubble::before{content:'"';font-size:14px;color:var(--brand);font-style:normal;line-height:1;}
+
+  /* Thought bubble */
+  .phase-thought{
+    font-size:9.5px;color:var(--muted);line-height:1.3;font-style:italic;
+    border-left:2px dashed var(--g4);padding-left:7px;
+  }
+  .phase-thought::before{content:'💭 ';}
+
+  /* Mechanic badge */
+  .phase-mechanic{
+    margin-top:auto;display:flex;flex-direction:column;gap:3px;
+    border-top:1px dashed var(--g4);padding-top:6px;
+  }
+  .mech-label{font-family:var(--mono);font-size:7.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--brand);font-weight:700;}
+  .mech-text{font-size:9px;color:var(--muted);line-height:1.25;}
+
+  /* Emotion dot */
+  .phase-emotion{
+    display:flex;align-items:center;gap:5px;
+    font-family:var(--mono);font-size:8px;color:var(--faint);
+  }
+  .emotion-dot{width:7px;height:7px;border-radius:50%;background:var(--g4);flex-shrink:0;}
+
+  /* Critical moment */
+  .phase-col.critical{border-color:var(--brand);background:linear-gradient(160deg,#fff,var(--o1));}
+  .phase-col.critical .phase-name{color:var(--o7);}
+  .phase-col.critical .phase-num{color:var(--brand);font-weight:700;}
+  .critical-badge{
+    position:absolute;top:-9px;right:10px;
+    background:var(--brand);color:#fff;font-family:var(--mono);
+    font-size:7px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+    padding:2px 6px;border-radius:4px;
+  }
+
+  /* Success */
+  .phase-col.success{background:var(--brand);border-color:var(--brand);}
+  .phase-col.success .phase-num,
+  .phase-col.success .phase-name,
+  .phase-col.success .phase-scenario,
+  .phase-col.success .phase-bubble,
+  .phase-col.success .phase-thought,
+  .phase-col.success .mech-text,
+  .phase-col.success .phase-emotion{color:rgba(255,255,255,.9);}
+  .phase-col.success .phase-name{color:#fff;}
+  .phase-col.success .phase-bubble{background:rgba(255,255,255,.15);border-color:rgba(255,255,255,.25);}
+  .phase-col.success .phase-mechanic{border-top-color:rgba(255,255,255,.2);}
+  .phase-col.success .mech-label{color:rgba(255,255,255,.8);}
+  .phase-col.success .emotion-dot{background:rgba(255,255,255,.5);}
+  .success-metric{font-size:16px;font-weight:800;color:#fff;border-top:1px solid rgba(255,255,255,.2);padding-top:6px;margin-top:4px;}
+
+  /* ── Trust statement footer ── */
+  .trust-statement{
+    flex-shrink:0;background:var(--g2);border-radius:8px;
+    padding:8px 14px;font-size:11px;color:var(--muted);
+    border-left:3px solid var(--brand);font-style:italic;line-height:1.4;
+  }
+  .trust-statement strong{color:var(--brand);font-style:normal;}
+
 
   @media print{
     body{ background:#fff; overflow:visible; }
@@ -645,213 +692,367 @@
       </div>
     </section>
 
-    <!-- ============ SLIDE 7 · USER JOURNEY ============ -->
+        <!-- ============ SLIDE 7 · USER JOURNEY ============ -->
     <section class="slide" data-name="User journey">
       <div class="head">
         <h2>User Journey</h2>
-        <div class="kicker"><span class="dot"></span>05 · Scenari d'uso del prodotto</div>
+        <div class="kicker"><span class="dot"></span>05 · Scenari d'uso reale — AI già operativo</div>
       </div>
 
       <div class="journey-container">
-        <!-- Tabs selector -->
+
+        <!-- ── Tab bar ── -->
         <div class="journey-tabs">
           <button class="jtab-btn active" id="tab-marco" onclick="switchJourney('marco')">
-            <span class="jtab-role">Project Manager · 2 Proprietà</span>
-            Marco Ferretti, 41
+            <span class="jtab-role">Project Manager · 41 anni · 2 proprietà</span>
+            Marco Ferretti
+            <span class="jtab-tension">Controllo → Delega consapevole</span>
           </button>
           <button class="jtab-btn" id="tab-chiara" onclick="switchJourney('chiara')">
-            <span class="jtab-role">Ricercatrice Ambientale · Sola</span>
-            Chiara Bellini, 34
+            <span class="jtab-role">Ricercatrice Ambientale · 34 anni · Bilocale</span>
+            Chiara Bellini
+            <span class="jtab-tension">Dati frammentati → Vista integrata</span>
           </button>
           <button class="jtab-btn" id="tab-pina" onclick="switchJourney('pina')">
-            <span class="jtab-role">Pensionata · Caregiver remoto</span>
-            Giuseppina "Pina" Conti, 68
+            <span class="jtab-role">Pensionata · 68 anni · Figlio caregiver</span>
+            Giuseppina "Pina" Conti
+            <span class="jtab-tension">Dipendenza → Autonomia protetta</span>
           </button>
         </div>
 
-        <!-- ============ MARCO CONTENT ============ -->
-        <div class="journey-content active" id="content-marco">
+        <!-- ══════════════ MARCO ══════════════ -->
+        <div class="journey-panel active" id="content-marco">
+
           <div class="journey-meta">
-            <div class="journey-need"><strong>Obiettivo:</strong> Ottimizzare l'efficienza energetica delle case senza perdere il controllo delle routine quotidiane.</div>
-            <div class="journey-funcs">
-              <span class="jfunc-tag">Onboarding 10 giorni</span>
-              <span class="jfunc-tag">Dashboard intelligente</span>
+            <div class="journey-goal"><strong>Goal:</strong> Ottimizzare i consumi di 2 case senza dover gestire ogni micro-decisione.</div>
+            <div class="journey-tags">
+              <span class="jtag">Progressive Autonomy</span>
+              <span class="jtag">Value Center</span>
+              <span class="jtag">Notification Center</span>
             </div>
           </div>
 
-          <div class="journey-flow">
-            <div class="journey-step">
-              <span class="step-num">01 · Contesto</span>
-              <h4>Ricezione Proposta</h4>
-              <p>Dopo 10 giorni di apprendimento passivo, la dashboard notifica una proposta di risparmio energetico.</p>
-            </div>
-            <span class="journey-flow-arrow">→</span>
-            <div class="journey-step">
-              <span class="step-num">02 · Azione</span>
-              <h4>Verifica e Accettazione</h4>
-              <p>Marco esamina lo storico consumi nella Dashboard e accetta la proposta automatizzata del sistema.</p>
-            </div>
-            <span class="journey-flow-arrow">→</span>
-            <div class="journey-step critical">
-              <span class="badge">⚡ CRITICAL MOMENT</span>
-              <span class="step-num">03 · Deviazione</span>
-              <h4>Override Manuale</h4>
-              <p>Marco rientra prima e alza il riscaldamento. Il sistema rispetta l'azione senza alterare la routine permanente.</p>
-            </div>
-            <span class="journey-flow-arrow">→</span>
-            <div class="journey-step success">
-              <span class="step-num">04 · Risultato</span>
-              <h4>Successo &amp; Controllo</h4>
-              <p>Controllo mantenuto. Risparmio mensile consolidato senza frizioni.</p>
-              <div class="metric">-12% Bolletta</div>
+          <!-- Trust curve SVG -->
+          <div class="trust-curve-wrap">
+            <span class="trust-label">Trust</span>
+            <div class="trust-curve-track">
+              <svg class="trust-curve-svg" viewBox="0 0 600 28" preserveAspectRatio="none">
+                <polyline points="0,26 120,22 240,16 360,10 480,5 600,2"
+                  fill="none" stroke="var(--g4)" stroke-width="1.5" stroke-dasharray="4 3"/>
+                <polyline points="0,26 120,22 240,16 360,10 480,5 600,2"
+                  fill="none" stroke="var(--brand)" stroke-width="2"
+                  stroke-dasharray="600" stroke-dashoffset="0" opacity=".5"/>
+                <!-- emotion dots -->
+                <circle cx="0"   cy="26" r="3.5" fill="var(--g5)"/>
+                <circle cx="120" cy="22" r="3.5" fill="var(--g5)"/>
+                <circle cx="240" cy="16" r="3.5" fill="var(--brand)" opacity=".6"/>
+                <circle cx="360" cy="10" r="3.5" fill="var(--brand)" opacity=".8"/>
+                <circle cx="480" cy="5"  r="3.5" fill="var(--brand)"/>
+                <circle cx="600" cy="2"  r="3.5" fill="var(--brand)"/>
+                <!-- labels -->
+                <text x="0"   y="12" font-size="6" fill="var(--faint)" font-family="monospace">Scettico</text>
+                <text x="100" y="8"  font-size="6" fill="var(--faint)" font-family="monospace">Curioso</text>
+                <text x="220" y="4"  font-size="6" fill="var(--brand)" font-family="monospace" opacity=".7">Rassicurato</text>
+                <text x="340" y="2"  font-size="6" fill="var(--brand)" font-family="monospace">Fiducioso</text>
+                <text x="470" y="2"  font-size="6" fill="var(--brand)" font-family="monospace">Advocate</text>
+              </svg>
             </div>
           </div>
 
-          <div class="journey-branches-section">
-            <span class="journey-branches-title">Percorsi alternativi (Lateral Branches)</span>
-            <div class="journey-branches">
-              <div class="jbranch-card">
-                <span class="branch-code">Percorso A · Apprendimento Esteso</span>
-                <h5>Dati Insufficienti</h5>
-                <p>Il sistema prolunga l'osservazione silenziosa per altri 5 giorni per garantire precisione.</p>
-              </div>
-              <div class="jbranch-card">
-                <span class="branch-code">Percorso B · Rifiuto</span>
-                <h5>Suggerimenti Passivi</h5>
-                <p>Marco rifiuta. L'app non interviene ma mostra consigli non invasivi in dashboard.</p>
-              </div>
-              <div class="jbranch-card">
-                <span class="branch-code">Percorso C · Eccezione Routine</span>
-                <h5>Modifica Temporanea</h5>
-                <p>L'override manuale viene rimosso automaticamente il mattino seguente ripristinando la routine.</p>
-              </div>
-            </div>
-          </div>
-        </div>
+          <!-- Phases -->
+          <div class="journey-phases">
 
-        <!-- ============ CHIARA CONTENT ============ -->
-        <div class="journey-content" id="content-chiara">
+            <div class="phase-col">
+              <span class="phase-num">01 · OSSERVA</span>
+              <div class="phase-name">Apprendimento Silenzioso</div>
+              <div class="phase-scenario">App installata. L'AI inizia a raccogliere dati senza intervenire: nessuna azione automatica per 10 giorni.</div>
+              <div class="phase-bubble">Sto imparando le tue abitudini — ci vogliono circa 10 giorni. Non cambierò nulla senza che tu lo sappia.</div>
+              <div class="phase-thought">Almeno non parte subito a fare cose strane. Vediamo.</div>
+              <div class="phase-mechanic">
+                <span class="mech-label">⚙ Progressive Autonomy · Livello: Manual</span>
+                <span class="mech-text">Log silenzioso nel Value Center: "Dati raccolti: 3 giorni su 10." Zero notifiche push.</span>
+              </div>
+              <div class="phase-emotion"><span class="emotion-dot" style="background:var(--g5)"></span> Scettico-curioso</div>
+            </div>
+
+            <div class="phase-col">
+              <span class="phase-num">02 · VALUTA</span>
+              <div class="phase-name">Prima Proposta</div>
+              <div class="phase-scenario">Dopo 10 giorni l'AI presenta un Insight sul riscaldamento della seconda proprietà — dati reali, nessun allarme.</div>
+              <div class="phase-bubble">Il riscaldamento di casa 2 resta acceso 4h ogni giovedì sera senza nessuno. Ti propongo di spegnerlo dopo le 20:00 — risparmi ~€18/mese. Vuoi provarci?</div>
+              <div class="phase-thought">Aspetta — questo è esatto. Come fa a saperlo?</div>
+              <div class="phase-mechanic">
+                <span class="mech-label">⚙ Value Center · Insight</span>
+                <span class="mech-text">Notifica non urgente, tono narrativo. Due pulsanti: "Sì, prova" / "Vediamo dopo".</span>
+              </div>
+              <div class="phase-emotion"><span class="emotion-dot" style="background:var(--o4)"></span> Curioso-impressionato</div>
+            </div>
+
+            <div class="phase-col critical">
+              <span class="critical-badge">⚡ CRITICAL MOMENT</span>
+              <span class="phase-num">03 · CONFERMA</span>
+              <div class="phase-name">Fiducia Progressiva</div>
+              <div class="phase-scenario">Per 3 giovedì l'AI avvisa prima di agire. Al 4° giovedì agisce in silenzio e riporta il mattino dopo.</div>
+              <div class="phase-bubble">Tra 5 minuti spengo il riscaldamento di casa 2 come concordato. Vuoi bloccare questa volta?</div>
+              <div class="phase-thought">La prima volta ha chiesto. La seconda anche. Questa ha già fatto — e me l'ha detto. Bene.</div>
+              <div class="phase-mechanic">
+                <span class="mech-label">⚙ Progressive Autonomy: Assisted → Collaborative</span>
+                <span class="mech-text">Passaggio automatico dopo 3 conferme manuali consecutive. Card discreta: "Gestirò in autonomia, ma ti avviserò sempre."</span>
+              </div>
+              <div class="phase-emotion"><span class="emotion-dot" style="background:var(--brand)"></span> Rassicurato · svolta</div>
+            </div>
+
+            <div class="phase-col">
+              <span class="phase-num">04 · TESTA</span>
+              <div class="phase-name">Override Rispettato</div>
+              <div class="phase-scenario">Marco rientra prima del solito e accende il riscaldamento manualmente. L'AI registra e chiede: eccezione o modifica?</div>
+              <div class="phase-bubble">Ho registrato che hai acceso manualmente. Questa settimana salto l'automazione — vuoi che lo consideri un'eccezione o preferisci modificare la regola?</div>
+              <div class="phase-thought">Non ha fatto storie. Ha capito da solo che era una cosa occasionale.</div>
+              <div class="phase-mechanic">
+                <span class="mech-label">⚙ Human-in-the-Loop · Override</span>
+                <span class="mech-text">Sistema distingue eccezione vs. modifica permanente. Value Center: "Eccezione manuale — regola invariata."</span>
+              </div>
+              <div class="phase-emotion"><span class="emotion-dot" style="background:var(--brand)"></span> Fiducioso</div>
+            </div>
+
+            <div class="phase-col success">
+              <span class="phase-num">05 · AFFIDA</span>
+              <div class="phase-name">Rapport Mensile</div>
+              <div class="phase-scenario">Dopo 6 settimane Marco apre il Value Center: report narrativo, non dashboard tecnica. Lo manda a un collega.</div>
+              <div class="phase-bubble">Questo mese hai risparmiato €43. Casa 2 ha funzionato in autonomia per 18 sere — 0 eccezioni impreviste. Livello: Collaborative Home.</div>
+              <div class="phase-thought">Questo lo mando a Riccardo. Anche lui ha due case.</div>
+              <div class="phase-mechanic">
+                <span class="mech-label">⚙ Value Center · Narrazione settimanale</span>
+                <span class="mech-text">Risparmio tangibile + autonomia guadagnata = valore misurabile e condivisibile.</span>
+              </div>
+              <div class="success-metric">-€43 · Collaborative Home ✓</div>
+            </div>
+
+          </div><!-- /journey-phases -->
+
+          <div class="trust-statement"><strong>Trust Statement:</strong> "La casa funziona come me: fa le cose senza disturbarmi, ma mi tiene sempre in loop. Ho smesso di dover controllare tutto — perché l'AI se l'è meritato."</div>
+        </div><!-- /content-marco -->
+
+        <!-- ══════════════ CHIARA ══════════════ -->
+        <div class="journey-panel" id="content-chiara">
+
           <div class="journey-meta">
-            <div class="journey-need"><strong>Obiettivo:</strong> Monitorare l'impatto ambientale riducendo l'inquinamento indoor senza subire notifiche assillanti.</div>
-            <div class="journey-funcs">
-              <span class="jfunc-tag">Dashboard intelligente</span>
-              <span class="jfunc-tag">Widget schermata di blocco</span>
+            <div class="journey-goal"><strong>Goal:</strong> Vivere in un ambiente sano e sostenibile senza gestire ogni micro-azione né subire notifiche assillanti.</div>
+            <div class="journey-tags">
+              <span class="jtag">Value Center CO2</span>
+              <span class="jtag">Notification Adattivo</span>
+              <span class="jtag">Widget Lock Screen</span>
             </div>
           </div>
 
-          <div class="journey-flow">
-            <div class="journey-step">
-              <span class="step-num">01 · Contesto</span>
-              <h4>Controllo Rapido</h4>
-              <p>Chiara monitora l'andamento della qualità dell'aria e della CO2 direttamente dal widget sul telefono.</p>
-            </div>
-            <span class="journey-flow-arrow">→</span>
-            <div class="journey-step">
-              <span class="step-num">02 · Azione</span>
-              <h4>Micro-Azione</h4>
-              <p>Accetta con un solo tocco lo spegnimento dei carichi standby suggerito dal widget dinamico.</p>
-            </div>
-            <span class="journey-flow-arrow">→</span>
-            <div class="journey-step critical">
-              <span class="badge">⚡ CRITICAL MOMENT</span>
-              <span class="step-num">03 · Deviazione</span>
-              <h4>Cena con Ospiti</h4>
-              <p>La CO2 sale durante una cena. L'app avvisa con una notifica soffusa per non disturbare gli ospiti.</p>
-            </div>
-            <span class="journey-flow-arrow">→</span>
-            <div class="journey-step success">
-              <span class="step-num">04 · Risultato</span>
-              <h4>Comfort &amp; Sostenibilità</h4>
-              <p>Impatto CO2 ridotto nel silenzio del sistema di climatizzazione.</p>
-              <div class="metric">-15% Emissioni CO2</div>
+          <!-- Trust curve SVG -->
+          <div class="trust-curve-wrap">
+            <span class="trust-label">Trust</span>
+            <div class="trust-curve-track">
+              <svg class="trust-curve-svg" viewBox="0 0 600 28" preserveAspectRatio="none">
+                <polyline points="0,20 120,16 240,12 360,7 480,3 600,1"
+                  fill="none" stroke="var(--g4)" stroke-width="1.5" stroke-dasharray="4 3"/>
+                <polyline points="0,20 120,16 240,12 360,7 480,3 600,1"
+                  fill="none" stroke="var(--lime)" stroke-width="2" opacity=".5"/>
+                <circle cx="0"   cy="20" r="3.5" fill="var(--g5)"/>
+                <circle cx="120" cy="16" r="3.5" fill="var(--g5)"/>
+                <circle cx="240" cy="12" r="3.5" fill="var(--lime)" opacity=".7"/>
+                <circle cx="360" cy="7"  r="3.5" fill="var(--lime)" opacity=".85"/>
+                <circle cx="480" cy="3"  r="3.5" fill="var(--lime)"/>
+                <circle cx="600" cy="1"  r="3.5" fill="var(--lime)"/>
+                <text x="0"   y="10" font-size="6" fill="var(--faint)" font-family="monospace">Scettica</text>
+                <text x="100" y="8"  font-size="6" fill="var(--faint)" font-family="monospace">Curiosa</text>
+                <text x="220" y="4"  font-size="6" fill="var(--lime)" font-family="monospace" opacity=".8">Impressionata</text>
+                <text x="340" y="2"  font-size="6" fill="var(--lime)" font-family="monospace">Rassicurata</text>
+                <text x="470" y="2"  font-size="6" fill="var(--lime)" font-family="monospace">Advocate</text>
+              </svg>
             </div>
           </div>
 
-          <div class="journey-branches-section">
-            <span class="journey-branches-title">Percorsi alternativi (Lateral Branches)</span>
-            <div class="journey-branches">
-              <div class="jbranch-card">
-                <span class="branch-code">Percorso A · Silenzio Attivo</span>
-                <h5>Notifica Ignorata</h5>
-                <p>Chiara ignora la notifica; l'app monitora in background senza inviare altri avvisi per 24 ore.</p>
-              </div>
-              <div class="jbranch-card">
-                <span class="branch-code">Percorso B · Comfort Priority</span>
-                <h5>Ventilazione Rapida</h5>
-                <p>Chiara richiede la massima aerazione accettando il temporaneo aumento del rumore.</p>
-              </div>
-              <div class="jbranch-card">
-                <span class="branch-code">Percorso C · Dati Incoerenti</span>
-                <h5>Segnalazione Incertezza</h5>
-                <p>In caso di discrepanze tra sensori, l'app avvisa Chiara richiedendo una verifica manuale.</p>
-              </div>
-            </div>
-          </div>
-        </div>
+          <div class="journey-phases">
 
-        <!-- ============ PINA CONTENT ============ -->
-        <div class="journey-content" id="content-pina">
+            <div class="phase-col">
+              <span class="phase-num">01 · MAPPA</span>
+              <div class="phase-name">Vista Unificata</div>
+              <div class="phase-scenario">Chiara connette 6 dispositivi: l'AI costruisce per la prima volta una visione integrata di CO2, temperatura, umidità e consumi.</div>
+              <div class="phase-bubble">Ho messo insieme i dati di 6 dispositivi. Ci vorrà qualche giorno prima che le letture si stabilizzino — intanto puoi già esplorare.</div>
+              <div class="phase-thought">Finalmente non devo aprire quattro app diverse. Vediamo se i dati sono attendibili.</div>
+              <div class="phase-mechanic">
+                <span class="mech-label">⚙ Learning · Integrazione multi-sorgente</span>
+                <span class="mech-text">Value Center mostra indicatore "Qualità Ambientale" composito. Correlazioni rilevate: CO2 alta = finestre chiuse + cucina + 2 persone.</span>
+              </div>
+              <div class="phase-emotion"><span class="emotion-dot" style="background:var(--g5)"></span> Scettica-curiosa</div>
+            </div>
+
+            <div class="phase-col">
+              <span class="phase-num">02 · CONNETTE</span>
+              <div class="phase-name">Causa–Effetto Visibile</div>
+              <div class="phase-scenario">L'AI rileva correlazione tra cucina e picchi CO2 su 5 sere e lo segnala con un Insight narrativo — non un allarme.</div>
+              <div class="phase-bubble">Quando cucini con le finestre chiuse, la CO2 sale del 40% in 20 minuti. Vuoi che ti avvisi quando supera la soglia di comfort?</div>
+              <div class="phase-thought">Lo sapevo in teoria, ma non l'avevo mai misurato a casa mia. Questo è davvero utile.</div>
+              <div class="phase-mechanic">
+                <span class="mech-label">⚙ Notification Center · Livello Insight</span>
+                <span class="mech-text">Tono verde, non urgente. Value Center: trend settimanale CO2 con benchmark medi quartiere.</span>
+              </div>
+              <div class="phase-emotion"><span class="emotion-dot" style="background:var(--o4)"></span> Impressionata</div>
+            </div>
+
+            <div class="phase-col critical">
+              <span class="critical-badge">⚡ CRITICAL MOMENT</span>
+              <span class="phase-num">03 · BILANCIA</span>
+              <div class="phase-name">Tatto Contestuale</div>
+              <div class="phase-scenario">Cena con ospiti: CO2 a 1.200 ppm. L'AI non manda notifica push — usa solo il widget sul lock screen per non imbarazzarla.</div>
+              <div class="phase-bubble">Aria in casa: attenzione — apri una finestra quando vuoi.</div>
+              <div class="phase-thought">Non mi ha imbarazzata davanti agli amici. Ha capito che non era il momento. Come se avesse buon senso.</div>
+              <div class="phase-mechanic">
+                <span class="mech-label">⚙ Notification Center · Adaptive Delivery</span>
+                <span class="mech-text">Sistema sceglie il canale in base a contesto rilevato (più persone, sera, pattern "ospiti"): widget silenzioso invece di push.</span>
+              </div>
+              <div class="phase-emotion"><span class="emotion-dot" style="background:var(--lime)"></span> Fiduciosa · epifania</div>
+            </div>
+
+            <div class="phase-col">
+              <span class="phase-num">04 · AGISCE</span>
+              <div class="phase-name">Delega Autonomia</div>
+              <div class="phase-scenario">Dopo 14 giorni in cui Chiara ha spento i carichi standby ogni notte, l'AI propone di farlo in autonomia.</div>
+              <div class="phase-bubble">Hai spento i carichi standby ogni notte per 14 giorni. Se vuoi, posso farlo io a partire dalle 23:00 — tu puoi sempre accenderli manualmente.</div>
+              <div class="phase-thought">Ha aspettato che lo facessi io per prima. Non ha assunto niente. Questo mi piace.</div>
+              <div class="phase-mechanic">
+                <span class="mech-label">⚙ Progressive Autonomy: Manual → Assisted</span>
+                <span class="mech-text">Il sistema agisce solo dopo che l'utente ha dimostrato il comportamento come proprio. Consumo standby: -18%.</span>
+              </div>
+              <div class="phase-emotion"><span class="emotion-dot" style="background:var(--lime)"></span> Rassicurata</div>
+            </div>
+
+            <div class="phase-col success">
+              <span class="phase-num">05 · RACCONTA</span>
+              <div class="phase-name">Report Ambientale</div>
+              <div class="phase-scenario">Fine mese: il Value Center genera un report narrativo con CO2 evitata. Chiara lo salva nel suo archivio di ricerca.</div>
+              <div class="phase-bubble">Luglio nella tua casa: CO2 indoor -24%, consumo standby -31%. Hai evitato 14 kg di CO2 — come non aver percorso 85 km in auto.</div>
+              <div class="phase-thought">Questo dato lo uso davvero. Posso citarlo nel mio lavoro. È casa mia che diventa caso studio.</div>
+              <div class="phase-mechanic">
+                <span class="mech-label">⚙ Value Center · Narrazione Ambientale</span>
+                <span class="mech-text">Dato calibrato su profilo (non ha auto, usa bici). Report come strumento di ricerca personale.</span>
+              </div>
+              <div class="success-metric">-14 kg CO2 · Quality Air 22/30 gg ✓</div>
+            </div>
+
+          </div><!-- /journey-phases -->
+
+          <div class="trust-statement"><strong>Trust Statement:</strong> "Non mi dice cosa fare. Mi mostra cosa succede — e lascia che sia io a scegliere. È esattamente come dovrebbe funzionare una tecnologia intelligente."</div>
+        </div><!-- /content-chiara -->
+
+        <!-- ══════════════ PINA ══════════════ -->
+        <div class="journey-panel" id="content-pina">
+
           <div class="journey-meta">
-            <div class="journey-need"><strong>Obiettivo:</strong> Sicurezza domestica in situazioni di emergenza con interfacce ultra-semplificate e backup offline affidabile.</div>
-            <div class="journey-funcs">
-              <span class="jfunc-tag">Dashboard intelligente</span>
-              <span class="jfunc-tag">Continuità offline (No Wi-Fi)</span>
+            <div class="journey-goal"><strong>Goal:</strong> Vivere in sicurezza senza sentirsi sorvegliata — sapendo che il figlio è informato solo quando serve davvero.</div>
+            <div class="journey-tags">
+              <span class="jtag">Safety Graduata</span>
+              <span class="jtag">Continuità Offline</span>
+              <span class="jtag">Inclusion by Design</span>
             </div>
           </div>
 
-          <div class="journey-flow">
-            <div class="journey-step">
-              <span class="step-num">01 · Contesto</span>
-              <h4>Rilevazione Gas</h4>
-              <p>Un sensore rileva una perdita di gas in cucina durante la notte a casa di Pina.</p>
-            </div>
-            <span class="journey-flow-arrow">→</span>
-            <div class="journey-step">
-              <span class="step-num">02 · Azione</span>
-              <h4>Notifica Sdoppiata</h4>
-              <p>Pina riceve un allarme acustico e vocale in casa; il figlio riceve una notifica push dettagliata sul telefono.</p>
-            </div>
-            <span class="journey-flow-arrow">→</span>
-            <div class="journey-step critical">
-              <span class="badge">⚡ CRITICAL MOMENT</span>
-              <span class="step-num">03 · Deviazione</span>
-              <h4>Blackout &amp; No Wi-Fi</h4>
-              <p>Salta la corrente e il Wi-Fi crolla. Il sistema locale chiude l'elettrovalvola offline in sicurezza.</p>
-            </div>
-            <span class="journey-flow-arrow">→</span>
-            <div class="journey-step success">
-              <span class="step-num">04 · Risultato</span>
-              <h4>Sicurezza Garantita</h4>
-              <p>Valvola chiusa localmente; figlio avvisato via backup 4G. Pericolo sventato.</p>
-              <div class="metric">Sicurezza 100% Offline</div>
+          <!-- Trust curve SVG -->
+          <div class="trust-curve-wrap">
+            <span class="trust-label">Trust</span>
+            <div class="trust-curve-track">
+              <svg class="trust-curve-svg" viewBox="0 0 600 28" preserveAspectRatio="none">
+                <polyline points="0,25 120,22 240,18 360,12 480,6 600,2"
+                  fill="none" stroke="var(--g4)" stroke-width="1.5" stroke-dasharray="4 3"/>
+                <polyline points="0,25 120,22 240,18 360,12 480,6 600,2"
+                  fill="none" stroke="var(--teal)" stroke-width="2" opacity=".5"/>
+                <circle cx="0"   cy="25" r="3.5" fill="var(--g5)"/>
+                <circle cx="120" cy="22" r="3.5" fill="var(--g5)"/>
+                <circle cx="240" cy="18" r="3.5" fill="var(--teal)" opacity=".6"/>
+                <circle cx="360" cy="12" r="3.5" fill="var(--teal)" opacity=".8"/>
+                <circle cx="480" cy="6"  r="3.5" fill="var(--teal)"/>
+                <circle cx="600" cy="2"  r="3.5" fill="var(--teal)"/>
+                <text x="0"   y="14" font-size="6" fill="var(--faint)" font-family="monospace">Riservata</text>
+                <text x="100" y="12" font-size="6" fill="var(--faint)" font-family="monospace">Curiosa</text>
+                <text x="220" y="8"  font-size="6" fill="var(--teal)" font-family="monospace" opacity=".8">Rassicurata</text>
+                <text x="340" y="4"  font-size="6" fill="var(--teal)" font-family="monospace">Autonoma</text>
+                <text x="470" y="2"  font-size="6" fill="var(--teal)" font-family="monospace">Advocate</text>
+              </svg>
             </div>
           </div>
 
-          <div class="journey-branches-section">
-            <span class="journey-branches-title">Percorsi alternativi (Lateral Branches)</span>
-            <div class="journey-branches">
-              <div class="jbranch-card">
-                <span class="branch-code">Percorso A · Mancata Risposta</span>
-                <h5>Escalation Contatti</h5>
-                <p>Se Pina non risponde entro 2 minuti, il sistema chiama automaticamente il figlio e i soccorsi.</p>
+          <div class="journey-phases">
+
+            <div class="phase-col">
+              <span class="phase-num">01 · ACCOGLIE</span>
+              <div class="phase-name">Benvenuto Accessibile</div>
+              <div class="phase-scenario">Il figlio installa l'app con Pina presente. L'app si presenta in italiano semplice, testo grande, zero tecnicismi.</div>
+              <div class="phase-bubble">Ciao Pina, mi chiamo Agente di Casa. Sono qui per tenerti compagnia e avvisarti se succede qualcosa di importante. Non faccio niente senza prima dirtelo.</div>
+              <div class="phase-thought">Almeno non usa parole strane. Vediamo se è come dice mio figlio.</div>
+              <div class="phase-mechanic">
+                <span class="mech-label">⚙ Inclusion by Design · Onboarding</span>
+                <span class="mech-text">Testo ≥18pt, nessun termine tecnico. "AI" → "Agente di Casa". Avatar neutro, non robotico.</span>
               </div>
-              <div class="jbranch-card">
-                <span class="branch-code">Percorso B · Backup Locale</span>
-                <h5>Batteria e RF Continuo</h5>
-                <p>I sensori continuano a dialogare via radio a batteria anche senza energia elettrica in casa.</p>
-              </div>
-              <div class="jbranch-card">
-                <span class="branch-code">Percorso C · Falso Allarme</span>
-                <h5>Revoca Rapida</h5>
-                <p>Se l'anomalia rientra subito, l'allarme si disattiva spiegando chiaramente l'accaduto.</p>
-              </div>
+              <div class="phase-emotion"><span class="emotion-dot" style="background:var(--g5)"></span> Riservata ma aperta</div>
             </div>
-          </div>
-        </div>
 
-      </div>
+            <div class="phase-col">
+              <span class="phase-num">02 · ABITUA</span>
+              <div class="phase-name">Conversazione Quotidiana</div>
+              <div class="phase-scenario">Nei primi giorni l'AI manda solo buongiorno e piccoli promemoria facoltativi. Pina inizia a rispondere — segnale di dialogo.</div>
+              <div class="phase-bubble">Buongiorno Pina! Il termostato è a 21°, tutto ok. Oggi c'è una buona finestra per arieggiare, se vuoi.</div>
+              <div class="phase-thought">È gentile. Non rompe. E mi dice le cose chiare.</div>
+              <div class="phase-mechanic">
+                <span class="mech-label">⚙ Learning · Calibrazione al ritmo di Pina</span>
+                <span class="mech-text">Micro-interazioni conversazionali, non transazionali. Il sistema impara orari pasti, accensioni, movimenti senza nominare la sorveglianza.</span>
+              </div>
+              <div class="phase-emotion"><span class="emotion-dot" style="background:var(--teal)" style="opacity:.5"></span> Curiosa e rilassata</div>
+            </div>
 
-      <!-- Rail pagination -->
+            <div class="phase-col critical">
+              <span class="critical-badge">⚡ CRITICAL MOMENT</span>
+              <span class="phase-num">03 · PERCEPISCE</span>
+              <div class="phase-name">Emergenza Graduata</div>
+              <div class="phase-scenario">Fumo in cucina: l'AI avvisa prima Pina, attende 60 secondi, poi — se ok — informa il figlio solo dell'esito risolto.</div>
+              <div class="phase-bubble">Pina, c'è del fumo in cucina. Vai a controllare — se tutto ok, premi "Sto bene".</div>
+              <div class="phase-thought">Non ha chiamato mio figlio subito. Ha aspettato me. Non voglio sembrare incapace.</div>
+              <div class="phase-mechanic">
+                <span class="mech-label">⚙ Safety · Notification Center Graduato</span>
+                <span class="mech-text">Step 1: avviso a Pina (60s). Step 2 se silenzio: Warning al figlio. Step 3: Critical + chiamata. Qui si ferma allo Step 1 + conferma "tutto risolto" al figlio.</span>
+              </div>
+              <div class="phase-emotion"><span class="emotion-dot" style="background:var(--teal)"></span> Rassicurata · dignità intatta</div>
+            </div>
+
+            <div class="phase-col">
+              <span class="phase-num">04 · PROTEGGE</span>
+              <div class="phase-name">Resilienza Offline</div>
+              <div class="phase-scenario">Notte di temporale: il Wi-Fi cade. I sensori continuano in locale. Il mattino dopo l'app riassume senza allarmismo.</div>
+              <div class="phase-bubble">Stanotte la connessione è caduta dalle 01:40 alle 05:12. I sensori hanno continuato a funzionare — tutto ok. Tuo figlio sa già.</div>
+              <div class="phase-thought">Nemmeno me ne sono accorta. Ha continuato da sola. E mio figlio era già informato.</div>
+              <div class="phase-mechanic">
+                <span class="mech-label">⚙ Continuità Offline · Backup RF Locale</span>
+                <span class="mech-text">Sensori via RF attivi anche senza cloud. Log sincronizzato al rientro della connessione. Uptime sensori: 100% inclusa interruzione.</span>
+              </div>
+              <div class="phase-emotion"><span class="emotion-dot" style="background:var(--teal)"></span> Fiduciosa nella resilienza</div>
+            </div>
+
+            <div class="phase-col success">
+              <span class="phase-num">05 · CONDIVIDE</span>
+              <div class="phase-name">Orgoglio Ritrovato</div>
+              <div class="phase-scenario">Pina racconta al figlio l'episodio del fumo — con orgoglio, non con paura. Poi lo suggerisce all'amica Rosaria.</div>
+              <div class="phase-bubble">L'app me l'ha detto lei prima. E ti ha scritto solo dopo che avevo risolto io. Non ti ha preoccupato per niente.</div>
+              <div class="phase-thought">Non ho avuto bisogno di lui. Ma sapevo che c'era. È diverso.</div>
+              <div class="phase-mechanic">
+                <span class="mech-label">⚙ Human-in-the-Loop + Inclusion</span>
+                <span class="mech-text">Pina è sempre prima nella catena decisionale. Il figlio è informato, non sostituto. Autonomia reale, non promessa.</span>
+              </div>
+              <div class="success-metric">Sicurezza 100% Offline · Autonomia ✓</div>
+            </div>
+
+          </div><!-- /journey-phases -->
+
+          <div class="trust-statement"><strong>Trust Statement:</strong> "Non mi fa sentire sorvegliata. Mi fa sentire accompagnata. C'è una bella differenza."</div>
+        </div><!-- /content-pina -->
+
+      </div><!-- /journey-container -->
+
       <div class="rail">
         <span class="tag left">SYS · JOURNEY</span>
         <div class="track">
@@ -867,6 +1068,7 @@
         <span class="tag right">07 / 08</span>
       </div>
     </section>
+
 
 
     <!-- ============ SLIDE 7 · OPPORTUNITÀ DI DESIGN ============ -->
@@ -948,12 +1150,14 @@
   });
 
 
-  // Journey tab switcher
+  // Journey tab switcher (updated for .journey-panel)
   function switchJourney(name) {
-    document.querySelectorAll('.journey-content').forEach(c => c.classList.remove('active'));
+    document.querySelectorAll('.journey-panel').forEach(c => c.classList.remove('active'));
     document.querySelectorAll('.jtab-btn').forEach(b => b.classList.remove('active'));
-    document.getElementById('content-' + name).classList.add('active');
-    document.getElementById('tab-' + name).classList.add('active');
+    var panel = document.getElementById('content-' + name);
+    var tab   = document.getElementById('tab-' + name);
+    if (panel) panel.classList.add('active');
+    if (tab)   tab.classList.add('active');
   }
 
   // Fit 16:9 stage to viewport
