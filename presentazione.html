@@ -303,7 +303,7 @@
      SLIDE 7 · USER JOURNEY — final clean version
      Typographic scale:
        7px  → chrome / system / kicker / counter / tags / rail
-      10px  → caption / jtag / goal / jtab-role / p-mech-label
+      10px  → caption / jtag / goal / jtab-role
       11px  → speech bubble
       12px  → scenario (secondary body)
       14px  → tab names, trust statement
@@ -316,13 +316,13 @@
     overflow: hidden;
   }
 
-  /* Pinned container to prevent vertical stretch */
+  /* Pinned container to prevent vertical stretch, pushed down for 'y' spacing */
   .journey-container {
     position: absolute;
-    top:    137px;
+    top:    154px;   /* Pushed down to prevent title 'y' overlap */
     left:   72px;
     right:  72px;
-    bottom:  84px;
+    bottom:  110px;  /* Pushed up to give more space at the bottom */
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -419,11 +419,11 @@
   /* ── Phase card ── */
   .p-col {
     flex: 1; min-width: 0;
-    display: flex; flex-direction: column; gap: 8px; /* gap reduced to 8px */
+    display: flex; flex-direction: column; gap: 8px;
     background: var(--surface);
     border: 1px solid var(--line);
     border-radius: 10px;
-    padding: 16px 14px 12px; /* padding reduced to fit text */
+    padding: 16px 14px 14px; /* optimized padding */
     overflow: hidden;
     position: relative;
     opacity: 0;
@@ -467,7 +467,7 @@
     font-family: var(--sans);
     font-size: 12px;
     color: var(--muted);
-    line-height: 1.4;         /* line-height reduced to 1.4 */
+    line-height: 1.4;
     flex-shrink: 0;
     display: -webkit-box;
     -webkit-line-clamp: 2;
@@ -482,7 +482,7 @@
     font-size: 11px;
     font-style: italic;
     color: var(--ink);
-    line-height: 1.4;         /* line-height reduced to 1.4 */
+    line-height: 1.4;
     background: var(--g2);
     border-left: 2px solid var(--brand);
     padding: 6px 10px;
@@ -497,21 +497,6 @@
 
   /* Flex spacer */
   .p-spacer { flex: 1; min-height: 0; }
-
-  /* Mechanic label — caption tier, single line */
-  .p-mechanic { flex-shrink: 0; }
-  .p-mech-label {
-    font-family: var(--mono);
-    font-size: 10px;          /* caption at 10px */
-    letter-spacing: .08em;
-    text-transform: uppercase;
-    color: var(--brand);
-    font-weight: 600;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: block;
-  }
 
   /* ── Critical ── */
   .p-col.critical {
@@ -542,7 +527,6 @@
   .p-col.success .p-bubble   { background: rgba(255,255,255,.12);
                                 border-left-color: rgba(255,255,255,.35);
                                 color: rgba(255,255,255,.9); }
-  .p-col.success .p-mech-label { color: rgba(255,255,255,.65); }
 
   .p-metric {
     font-family: var(--sans);
@@ -580,7 +564,7 @@
 
   .node { width: 5px !important; height: 5px !important; }
 
-  /* ── Premium cross-fade transitions (zero black background flash) ── */
+  /* ── Premium cross-fade transitions ── */
   @keyframes slideCrossFadeIn {
     from { opacity: 0; }
     to   { opacity: 1; }
@@ -598,14 +582,14 @@
     to   { opacity: 1; }
   }
 
-  /* Entering slide: fades in on top (z-index: 2) */
+  /* Entering slide: fades in on top */
   .slide.active {
     display: block;
     z-index: 2;
     animation: slideCrossFadeIn 0.3s ease forwards;
   }
 
-  /* Leaving slide: stays fully opaque below (z-index: 1) until removed */
+  /* Leaving slide: stays fully opaque below until removed */
   .slide.leaving {
     display: block !important;
     z-index: 1;
@@ -613,7 +597,7 @@
     pointer-events: none;
   }
 
-  /* ── Element entry animation (staggered on active slides, delayed by 0.2s to stagger during slide fade-in) ── */
+  /* ── Element entry animation (staggered on active slides) ── */
   .slide.active .agenda .row,
   .slide.active .mcol,
   .slide.active .step,
@@ -967,7 +951,7 @@
       </div>
     </section>
 
-                        <!-- ============ SLIDE 7 · USER JOURNEY ============ -->
+                            <!-- ============ SLIDE 7 · USER JOURNEY ============ -->
     <section class="slide" data-name="User journey">
       <div class="head">
         <h2>User Journey</h2>
@@ -1002,20 +986,18 @@
               <span class="p-num">01 · Osserva</span>
               <div class="p-name">Apprendimento</div>
               <div class="p-divider"></div>
-              <div class="p-scenario">L'AI osserva 10 giorni in silenzio per apprendere le routine.</div>
-              <div class="p-bubble">"Sto imparando le tue abitudini, non farò modifiche."</div>
+              <div class="p-scenario">L'AI osserva per 10 giorni in silenzio per registrare le abitudini.</div>
+              
               <div class="p-spacer"></div>
-              <div class="p-mechanic"><span class="p-mech-label">Progressive Autonomy · Manual</span></div>
             </div>
             <div class="p-col">
               
               <span class="p-num">02 · Valuta</span>
               <div class="p-name">Prima proposta</div>
               <div class="p-divider"></div>
-              <div class="p-scenario">Rilevato riscaldamento attivo senza presenza in casa 2.</div>
-              <div class="p-bubble">"Riscaldamento attivo in casa 2 vuota. Spegno alle 20:00?"</div>
+              <div class="p-scenario">Rilevato riscaldamento attivo senza presenza nella seconda casa.</div>
+              <div class="p-bubble">"Riscaldamento attivo nella seconda casa vuota. Spegno alle 20:00?"</div>
               <div class="p-spacer"></div>
-              <div class="p-mechanic"><span class="p-mech-label">Value Center · Insight</span></div>
             </div>
             <div class="p-col critical">
               <span class="p-crit-badge">⚡ Critical</span>
@@ -1023,19 +1005,17 @@
               <div class="p-name">Fiducia progressiva</div>
               <div class="p-divider"></div>
               <div class="p-scenario">Dopo 3 conferme manuali, l'AI agisce in autonomia.</div>
-              <div class="p-bubble">"Tra 5 minuti spengo casa 2. Vuoi bloccare l'azione?"</div>
+              <div class="p-bubble">"Tra 5 minuti spengo il riscaldamento nella seconda casa. Vuoi bloccarlo?"</div>
               <div class="p-spacer"></div>
-              <div class="p-mechanic"><span class="p-mech-label">Autonomy: Assisted → Collaborative</span></div>
             </div>
             <div class="p-col">
               
               <span class="p-num">04 · Testa</span>
               <div class="p-name">Override</div>
               <div class="p-divider"></div>
-              <div class="p-scenario">Rientro anticipato di Marco: l'AI adatta la regola.</div>
-              <div class="p-bubble">"Accensione manuale rilevata. Salto la regola per oggi?"</div>
+              <div class="p-scenario">Rientro anticipato di Marco: l'AI adatta la regola temporaneamente.</div>
+              
               <div class="p-spacer"></div>
-              <div class="p-mechanic"><span class="p-mech-label">Human-in-the-Loop · Override</span></div>
             </div>
             <div class="p-col success">
               <span class="p-num">05 · Affida</span>
@@ -1044,10 +1024,9 @@
               <div class="p-scenario">Sintesi dei risparmi e dell'autonomia raggiunta.</div>
               <div class="p-spacer"></div>
               <div class="p-metric">−€43 · Collaborative Home ✓</div>
-              <div class="p-mechanic"><span class="p-mech-label">Value Center · Ottimizzazione</span></div>
             </div>
           </div>
-          <div class="trust-statement"><strong>Marco:</strong> "La casa fa le cose senza disturbarmi, ma mi tiene in loop. L'AI se l'è meritato."</div>
+          <div class="trust-statement"><strong>Marco:</strong> "La casa fa le cose senza disturbarmi, ma mi tiene sempre in loop. L'AI se l'è meritato."</div>
         </div>
         <div class="journey-panel" id="content-chiara">
           <div class="journey-meta">
@@ -1060,40 +1039,36 @@
               <span class="p-num">01 · Mappa</span>
               <div class="p-name">Vista unificata</div>
               <div class="p-divider"></div>
-              <div class="p-scenario">Unificazione di CO2, umidità e consumi in una sola schermata.</div>
-              <div class="p-bubble">"Ho unito 6 sensori. Esplora pure mentre calibro."</div>
+              <div class="p-scenario">CO2, umidità e consumi in un'unica schermata per la prima volta.</div>
+              
               <div class="p-spacer"></div>
-              <div class="p-mechanic"><span class="p-mech-label">Learning · Integrazione multi-sorgente</span></div>
             </div>
             <div class="p-col">
               
               <span class="p-num">02 · Connette</span>
               <div class="p-name">Causa–effetto</div>
               <div class="p-divider"></div>
-              <div class="p-scenario">Picchi di CO2 rilevati durante la cottura a finestre chiuse.</div>
-              <div class="p-bubble">"CO2 +40% in cucina a finestre chiuse. Ti avviso se risale?"</div>
+              <div class="p-scenario">Rilevati picchi di CO2 in cucina durante la cottura.</div>
+              <div class="p-bubble">"La CO2 sale molto quando cucini. Ti avviso se supera la soglia?"</div>
               <div class="p-spacer"></div>
-              <div class="p-mechanic"><span class="p-mech-label">Notification Center · Insight</span></div>
             </div>
             <div class="p-col critical">
               <span class="p-crit-badge">⚡ Critical</span>
-              <span class="p-num">03 · Bilancia</span>
-              <div class="p-name">Tatto contestuale</div>
+              <span class="p-num">03 · Consiglia</span>
+              <div class="p-name">Comfort notturno</div>
               <div class="p-divider"></div>
-              <div class="p-scenario">Cena con ospiti: avviso silenzioso per non disturbare.</div>
-              <div class="p-bubble">"Livello CO2 elevato. Apri la finestra quando preferisci."</div>
+              <div class="p-scenario">Camera da letto chiusa: CO2 raddoppiata di notte. Suggerito ricambio d'aria.</div>
+              <div class="p-bubble">"CO2 elevata in camera. Ti consiglio di arieggiare 5 minuti per iniziare bene."</div>
               <div class="p-spacer"></div>
-              <div class="p-mechanic"><span class="p-mech-label">Notification · Adaptive Delivery</span></div>
             </div>
             <div class="p-col">
               
               <span class="p-num">04 · Agisce</span>
-              <div class="p-name">Delega</div>
+              <div class="p-name">Sprechi silenziosi</div>
               <div class="p-divider"></div>
-              <div class="p-scenario">Proposta di automazione intelligente dello standby notturno.</div>
-              <div class="p-bubble">"Hai spento lo standby per 14 notti. Posso farlo io alle 23?"</div>
+              <div class="p-scenario">L'AI propone lo spegnimento notturno degli elettrodomestici inutilizzati.</div>
+              <div class="p-bubble">"Dispositivi inutilizzati rilevati accesi di notte. Posso spegnerli alle 23?"</div>
               <div class="p-spacer"></div>
-              <div class="p-mechanic"><span class="p-mech-label">Autonomy: Manual → Assisted</span></div>
             </div>
             <div class="p-col success">
               <span class="p-num">05 · Racconta</span>
@@ -1102,7 +1077,6 @@
               <div class="p-scenario">Report mensile sull'impatto e il risparmio ecologico.</div>
               <div class="p-spacer"></div>
               <div class="p-metric">−14 kg CO2 · Air Quality 22/30 gg ✓</div>
-              <div class="p-mechanic"><span class="p-mech-label">Value Center · Narrazione CO2</span></div>
             </div>
           </div>
           <div class="trust-statement"><strong>Chiara:</strong> "Non mi dice cosa fare. Mi mostra cosa succede e lascia che scelga io. Come dovrebbe funzionare."</div>
@@ -1118,49 +1092,44 @@
               <span class="p-num">01 · Accoglie</span>
               <div class="p-name">Benvenuto</div>
               <div class="p-divider"></div>
-              <div class="p-scenario">Onboarding facilitato con testo grande e lingua semplice.</div>
-              <div class="p-bubble">"Ciao Pina, sono il tuo Agente. Ti avviso se necessario."</div>
+              <div class="p-scenario">Interfaccia semplificata con testi grandi per facilitare l'uso.</div>
+              <div class="p-bubble">"Ciao Pina, sono l'Agente. Ti avviserò solo se necessario."</div>
               <div class="p-spacer"></div>
-              <div class="p-mechanic"><span class="p-mech-label">Inclusion by Design · Onboarding</span></div>
             </div>
             <div class="p-col">
               
               <span class="p-num">02 · Abitua</span>
               <div class="p-name">Dialogo</div>
               <div class="p-divider"></div>
-              <div class="p-scenario">Piccoli consigli quotidiani per stabilire una routine.</div>
-              <div class="p-bubble">"Buongiorno Pina! Casa a 21°. Ottimo momento per arieggiare."</div>
+              <div class="p-scenario">Primi dialoghi discreti basati su piccoli consigli utili.</div>
+              <div class="p-bubble">"Buongiorno Pina! Ottimo momento per arieggiare le stanze."</div>
               <div class="p-spacer"></div>
-              <div class="p-mechanic"><span class="p-mech-label">Learning · Calibrazione al ritmo</span></div>
             </div>
             <div class="p-col critical">
               <span class="p-crit-badge">⚡ Critical</span>
               <span class="p-num">03 · Percepisce</span>
               <div class="p-name">Emergenza</div>
               <div class="p-divider"></div>
-              <div class="p-scenario">Fumo in cucina: l'AI avvisa prima Pina, poi il figlio.</div>
-              <div class="p-bubble">"Rilevato fumo, Pina. Se va tutto bene premi 'Sto bene'."</div>
+              <div class="p-scenario">Fumo in cucina: l'AI allerta prima Pina, poi il figlio in caso di necessità.</div>
+              <div class="p-bubble">"Rilevato fumo, Pina. Premi 'Sto bene' se è tutto sotto controllo."</div>
               <div class="p-spacer"></div>
-              <div class="p-mechanic"><span class="p-mech-label">Safety · Notification graduato</span></div>
             </div>
             <div class="p-col">
               
               <span class="p-num">04 · Protegge</span>
               <div class="p-name">Resilienza</div>
               <div class="p-divider"></div>
-              <div class="p-scenario">Wi-Fi assente per 3 ore: i sensori continuano via RF locale.</div>
-              <div class="p-bubble">"Wi-Fi assente 3h. I sensori hanno continuato a proteggerti."</div>
+              <div class="p-scenario">Connessione Wi-Fi assente: i sensori continuano a vigilare via RF locale.</div>
+              <div class="p-bubble">"Wi-Fi assente, ma i sensori continuano a proteggerti offline."</div>
               <div class="p-spacer"></div>
-              <div class="p-mechanic"><span class="p-mech-label">Continuità Offline · Backup RF</span></div>
             </div>
             <div class="p-col success">
               <span class="p-num">05 · Condivide</span>
               <div class="p-name">Orgoglio</div>
               <div class="p-divider"></div>
-              <div class="p-scenario">Pina gestisce l'allarme e racconta l'accaduto al figlio.</div>
+              <div class="p-scenario">Pina gestisce l'allarme in autonomia e lo racconta con orgoglio.</div>
               <div class="p-spacer"></div>
-              <div class="p-metric">Sicurezza offline · Autonomia ✓</div>
-              <div class="p-mechanic"><span class="p-mech-label">Human-in-the-Loop + Inclusion</span></div>
+              <div class="p-metric">Autonomia reale ✓</div>
             </div>
           </div>
           <div class="trust-statement"><strong>Pina:</strong> "Non mi fa sentire sorvegliata. Mi fa sentire accompagnata. C'è una bella differenza."</div>
