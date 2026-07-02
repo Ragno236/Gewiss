@@ -1,0 +1,29 @@
+# .gitignore — GEWISS Project
+
+# macOS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Icon?
+ehthumbs.db
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Node (se usato come server locale)
+node_modules/
+npm-debug.log*
+
+# Logs
+*.log
+
+# Temp
+*.tmp
+*.bak

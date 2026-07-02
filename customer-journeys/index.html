@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Customer Journeys — AI Home Agent by GEWISS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Top Brand Navbar -->
+  <header class="brand-navbar">
+    <div class="container navbar-container">
+      <div class="brand-logo">
+        <span class="logo-bold">GEWISS</span> <span class="logo-light">UX Lab</span>
+      </div>
+      <div class="project-tag">AI Home Agent Project</div>
+    </div>
+  </header>
+
+  <!-- Hero Header -->
+  <section class="hero-section">
+    <div class="hero-gradient"></div>
+    <div class="container hero-container">
+      <h1 class="hero-title">Customer Journeys<br><span class="accent-text">AI Home Agent</span></h1>
+      <p class="hero-subtitle">How different users collaborate with AI to save energy, improve sustainability, and increase home safety.</p>
+      <p class="hero-intro">
+        The experience moves from controlling devices to expressing intentions. The app helps users collaborate with AI to manage the home through proactive suggestions, explainable automations, progressive autonomy, safety alerts, and measurable value. Explore the detailed scope, goals, happy paths, critical decision points, and alternative branches for each persona below.
+      </p>
+    </div>
+  </section>
+
+  <!-- Persona Selection Tabs / Cards -->
+  <section class="persona-selector-section">
+    <div class="container">
+      <h2 class="section-title">Select a User Persona</h2>
+      <p class="section-subtitle">Switch between personas to explore their customized onboarding, dashboard experiences, and specific journey flows.</p>
+      
+      <div class="persona-grid" id="personaGrid">
+        <!-- Persona card 1: Marco -->
+        <button class="persona-card active" data-persona="marco" id="btn-persona-marco">
+          <div class="persona-avatar-container avatar-marco">
+            <div class="avatar-circle">M</div>
+          </div>
+          <div class="persona-card-content">
+            <span class="persona-badge badge-energy">Energy</span>
+            <h3>Marco Ferretti</h3>
+            <p class="persona-age">41, Project Manager</p>
+            <p class="persona-summary">Manages two properties; wants to reduce consumption without losing control over automation.</p>
+          </div>
+        </button>
+
+        <!-- Persona card 2: Chiara -->
+        <button class="persona-card" data-persona="chiara" id="btn-persona-chiara">
+          <div class="persona-avatar-container avatar-chiara">
+            <div class="avatar-circle">C</div>
+          </div>
+          <div class="persona-card-content">
+            <span class="persona-badge badge-sustainability">Sustainability</span>
+            <h3>Chiara Bellini</h3>
+            <p class="persona-age">34, Environmental Researcher</p>
+            <p class="persona-summary">Lives alone; wants to understand environmental impact and avoid fragmented metrics.</p>
+          </div>
+        </button>
+
+        <!-- Persona card 3: Pina -->
+        <button class="persona-card" data-persona="pina" id="btn-persona-pina">
+          <div class="persona-avatar-container avatar-pina">
+            <div class="avatar-circle">P</div>
+          </div>
+          <div class="persona-card-content">
+            <span class="persona-badge badge-safety">Safety</span>
+            <h3>Giuseppina "Pina"</h3>
+            <p class="persona-age">68, Retired</p>
+            <p class="persona-summary">Lives alone; protected by safety communication and continuity mode with a remote caregiver.</p>
+          </div>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Journey Simulator Section -->
+  <section class="interactive-simulator-section">
+    <div class="container">
+      <div class="simulator-wrapper">
+        
+        <!-- Left: Interactive Flow & Description -->
+        <div class="flow-container">
+          <div class="persona-meta-info" id="personaMeta">
+            <!-- Dynamically populated -->
+            <div class="meta-header">
+              <h2 id="metaName" class="meta-title">Marco Ferretti</h2>
+              <p id="metaBio" class="meta-bio">41, Project Manager, lives with partner.</p>
+            </div>
+            
+            <div class="meta-grid">
+              <div class="meta-item">
+                <span class="meta-label">Scope</span>
+                <span id="metaScope" class="meta-value">Help Marco reduce energy consumption...</span>
+              </div>
+              <div class="meta-item">
+                <span class="meta-label">Primary Goal</span>
+                <span id="metaGoal" class="meta-value energy-text">Save Energy</span>
+              </div>
+              <div class="meta-item">
+                <span class="meta-label font-bold">Selected Functions</span>
+                <span id="metaFunctions" class="meta-value">1. Smart Dashboard for Home Improvement<br>2. 10-Day Intelligent Onboarding</span>
+              </div>
+            </div>
+            
+            <div class="insight-box">
+              <h4>Key Insights Addressed</h4>
+              <ul id="insightList">
+                <!-- Dynamically populated -->
+              </ul>
+            </div>
+          </div>
+
+          <!-- Timeline Navigator -->
+          <div class="timeline-title-bar">
+            <h3>Journey Stages & Decision Points</h3>
+            <span class="hint-label">Click a step to view details & app screen</span>
+          </div>
+
+          <div class="timeline-steps" id="timelineSteps">
+            <!-- Dynamically populated -->
+          </div>
+
+          <!-- Bottom UX Insights & Metrics -->
+          <div class="ux-outcomes-grid">
+            <div class="ux-outcome-card critical-moment-card">
+              <div class="card-icon">⚡</div>
+              <div>
+                <h5>Critical Moment</h5>
+                <p id="uxCritical">Marco manually overrides the system. The app must prove that it learns without taking control away.</p>
+              </div>
+            </div>
+            <div class="ux-outcome-card opportunity-card">
+              <div class="card-icon">💡</div>
+              <div>
+                <h5>UX Opportunity</h5>
+                <p id="uxOpportunity">Make automation confidence and autonomy level visible before activation.</p>
+              </div>
+            </div>
+            <div class="ux-outcome-card metric-card">
+              <div class="card-icon">📈</div>
+              <div>
+                <h5>Success Metrics</h5>
+                <p id="uxMetric">Number of accepted energy suggestions, reduced manual corrections, monthly energy savings.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Mobile Device Live Simulator Mockup -->
+        <div class="simulator-device-container">
+          <div class="iphone-mockup">
+            <div class="iphone-bezel">
+              <div class="iphone-screen">
+                <!-- Status bar -->
+                <div class="screen-status-bar">
+                  <span class="status-time" id="screenTime">15:40</span>
+                  <div class="dynamic-island"></div>
+                  <div class="status-icons">
+                    <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M12 3c-4.97 0-9 4.03-9 9 0 2.12.74 4.07 1.97 5.61L4.35 19.4c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0l1.9-1.9C9.07 19.58 10.49 20 12 20c4.97 0 9-4.03 9-9s-4.03-9-9-9zm0 15c-3.31 0-6-2.69-6-6 0-1.01.25-1.97.7-2.8l7.1 7.1c-.83.45-1.79.7-2.8.7zm5.3-3.2l-7.1-7.1c.83-.45 1.79-.7 2.8-.7 3.31 0 6 2.69 6 6 0 1.01-.25 1.97-.7 2.8z"/></svg>
+                    <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H7c0-2.76 2.24-5 5-5s5 2.24 5 5c0 1.04-.42 1.99-1.07 2.75z"/></svg>
+                  </div>
+                </div>
+
+                <!-- App Header inside screen -->
+                <div class="app-header" id="appHeader">
+                  <div class="app-logo">
+                    <span class="dot"></span> GEWISS Home
+                  </div>
+                  <div class="app-user-info">
+                    <span class="user-name" id="deviceUser">Marco</span>
+                    <span class="user-status-dot"></span>
+                  </div>
+                </div>
+
+                <!-- App Screen Content (Dynamic based on selected step) -->
+                <div class="screen-content" id="screenContent">
+                  <!-- Dynamically populated by app.js -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+    <!-- Customer Journeys Visual Diagrams Section -->
+  <section class="customer-journeys-section" id="customer-journeys-flow">
+    <div class="container">
+      <h2 class="section-title">Customer Journeys</h2>
+      <p class="section-subtitle">Tre percorsi utente che mostrano come l’AI Home Agent supporta obiettivi diversi: risparmio energetico, sostenibilità e sicurezza.</p>
+      
+      <!-- Persona 1: Marco -->
+      <div class="journey-schema-card">
+        <div class="schema-header m-header">
+          <div class="schema-header-title">
+            <div class="schema-persona-avatar avatar-m">M</div>
+            <div>
+              <h3>Customer Journey 1 — Marco Ferretti</h3>
+              <p class="persona-role">41 anni, Project Manager • Vive con la compagna • Gestisce due immobili</p>
+            </div>
+          </div>
+          <div class="schema-meta-grid">
+            <div class="schema-meta-item">
+              <span class="meta-lbl">Scope:</span>
+              <span class="meta-val">Aiutare Marco a ridurre i consumi energetici senza fargli perdere controllo sulle decisioni automatiche della casa.</span>
+            </div>
+            <div class="schema-meta-item">
+              <span class="meta-lbl">Goal:</span>
+              <span class="meta-val"><span class="table-badge badge-energy">Save Energy</span></span>
+            </div>
+            <div class="schema-meta-item">
+              <span class="meta-lbl">Funzioni:</span>
+              <span class="meta-val font-medium">Onboarding intelligente di 10 giorni, Dashboard intelligente per il miglioramento della casa</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="schema-insights">
+          <h5>Insight Collegati</h5>
+          <ul>
+            <li>Il rifiuto non è dell’automazione, è della perdita di controllo.</li>
+            <li>Passare dai comandi alle intenzioni non elimina il bisogno di capire cosa farà la casa.</li>
+            <li>La fiducia nasce prima dell’azione, non dopo l’errore.</li>
+            <li>Apprendere non significa automatizzare di più: significa sapere quando fermarsi.</li>
+            <li>L’opportunità più forte è rendere visibile il livello di autonomia.</li>
+          </ul>
+        </div>
+        
+        <h5 class="timeline-heading">Mappa di Flusso dell'Esperienza</h5>
+        <div class="schema-flow-scroll">
+          <div class="schema-flow-container">
+            <!-- Node 1 -->
+            <div class="flow-node">
+              <div class="node-badge-happy">Step 1</div>
+              <div class="node-main-box">
+                <h6>1. Trigger</h6>
+                <p>Marco riceve una bolletta più alta del previsto e apre l’app per capire da dove arrivano i consumi.</p>
+              </div>
+            </div>
+            
+            <div class="flow-arrow">→</div>
+            
+            <!-- Node 2 -->
+            <div class="flow-node">
+              <div class="node-badge-happy">Step 2</div>
+              <div class="node-main-box">
+                <h6>2. Context recognition</h6>
+                <p>L’app riconosce che Marco lavora da casa solo alcuni giorni e che alcune stanze restano inutilizzate.</p>
+              </div>
+            </div>
+            
+            <div class="flow-arrow">→</div>
+            
+            <!-- Node 3 -->
+            <div class="flow-node">
+              <div class="node-badge-happy">Step 3</div>
+              <div class="node-main-box">
+                <h6>3. Insight from the home</h6>
+                <p>La dashboard mostra che lo studio e il soggiorno vengono riscaldati contemporaneamente anche quando Marco usa solo lo studio.</p>
+              </div>
+              <div class="branch-connector"></div>
+              <div class="node-branch-box">
+                <span class="branch-tag">Branch C</span>
+                <p>Se i dati non sono sufficienti, l'app continua ad osservare invece di proporre automazioni premature.</p>
+              </div>
+            </div>
+            
+            <div class="flow-arrow">→</div>
+            
+            <!-- Node 4 -->
+            <div class="flow-node">
+              <div class="node-badge-happy">Step 4</div>
+              <div class="node-main-box">
+                <h6>4. AI proposal</h6>
+                <p>L'app propone una routine temporanea: ridurre riscaldamento nelle stanze non utilizzate dalle 9:30 alle 13:00 (risparmio 18€/mese).</p>
+              </div>
+            </div>
+            
+            <div class="flow-arrow">→</div>
+            
+            <!-- Node 5 -->
+            <div class="flow-node">
+              <div class="node-badge-happy">Step 5</div>
+              <div class="node-main-box">
+                <h6>5. User control</h6>
+                <p>Marco vede prima cosa cambierà, quali stanze saranno coinvolte e può scegliere il livello di autonomia.</p>
+              </div>
+              <div class="branch-connector"></div>
+              <div class="node-branch-box">
+                <span class="branch-tag">Branch A</span>
+                <p>Se Marco rifiuta la proposta, l'app mantiene il suggerimento come insight e non insiste.</p>
+              </div>
+            </div>
+            
+            <div class="flow-arrow">→</div>
+            
+            <!-- Node 6 -->
+            <div class="flow-node">
+              <div class="node-badge-happy">Step 6</div>
+              <div class="node-main-box">
+                <h6>6. Real-life exception</h6>
+                <p>Una sera Marco lavora fino a tardi in soggiorno e modifica manualmente la temperatura.</p>
+              </div>
+            </div>
+            
+            <div class="flow-arrow">→</div>
+            
+            <!-- Node 7 -->
+            <div class="flow-node node-critical-moment">
+              <div class="node-badge-happy">Step 7</div>
+              <div class="node-main-box">
+                <h6>7. System response</h6>
+                <p>L’app non trasforma subito l’eccezione in una nuova regola. Chiede se si tratta di un'eccezione temporanea.</p>
+              </div>
+              <div class="branch-connector"></div>
+              <div class="node-branch-box">
+                <span class="branch-tag">Branch B</span>
+                <p>Se Marco modifica manualmente una routine, l'app chiede se si tratta di un'eccezione.</p>
+              </div>
+            </div>
+            
+            <div class="flow-arrow">→</div>
+            
+            <!-- Node 8 -->
+            <div class="flow-node node-outcome-node">
+              <div class="node-badge-happy">Outcome</div>
+              <div class="node-main-box outcome-bg-box">
+                <h6>8. Outcome</h6>
+                <p>Dopo un mese, Marco vede un riepilogo: risparmio stimato di 23€, 4 picchi evitati, nessuna routine modificata senza conferma.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="happy-path-summary">
+          <span class="happy-path-badge">Happy Path</span>
+          <p>Marco comprende la proposta di risparmio, sceglie un livello di autonomia controllato e accetta la routine energetica.</p>
+        </div>
+
+        <div class="schema-footer-grid">
+          <div class="footer-block crit-block">
+            <div class="fb-title">⚡ Critical Moment</div>
+            <p>Marco deve vedere che l’app rispetta il suo intervento manuale e non interpreta ogni comportamento come pattern.</p>
+          </div>
+          <div class="footer-block opp-block">
+            <div class="fb-title">💡 UX Opportunity</div>
+            <p>Mostrare sempre “cosa cambierà”, “quanto farà risparmiare” e “quanto controllo resta all’utente” prima di attivare una routine.</p>
+          </div>
+          <div class="footer-block succ-block">
+            <div class="fb-title">📈 Success Metric</div>
+            <p>Riduzione dei consumi, numero di suggerimenti accettati, riduzione degli override manuali, aumento del livello di autonomia scelto nel tempo.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Persona 2: Chiara -->
+      <div class="journey-schema-card">
+        <div class="schema-header c-header">
+          <div class="schema-header-title">
+            <div class="schema-persona-avatar avatar-c">C</div>
+            <div>
+              <h3>Customer Journey 2 — Chiara Bellini</h3>
+              <p class="persona-role">34 anni, ricercatrice in ambito ambientale • Vive da sola in un bilocale</p>
+            </div>
+          </div>
+          <div class="schema-meta-grid">
+            <div class="schema-meta-item">
+              <span class="meta-lbl">Scope:</span>
+              <span class="meta-val">Aiutare Chiara a prendere decisioni domestiche più sostenibili, trasformando dati frammentati in indicazioni ambientali comprensibili.</span>
+            </div>
+            <div class="schema-meta-item">
+              <span class="meta-lbl">Goal:</span>
+              <span class="meta-val"><span class="table-badge badge-sustainability">Improve Sustainability</span></span>
+            </div>
+            <div class="schema-meta-item">
+              <span class="meta-lbl">Funzioni:</span>
+              <span class="meta-val font-medium">Dashboard intelligente per il miglioramento della casa, Widget dinamici sulla schermata di blocco</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="schema-insights">
+          <h5>Insight Collegati</h5>
+          <ul>
+            <li>Il valore non è solo ciò che la casa fa, ma ciò che evita all’utente.</li>
+            <li>La frammentazione dell’ecosistema è percepita come fatica mentale, non come problema tecnico.</li>
+            <li>Il centro notifiche non deve essere un flusso di avvisi, ma una gerarchia dell’attenzione.</li>
+            <li>L’opportunità più forte è rendere visibile il livello di autonomia.</li>
+          </ul>
+        </div>
+        
+        <h5 class="timeline-heading">Mappa di Flusso dell'Esperienza</h5>
+        <div class="schema-flow-scroll">
+          <div class="schema-flow-container">
+            <!-- Node 1 -->
+            <div class="flow-node">
+              <div class="node-badge-happy">Step 1</div>
+              <div class="node-main-box">
+                <h6>1. Trigger</h6>
+                <p>Chiara controlla la casa prima dell'arrivo degli ospiti e nota dati distribuiti in app e dispositivi diversi.</p>
+              </div>
+            </div>
+            
+            <div class="flow-arrow">→</div>
+            
+            <!-- Node 2 -->
+            <div class="flow-node">
+              <div class="node-badge-happy">Step 2</div>
+              <div class="node-main-box">
+                <h6>2. Context recognition</h6>
+                <p>La dashboard unifica i dati e capisce che il soggiorno sarà usato più del solito nelle prossime ore.</p>
+              </div>
+            </div>
+            
+            <div class="flow-arrow">→</div>
+            
+            <!-- Node 3 -->
+            <div class="flow-node">
+              <div class="node-badge-happy">Step 3</div>
+              <div class="node-main-box">
+                <h6>3. Environmental insight</h6>
+                <p>L’app rileva che purificatore e ventilazione meccanica stanno lavorando in sovrapposizione.</p>
+              </div>
+              <div class="branch-connector"></div>
+              <div class="node-branch-box">
+                <span class="branch-tag">Branch C</span>
+                <p>Se i dati dei dispositivi sono incoerenti, l'app segnala l'incertezza invece di fare stime false.</p>
+              </div>
+            </div>
+            
+            <div class="flow-arrow">→</div>
+            
+            <!-- Node 4 -->
+            <div class="flow-node">
+              <div class="node-badge-happy">Step 4</div>
+              <div class="node-main-box">
+                <h6>4. AI proposal</h6>
+                <p>L'app suggerisce di usare la ventilazione naturale 20m per mantenere l'aria stabile spegnendo il purificatore.</p>
+              </div>
+            </div>
+            
+            <div class="flow-arrow">→</div>
+            
+            <!-- Node 5 -->
+            <div class="flow-node">
+              <div class="node-badge-happy">Step 5</div>
+              <div class="node-main-box">
+                <h6>5. Contextual action</h6>
+                <p>Entrando in soggiorno, il widget sulla schermata di blocco mostra solo qualità aria, luce e consumi.</p>
+              </div>
+            </div>
+            
+            <div class="flow-arrow">→</div>
+            
+            <!-- Node 6 -->
+            <div class="flow-node">
+              <div class="node-badge-happy">Step 6</div>
+              <div class="node-main-box">
+                <h6>6. Quick decision</h6>
+                <p>Chiara accetta dal widget la modifica temporanea per ridurre il purificatore per 1 ora.</p>
+              </div>
+              <div class="branch-connector"></div>
+              <div class="node-branch-box">
+                <span class="branch-tag">Branch A</span>
+                <p>Se Chiara ignora il suggerimento, l'app continua a monitorare senza inviare allarmi.</p>
+              </div>
+            </div>
+            
+            <div class="flow-arrow">→</div>
+            
+            <!-- Node 7 -->
+            <div class="flow-node">
+              <div class="node-badge-happy">Step 7</div>
+              <div class="node-main-box">
+                <h6>7. Branching moment</h6>
+                <p>Durante la cena, la qualità dell'aria peggiora più del previsto a causa degli ospiti.</p>
+              </div>
+            </div>
+            
+            <div class="flow-arrow">→</div>
+            
+            <!-- Node 8 -->
+            <div class="flow-node node-critical-moment">
+              <div class="node-badge-happy">Step 8</div>
+              <div class="node-main-box">
+                <h6>8. System response</h6>
+                <p>L'app mostra una notifica prioritaria non allarmante: "Aria in calo. Posso riattivare purificatore per 30 min?"</p>
+              </div>
+              <div class="branch-connector"></div>
+              <div class="node-branch-box">
+                <span class="branch-tag">Branch B</span>
+                <p>Se la qualità dell'aria peggiora, l'app dà priorità al comfort e propone correzioni temporanee.</p>
+              </div>
+            </div>
+            
+            <div class="flow-arrow">→</div>
+            
+            <!-- Node 9 -->
+            <div class="flow-node node-outcome-node">
+              <div class="node-badge-happy">Outcome</div>
+              <div class="node-main-box outcome-bg-box">
+                <h6>9. Outcome</h6>
+                <p>Il giorno dopo la dashboard mostra: CO₂ stimata evitata di 3,2 kg e purificatore spento per 5 ore in più.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="happy-path-summary">
+          <span class="happy-path-badge">Happy Path</span>
+          <p>Chiara riceve una proposta sostenibile, la valuta tramite dati ambientali chiari e accetta una micro-azione dal widget.</p>
+        </div>
+
+        <div class="schema-footer-grid">
+          <div class="footer-block crit-block">
+            <div class="fb-title">⚡ Critical Moment</div>
+            <p>La qualità dell’aria peggiora durante la cena. L’app deve bilanciare sostenibilità, comfort e attenzione, senza trasformarsi in un flusso di alert.</p>
+          </div>
+          <div class="footer-block opp-block">
+            <div class="fb-title">💡 UX Opportunity</div>
+            <p>Tradurre la complesità dei dati ambientali in una decisione semplice, contestuale e misurabile.</p>
+          </div>
+          <div class="footer-block succ-block">
+            <div class="fb-title">📈 Success Metric</div>
+            <p>CO₂ evitata, riduzione uso non necessario dei dispositivi, numero di azioni contestuali accettate, percezione di affidabilità dei dati.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Persona 3: Pina -->
+      <div class="journey-schema-card">
+        <div class="schema-header p-header">
+          <div class="schema-header-title">
+            <div class="schema-persona-avatar avatar-p">P</div>
+            <div>
+              <h3>Customer Journey 3 — Giuseppina "Pina" Conti</h3>
+              <p class="persona-role">68 anni, pensionata • Vive sola • Il figlio è caregiver remoto</p>
+            </div>
+          </div>
+          <div class="schema-meta-grid">
+            <div class="schema-meta-item">
+              <span class="meta-lbl">Scope:</span>
+              <span class="meta-val">Proteggere Pina durante una possibile emergenza domestica, mantenendo comunicazione chiara e continuità del sistema anche se la connessione cade.</span>
+            </div>
+            <div class="schema-meta-item">
+              <span class="meta-lbl">Goal:</span>
+              <span class="meta-val"><span class="table-badge badge-safety">Safety</span></span>
+            </div>
+            <div class="schema-meta-item">
+              <span class="meta-lbl">Funzioni:</span>
+              <span class="meta-val font-medium">Dashboard intelligente per il miglioramento della casa, Modalità continuità in assenza di Wi-Fi</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="schema-insights">
+          <h5>Insight Collegati</h5>
+          <ul>
+            <li>La fiducia nasce prima dell’azione, non dopo l’errore.</li>
+            <li>Il centro notifiche non deve essere un flusso di avvisi, ma una gerarchia dell’attenzione.</li>
+            <li>Il valore non è solo ciò che la casa fa, ma ciò che evita all’utente.</li>
+            <li>Il fallimento offline è un punto di rottura della fiducia, non solo un bug.</li>
+            <li>Il rifiuto non è dell’automazione, è della perdita di controllo.</li>
+          </ul>
+        </div>
+        
+        <h5 class="timeline-heading">Mappa di Flusso dell'Esperienza</h5>
+        <div class="schema-flow-scroll">
+          <div class="schema-flow-container">
+            <!-- Node 1 -->
+            <div class="flow-node">
+              <div class="node-badge-happy">Step 1</div>
+              <div class="node-main-box">
+                <h6>1. Trigger</h6>
+                <p>Pina sta cucinando e il sensore rileva una possibile presenza di gas in cucina.</p>
+              </div>
+            </div>
+            
+            <div class="flow-arrow">→</div>
+            
+            <!-- Node 2 -->
+            <div class="flow-node">
+              <div class="node-badge-happy">Step 2</div>
+              <div class="node-main-box">
+                <h6>2. Risk classification</h6>
+                <p>La dashboard classifica l’evento come critico, distinguendolo da manutenzioni o anomalie non urgenti.</p>
+              </div>
+            </div>
+            
+            <div class="flow-arrow">→</div>
+            
+            <!-- Node 3 -->
+            <div class="flow-node">
+              <div class="node-badge-happy">Step 3</div>
+              <div class="node-main-box">
+                <h6>3. Clear instruction</h6>
+                <p>Pina riceve un messaggio semplice: "Possibile gas rilevato. Apri la finestra. Non accendere luci. Sto avvisando tuo figlio."</p>
+              </div>
+              <div class="branch-connector"></div>
+              <div class="node-branch-box">
+                <span class="branch-tag">Branch A</span>
+                <p>Se Pina non conferma di aver letto il messaggio, il sistema aumenta la priorità verso il caregiver.</p>
+              </div>
+            </div>
+            
+            <div class="flow-arrow">→</div>
+            
+            <!-- Node 4 -->
+            <div class="flow-node">
+              <div class="node-badge-happy">Step 4</div>
+              <div class="node-main-box">
+                <h6>4. Protective action</h6>
+                <p>Il sistema spegne i dispositivi elettrici non essenziali nella zona a rischio.</p>
+              </div>
+            </div>
+            
+            <div class="flow-arrow">→</div>
+            
+            <!-- Node 5 -->
+            <div class="flow-node">
+              <div class="node-badge-happy">Step 5</div>
+              <div class="node-main-box">
+                <h6>5. Caregiver update</h6>
+                <p>Il figlio riceve un messaggio diverso: "Gas rilevato in cucina. Dispositivi spenti. Pina avvisata. Sensori attivi."</p>
+              </div>
+            </div>
+            
+            <div class="flow-arrow">→</div>
+            
+            <!-- Node 6 -->
+            <div class="flow-node node-critical-moment">
+              <div class="node-badge-happy">Step 6</div>
+              <div class="node-main-box">
+                <h6>6. Connection issue</h6>
+                <p>Durante l’evento, il Wi-Fi domestico si interrompe improvvisamente.</p>
+              </div>
+              <div class="branch-connector"></div>
+              <div class="node-branch-box">
+                <span class="branch-tag">Branch B</span>
+                <p>Se il Wi-Fi cade, la modalità continuità mantiene attivi i dispositivi essenziali.</p>
+              </div>
+            </div>
+            
+            <div class="flow-arrow">→</div>
+            
+            <!-- Node 7 -->
+            <div class="flow-node">
+              <div class="node-badge-happy">Step 7</div>
+              <div class="node-main-box">
+                <h6>7. Continuity mode</h6>
+                <p>La modalità continuità si attiva e mantiene operativi sensori, luci essenziali e elettrovalvole localmente.</p>
+              </div>
+            </div>
+            
+            <div class="flow-arrow">→</div>
+            
+            <!-- Node 8 -->
+            <div class="flow-node">
+              <div class="node-badge-happy">Step 8</div>
+              <div class="node-main-box">
+                <h6>8. Resolution</h6>
+                <p>Il rischio rientra. L’app mostra a Pina: "La situazione è sotto controllo. Tuo figlio è stato aggiornato."</p>
+              </div>
+              <div class="branch-connector"></div>
+              <div class="node-branch-box">
+                <span class="branch-tag">Branch C</span>
+                <p>Se il rischio rientra rapidamente, l’app evita allarmismi e comunica la risoluzione in modo semplice.</p>
+              </div>
+            </div>
+            
+            <div class="flow-arrow">→</div>
+            
+            <!-- Node 9 -->
+            <div class="flow-node node-outcome-node">
+              <div class="node-badge-happy">Outcome</div>
+              <div class="node-main-box outcome-bg-box">
+                <h6>9. Outcome</h6>
+                <p>Il figlio riceve un riepilogo: evento gestito, 3 dispositivi spenti, sensori rimasti attivi in assenza Wi-Fi.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="happy-path-summary">
+          <span class="happy-path-badge">Happy Path</span>
+          <p>Il sistema rileva il rischio, lo comunica in modo comprensibile, attiva solo le azioni necessarie e mantiene informato il caregiver.</p>
+        </div>
+
+        <div class="schema-footer-grid">
+          <div class="footer-block crit-block">
+            <div class="fb-title">⚡ Critical Moment</div>
+            <p>Il Wi-Fi cade durante un possibile rischio gas. La casa deve continuare a proteggere Pina proprio nel momento più delicato.</p>
+          </div>
+          <div class="footer-block opp-block">
+            <div class="fb-title">💡 UX Opportunity</div>
+            <p>Progettare comunicazioni differenziate per chi vive l’evento e per chi lo monitora da remoto.</p>
+          </div>
+          <div class="footer-block succ-block">
+            <div class="fb-title">📈 Success Metric</div>
+            <p>Tempo di comprensione dell’alert, tempo di risposta del caregiver, corretta attivazione della modalità continuità, riduzione di falsi allarmi e panico.</p>
+          </div>
+        </div>
+      </div>
+
+  <!-- Comparison Matrix Section -->
+  <section class="comparison-section">
+    <div class="container">
+      <h2 class="section-title">Strategic Comparison Matrix</h2>
+      <p class="section-subtitle">A cross-journey overview mapping core values, functionalities, and failure points to avoid.</p>
+      
+      <div class="table-responsive">
+        <table class="comparison-table">
+          <thead>
+            <tr>
+              <th>Persona</th>
+              <th>Goal</th>
+              <th>Selected Functions</th>
+              <th>Core Value</th>
+              <th>Main Risk to Avoid</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="row-marco">
+              <td>
+                <div class="table-persona">
+                  <div class="table-avatar m-avatar">M</div>
+                  <div>
+                    <strong>Marco Ferretti</strong>
+                    <span>Project Manager</span>
+                  </div>
+                </div>
+              </td>
+              <td><span class="table-badge badge-energy">Save Energy</span></td>
+              <td class="font-medium text-slate">Onboarding 10 giorni + Dashboard intelligente</td>
+              <td>Risparmio energetico controllato, trasparenza e mantenimento del controllo utente.</td>
+              <td>
+                <div class="risk-cell">
+                  <span class="danger-dot"></span>
+                  Automazioni invasive o perdita di controllo che portano al rifiuto del sistema.
+                </div>
+              </td>
+            </tr>
+            <tr class="row-chiara">
+              <td>
+                <div class="table-persona">
+                  <div class="table-avatar c-avatar">C</div>
+                  <div>
+                    <strong>Chiara Bellini</strong>
+                    <span>Environmental Researcher</span>
+                  </div>
+                </div>
+              </td>
+              <td><span class="table-badge badge-sustainability">Sustainability</span></td>
+              <td class="font-medium text-slate">Dashboard intelligente + Widget dinamici</td>
+              <td>Decisioni sostenibili concrete, dati ambientali unificati e riduzione della fatica mentale.</td>
+              <td>
+                <div class="risk-cell">
+                  <span class="danger-dot"></span>
+                  Badge di sostenibilità generici e metriche frammentate tra diversi dispositivi.
+                </div>
+              </td>
+            </tr>
+            <tr class="row-pina">
+              <td>
+                <div class="table-persona">
+                  <div class="table-avatar p-avatar">P</div>
+                  <div>
+                    <strong>Giuseppina "Pina"</strong>
+                    <span>Pensionata, Sola</span>
+                  </div>
+                </div>
+              </td>
+              <td><span class="table-badge badge-safety">Safety</span></td>
+              <td class="font-medium text-slate">Dashboard intelligente + Modalità continuità offline</td>
+              <td>Sicurezza domestica garantita, comunicazioni chiare differenziate e affidabilità offline.</td>
+              <td>
+                <div class="risk-cell">
+                  <span class="danger-dot"></span>
+                  Blackout di rete o fallimento offline durante un'emergenza gas critica.
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="presentation-footer">
+    <div class="container footer-content">
+      <p>© 2026 GEWISS Smart Ecosystem. All rights reserved. Created by UX Lab for Design System review.</p>
+      <p class="footer-note">Confidential Document — Internal UX Design Review</p>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
