@@ -2,7 +2,7 @@
 <html lang="it">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>GEWISS · AI Home Agent · iPhone 17 Prototype</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -55,12 +55,16 @@
     @media(max-width:960px){.stage{grid-template-columns:auto}.side{display:none}.device{transform:scale(.82)}}
     @media(max-height:930px){.device{transform:scale(.82)}.stage{padding:0}}
     @media(max-width:480px){
+      body { background: var(--grey-1) !important; }
+      body.dark-theme { background: #171515 !important; }
       .stage{display:block;padding:0;height:100vh}
       .side{display:none!important}
       .device{width:100vw!important;height:100vh!important;border:none!important;border-radius:0!important;padding:0!important;box-shadow:none!important;transform:none!important}
       .device::before,.device::after{display:none!important}
       .phone{border-radius:0!important;height:100%!important;width:100%!important}
       .status{display:none!important}
+      .scroll{padding-top:calc(16px + env(safe-area-inset-top))!important;padding-bottom:calc(80px + env(safe-area-inset-bottom))!important}
+      .bottom-nav{left:0!important;right:0!important;bottom:0!important;width:100%!important;border-radius:0!important;border-left:none!important;border-right:none!important;border-bottom:none!important;height:calc(64px + env(safe-area-inset-bottom))!important;padding-bottom:env(safe-area-inset-bottom)!important;padding-left:12px!important;padding-right:12px!important}
     }
   </style>
 </head>
@@ -167,7 +171,7 @@
     const goButtons=[...document.querySelectorAll('[data-go]')];
     const toast=document.querySelector('.toast');
     function showToast(message){toast.textContent=message;toast.classList.add('show');clearTimeout(showToast.t);showToast.t=setTimeout(()=>toast.classList.remove('show'),1800)}
-    function go(name){views.forEach(v=>v.classList.toggle('active',v.dataset.view===name));goButtons.forEach(b=>b.classList.toggle('active',b.dataset.go===name));}
+    function go(name){views.forEach(v=>v.classList.toggle('active',v.dataset.view===name));goButtons.forEach(b=>b.classList.toggle('active',b.dataset.go===name));document.body.classList.toggle('dark-theme', name==='emergency');}
     goButtons.forEach(button=>button.addEventListener('click',()=>go(button.dataset.go)));
     document.querySelector('[data-action="accept"]').addEventListener('click',e=>{e.currentTarget.textContent='Programmato';e.currentTarget.classList.add('done');showToast('Soggiorno pronto al tuo rientro.')});
     document.querySelector('[data-action="remote-off"]').addEventListener('click',e=>{e.currentTarget.textContent='Dispositivi spenti';e.currentTarget.classList.add('done');showToast('Tutto spento nell’altra casa.')});
