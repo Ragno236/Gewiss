@@ -69,6 +69,7 @@
     display: flex; align-items: center; justify-content: center;
   }
   #scaler { 
+    position: relative;
     width: var(--stage-w); 
     height: var(--stage-h); 
     transform-origin: center center; 
@@ -1670,6 +1671,8 @@
 
   // Fit 16:9 stage to viewport
   const scaler=document.getElementById('scaler');
+  const globalHeader=document.querySelector('.global-header');
+  if (globalHeader) scaler.prepend(globalHeader);
   function fit(){
     const pad=48;
     const sw=(window.innerWidth-pad)/1280;
