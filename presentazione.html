@@ -263,20 +263,47 @@
 
 
 
-  /* ══════════════════════════════════════════════════════
-     SLIDE 7 · USER JOURNEY
-     Typography: Inter (--sans) + JetBrains Mono (--mono)
-     Scale: 9px badge / 11px secondary / 14px body / 15px name
-     Canvas: 1280×720, pad 72px, head ~51px, rail abs bottom 40px
-  ══════════════════════════════════════════════════════ */
 
-  /* Container: absolute, pinned to precise coordinates */
+  /* ── Global slide animation (ease both) ── */
+  @keyframes slideIn {
+    from { opacity: 0; transform: translateY(14px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes cardIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+
+  /* Every slide: invisible by default, animated when .active is added */
+  .slide { opacity: 0; }
+  .slide.active {
+    animation: slideIn .5s cubic-bezier(.45,.05,.55,.95) forwards;
+  }
+
+
+  /* ══════════════════════════════════════════════════════════
+     SLIDE 7 · USER JOURNEY — final clean version
+     Typographic scale:
+       7px  → chrome / system / decorative (num, rail labels, kicker)
+      10px  → caption (mech label, jtag, goal)
+      11px  → bubble italic
+      12px  → scenario (secondary body)
+      14px  → tab names, trust statement (base body)
+      15px  → phase name (above body, primary)
+      46px  → h2 (unchanged)
+  ══════════════════════════════════════════════════════════ */
+
+  /* Container: absolute, pinned */
   .journey-container {
     position: absolute;
-    top:    137px;   /* 72 pad + 51 head + 14 gap */
+    top:    137px;
     left:   72px;
     right:  72px;
-    bottom:  84px;   /* 40 rail-bottom + 30 rail-h + 14 gap */
+    bottom:  84px;
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -293,34 +320,30 @@
     align-items: flex-end;
   }
   .jtab-btn {
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 5px 14px;
-    border-radius: 6px;
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-    transition: background .15s;
-    text-align: left;
-    line-height: 1;
+    background: none; border: none; cursor: pointer;
+    padding: 5px 14px; border-radius: 6px;
+    display: flex; flex-direction: column; gap: 2px;
+    transition: background .2s ease; text-align: left;
   }
   .jtab-btn:hover  { background: var(--g2); }
   .jtab-btn.active { background: var(--o1); }
+
   .jtab-name {
     font-family: var(--sans);
-    font-size: 14px;
+    font-size: 14px;          /* base body */
     font-weight: 700;
     color: var(--faint);
     line-height: 1.2;
   }
   .jtab-btn.active .jtab-name { color: var(--brand); }
+
   .jtab-role {
     font-family: var(--mono);
-    font-size: 9px;
-    letter-spacing: .07em;
+    font-size: 7px;           /* chrome tier */
+    letter-spacing: .1em;
     text-transform: uppercase;
     color: var(--faint);
+    line-height: 1;
   }
 
   /* ── Panel ── */
@@ -333,36 +356,30 @@
   }
   .journey-panel.active { display: flex; }
 
-  /* ── Meta: goal text + feature tags in one row ── */
+  /* ── Meta row: goal + tags, single line ── */
   .journey-meta {
     flex-shrink: 0;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 20px;
+    gap: 24px;
     height: 22px;
   }
   .journey-goal {
     font-family: var(--sans);
-    font-size: 11px;
+    font-size: 10px;          /* caption tier */
     color: var(--muted);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
   }
-  .journey-goal strong {
-    color: var(--ink);
-    font-weight: 600;
-  }
-  .journey-tags {
-    display: flex;
-    gap: 6px;
-    flex-shrink: 0;
-  }
+  .journey-goal strong { color: var(--ink); font-weight: 600; }
+
+  .journey-tags { display: flex; gap: 6px; flex-shrink: 0; }
   .jtag {
     font-family: var(--mono);
-    font-size: 9px;
-    letter-spacing: .06em;
+    font-size: 8px;           /* between chrome and caption */
+    letter-spacing: .07em;
     text-transform: uppercase;
     color: var(--brand);
     border: 1px solid var(--brand);
@@ -382,32 +399,39 @@
 
   /* ── Phase card ── */
   .p-col {
-    flex: 1;
-    min-width: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
+    flex: 1; min-width: 0;
+    display: flex; flex-direction: column; gap: 12px;
     background: var(--surface);
     border: 1px solid var(--line);
     border-radius: 10px;
-    padding: 16px 16px 14px;
+    padding: 20px;
     overflow: hidden;
     position: relative;
-    transition: box-shadow .15s;
+    /* Card enter animation — staggered by nth-child */
+    opacity: 0;
+    transition: box-shadow .2s ease;
   }
-  .p-col:hover { box-shadow: 0 4px 20px rgba(0,0,0,.06); }
+  .journey-panel.active .p-col { animation: cardIn .4s cubic-bezier(.45,.05,.55,.95) forwards; }
+  .journey-panel.active .p-col:nth-child(1) { animation-delay: .05s; }
+  .journey-panel.active .p-col:nth-child(2) { animation-delay: .10s; }
+  .journey-panel.active .p-col:nth-child(3) { animation-delay: .15s; }
+  .journey-panel.active .p-col:nth-child(4) { animation-delay: .20s; }
+  .journey-panel.active .p-col:nth-child(5) { animation-delay: .25s; }
 
-  /* Phase number */
+  .p-col:hover { box-shadow: 0 6px 24px rgba(0,0,0,.07); }
+
+  /* Phase number — chrome tier */
   .p-num {
     font-family: var(--mono);
-    font-size: 9px;
-    letter-spacing: .12em;
+    font-size: 7px;           /* chrome tier */
+    letter-spacing: .14em;
     text-transform: uppercase;
     color: var(--faint);
     flex-shrink: 0;
+    line-height: 1;
   }
 
-  /* Phase name — 1px above body (14→15) to signal hierarchy */
+  /* Phase name — above base body */
   .p-name {
     font-family: var(--sans);
     font-size: 15px;
@@ -419,23 +443,23 @@
     flex-shrink: 0;
   }
 
-  /* Divider between header and body of card */
+  /* Thin divider between header and body */
   .p-divider {
     height: 1px;
     background: var(--line);
     flex-shrink: 0;
-    margin: 2px 0;
+    margin: -4px 0;   /* tighten: uses the gap spacing */
   }
 
-  /* Scenario — base body 14px, max 2 lines */
+  /* Scenario — secondary body */
   .p-scenario {
     font-family: var(--sans);
-    font-size: 14px;
+    font-size: 12px;          /* secondary body */
     color: var(--muted);
-    line-height: 1.5;
+    line-height: 1.55;
     flex-shrink: 0;
-    /* Max 2 lines before overflow hidden */
-    max-height: calc(14px * 1.5 * 2);
+    /* Hard-stop at 2 lines — use overflow hidden with fixed height */
+    height: calc(12px * 1.55 * 2);
     overflow: hidden;
   }
 
@@ -451,75 +475,63 @@
     padding: 7px 10px;
     border-radius: 0 6px 6px 0;
     flex-shrink: 0;
-    /* Max 2 lines */
-    max-height: calc(11px * 1.5 * 2 + 14px);
+    height: calc(11px * 1.5 * 2 + 14px);  /* 2 lines + padding */
     overflow: hidden;
   }
 
-  /* Pushes mechanic to bottom */
-  .p-spacer { flex: 1; }
+  /* Flex spacer */
+  .p-spacer { flex: 1; min-height: 0; }
 
-  /* Feature mechanic — bottom, minimal */
-  .p-mechanic {
-    border-top: 1px dashed var(--line);
-    padding-top: 8px;
-    flex-shrink: 0;
-  }
+  /* Mechanic label — caption tier, single line */
+  .p-mechanic { flex-shrink: 0; }
   .p-mech-label {
     font-family: var(--mono);
-    font-size: 9px;
-    letter-spacing: .08em;
+    font-size: 8px;           /* between chrome and caption */
+    letter-spacing: .1em;
     text-transform: uppercase;
     color: var(--brand);
     font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
   }
 
   /* ── Critical ── */
   .p-col.critical {
     border-color: var(--brand);
-    background: linear-gradient(160deg, #fff 0%, var(--o1) 220%);
+    background: linear-gradient(160deg, #fff 0%, var(--o1) 200%);
   }
-  .p-col.critical .p-name { color: var(--o7); }
-  .p-col.critical .p-num  { color: var(--brand); font-weight: 700; }
+  .p-col.critical .p-name   { color: var(--o7); }
+  .p-col.critical .p-num    { color: var(--brand); }
   .p-col.critical .p-divider { background: var(--o3); }
-  .p-col.critical .p-bubble { background: rgba(255,255,255,.8); }
+  .p-col.critical .p-bubble { background: rgba(255,255,255,.85); }
 
   .p-crit-badge {
-    position: absolute;
-    top: -10px; right: 12px;
-    background: var(--brand);
-    color: #fff;
-    font-family: var(--mono);
-    font-size: 8px;
-    font-weight: 700;
-    letter-spacing: .07em;
-    text-transform: uppercase;
-    padding: 2px 8px;
-    border-radius: 4px;
+    position: absolute; top: -10px; right: 12px;
+    background: var(--brand); color: #fff;
+    font-family: var(--mono); font-size: 7px;
+    font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+    padding: 2px 8px; border-radius: 4px;
   }
 
   /* ── Success ── */
   .p-col.success {
-    background: var(--brand);
-    border-color: var(--brand);
+    background: var(--brand); border-color: var(--brand);
   }
-  .p-col.success .p-num        { color: rgba(255,255,255,.6); }
-  .p-col.success .p-name       { color: #fff; }
-  .p-col.success .p-divider    { background: rgba(255,255,255,.2); }
-  .p-col.success .p-scenario   { color: rgba(255,255,255,.85); }
-  .p-col.success .p-bubble     { background: rgba(255,255,255,.12);
-                                  border-left-color: rgba(255,255,255,.4);
-                                  color: rgba(255,255,255,.9); }
-  .p-col.success .p-mechanic   { border-top-color: rgba(255,255,255,.2); }
-  .p-col.success .p-mech-label { color: rgba(255,255,255,.75); }
+  .p-col.success .p-num      { color: rgba(255,255,255,.55); }
+  .p-col.success .p-name     { color: #fff; }
+  .p-col.success .p-divider  { background: rgba(255,255,255,.2); }
+  .p-col.success .p-scenario { color: rgba(255,255,255,.8); }
+  .p-col.success .p-bubble   { background: rgba(255,255,255,.12);
+                                border-left-color: rgba(255,255,255,.35);
+                                color: rgba(255,255,255,.9); }
+  .p-col.success .p-mech-label { color: rgba(255,255,255,.65); }
 
   .p-metric {
     font-family: var(--sans);
-    font-size: 20px;
-    font-weight: 800;
-    color: #fff;
-    line-height: 1.2;
-    padding-top: 10px;
+    font-size: 18px; font-weight: 800; color: #fff;
+    line-height: 1.25; padding-top: 10px;
     border-top: 1px solid rgba(255,255,255,.2);
     flex-shrink: 0;
   }
@@ -527,24 +539,25 @@
   /* ── Trust statement ── */
   .trust-statement {
     flex-shrink: 0;
-    font-family: var(--sans);
-    font-size: 11px;
-    font-style: italic;
-    color: var(--muted);
-    line-height: 1.5;
-    padding: 7px 14px;
-    background: var(--g2);
-    border-radius: 6px;
-    border-left: 3px solid var(--brand);
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
+    font-family: var(--sans); font-size: 11px;
+    font-style: italic; color: var(--muted); line-height: 1.5;
+    padding: 7px 14px; background: var(--g2);
+    border-radius: 6px; border-left: 3px solid var(--brand);
+    overflow: hidden; white-space: nowrap; text-overflow: ellipsis;
+    /* Animate after cards */
+    animation: fadeIn .4s ease .35s both;
   }
-  .trust-statement strong {
-    font-style: normal;
-    font-weight: 700;
-    color: var(--brand);
+  .trust-statement strong { font-style: normal; font-weight: 700; color: var(--brand); }
+
+  /* Tab switch: panel fades in */
+  .journey-panel.active {
+    animation: fadeIn .25s ease forwards;
   }
+
+  /* ── 7px override for global chrome elements on all slides ── */
+  .tag { font-size: 7px !important; letter-spacing: .12em; }
+  .kicker { font-size: 8px !important; }
+  .node { width: 5px !important; height: 5px !important; }
 
 
   @media print{
@@ -856,7 +869,7 @@
       </div>
     </section>
 
-                <!-- ============ SLIDE 7 · USER JOURNEY ============ -->
+                    <!-- ============ SLIDE 7 · USER JOURNEY ============ -->
     <section class="slide" data-name="User journey">
       <div class="head">
         <h2>User Journey</h2>
@@ -891,8 +904,8 @@
               <span class="p-num">01 · Osserva</span>
               <div class="p-name">Apprendimento silenzioso</div>
               <div class="p-divider"></div>
-              <div class="p-scenario">App installata. L'AI registra le abitudini di casa per 10 giorni senza toccare nulla.</div>
-              <div class="p-bubble">"Sto imparando le tue abitudini — ci vogliono 10 giorni. Non cambio nulla senza dirtelo prima."</div>
+              <div class="p-scenario">L'AI registra le abitudini per 10 giorni senza modificare nulla.</div>
+              <div class="p-bubble">"Sto imparando — non cambio nulla senza avertelo detto prima."</div>
               <div class="p-spacer"></div>
               <div class="p-mechanic"><span class="p-mech-label">Progressive Autonomy · Manual</span></div>
             </div>
@@ -901,18 +914,18 @@
               <span class="p-num">02 · Valuta</span>
               <div class="p-name">Prima proposta</div>
               <div class="p-divider"></div>
-              <div class="p-scenario">Dopo 10 giorni arriva un Insight preciso sul riscaldamento della seconda proprietà.</div>
-              <div class="p-bubble">"Il riscaldamento di casa 2 resta acceso 4h ogni giovedì senza nessuno. Spegnerlo alle 20:00 → ~€18/mese. Provo?"</div>
+              <div class="p-scenario">Insight preciso: il riscaldamento di casa 2 rimane acceso 4h ogni giovedì senza nessuno.</div>
+              <div class="p-bubble">"Casa 2: riscaldamento acceso per 4h di giovedì senza nessuno. Spegno alle 20:00 → ~€18/mese?"</div>
               <div class="p-spacer"></div>
               <div class="p-mechanic"><span class="p-mech-label">Value Center · Insight</span></div>
             </div>
             <div class="p-col critical">
-              <span class="p-crit-badge">⚡ Momento critico</span>
+              <span class="p-crit-badge">⚡ Critical</span>
               <span class="p-num">03 · Conferma</span>
               <div class="p-name">Fiducia progressiva</div>
               <div class="p-divider"></div>
-              <div class="p-scenario">L'AI avvisa prima di agire per 3 settimane. Alla quarta, agisce in silenzio e riporta il giorno dopo.</div>
-              <div class="p-bubble">"Tra 5 min spengo casa 2 come concordato. Vuoi bloccare questa volta?"</div>
+              <div class="p-scenario">Per 3 settimane avvisa prima di agire. Alla quarta, agisce in silenzio e riporta il giorno dopo.</div>
+              <div class="p-bubble">"Tra 5 min spengo casa 2 come concordato. Blocco questa volta?"</div>
               <div class="p-spacer"></div>
               <div class="p-mechanic"><span class="p-mech-label">Autonomy: Assisted → Collaborative</span></div>
             </div>
@@ -921,8 +934,8 @@
               <span class="p-num">04 · Testa</span>
               <div class="p-name">Override rispettato</div>
               <div class="p-divider"></div>
-              <div class="p-scenario">Marco rientra prima e accende il riscaldamento. L'AI registra e chiede: eccezione o modifica della regola?</div>
-              <div class="p-bubble">"Ho registrato l'accensione manuale — salto questa settimana. Eccezione o cambio la regola?"</div>
+              <div class="p-scenario">Marco rientra prima e accende il riscaldamento. L'AI registra e chiede: eccezione o nuova regola?</div>
+              <div class="p-bubble">"Accensione manuale registrata — salto questa settimana. Eccezione o cambio la regola?"</div>
               <div class="p-spacer"></div>
               <div class="p-mechanic"><span class="p-mech-label">Human-in-the-Loop · Override</span></div>
             </div>
@@ -936,7 +949,7 @@
               <div class="p-mechanic"><span class="p-mech-label">Value Center · Ottimizzazione</span></div>
             </div>
           </div>
-          <div class="trust-statement"><strong>Marco:</strong> "La casa funziona come me: fa le cose senza disturbarmi, ma mi tiene sempre in loop. L'AI se l'è meritato."</div>
+          <div class="trust-statement"><strong>Marco:</strong> "La casa fa le cose senza disturbarmi, ma mi tiene in loop. L'AI se l'è meritato."</div>
         </div>
         <div class="journey-panel" id="content-chiara">
           <div class="journey-meta">
@@ -949,28 +962,28 @@
               <span class="p-num">01 · Mappa</span>
               <div class="p-name">Vista unificata</div>
               <div class="p-divider"></div>
-              <div class="p-scenario">6 dispositivi connessi: per la prima volta CO2, temperatura, umidità e consumi in un'unica schermata.</div>
-              <div class="p-bubble">"Ho unito i dati di 6 dispositivi. Ci vuole qualche giorno — intanto puoi già esplorare."</div>
+              <div class="p-scenario">Per la prima volta CO2, umidità, consumi e qualità dell'aria in un'unica schermata.</div>
+              <div class="p-bubble">"Ho unito 6 dispositivi — qualche giorno per stabilizzarsi, intanto puoi già esplorare."</div>
               <div class="p-spacer"></div>
               <div class="p-mechanic"><span class="p-mech-label">Learning · Integrazione multi-sorgente</span></div>
             </div>
             <div class="p-col">
               
               <span class="p-num">02 · Connette</span>
-              <div class="p-name">Causa–effetto visibile</div>
+              <div class="p-name">Causa–effetto</div>
               <div class="p-divider"></div>
-              <div class="p-scenario">L'AI rileva che cucinare con finestre chiuse fa salire la CO2 del 40% — 4 sere su 5.</div>
-              <div class="p-bubble">"Quando cucini a finestre chiuse la CO2 sale del 40% in 20 min. Vuoi che ti avvisi al superamento soglia?"</div>
+              <div class="p-scenario">L'AI rileva che cucinare a finestre chiuse fa salire la CO2 del 40% — 4 sere su 5.</div>
+              <div class="p-bubble">"Cucini a finestre chiuse: CO2 +40% in 20 min. Vuoi che ti avvisi al superamento soglia?"</div>
               <div class="p-spacer"></div>
               <div class="p-mechanic"><span class="p-mech-label">Notification Center · Insight</span></div>
             </div>
             <div class="p-col critical">
-              <span class="p-crit-badge">⚡ Momento critico</span>
+              <span class="p-crit-badge">⚡ Critical</span>
               <span class="p-num">03 · Bilancia</span>
               <div class="p-name">Tatto contestuale</div>
               <div class="p-divider"></div>
-              <div class="p-scenario">Cena con ospiti: CO2 a 1.200 ppm. Nessun push — solo micro-badge silenzioso sul lock screen.</div>
-              <div class="p-bubble">"Aria in casa: attenzione — apri una finestra quando vuoi."</div>
+              <div class="p-scenario">Cena con ospiti, CO2 a 1.200 ppm. Nessun push — micro-badge silenzioso sul lock screen.</div>
+              <div class="p-bubble">"Aria: attenzione — apri una finestra quando vuoi."</div>
               <div class="p-spacer"></div>
               <div class="p-mechanic"><span class="p-mech-label">Notification · Adaptive Delivery</span></div>
             </div>
@@ -979,7 +992,7 @@
               <span class="p-num">04 · Agisce</span>
               <div class="p-name">Delega autonomia</div>
               <div class="p-divider"></div>
-              <div class="p-scenario">Dopo 14 giorni in cui Chiara spegne i carichi standby ogni notte, l'AI propone di farlo da sola.</div>
+              <div class="p-scenario">Dopo 14 giorni di standby spento ogni notte da Chiara, l'AI propone di farlo in autonomia.</div>
               <div class="p-bubble">"Hai fatto questa azione ogni notte per 14 giorni. Posso occuparmene io alle 23:00?"</div>
               <div class="p-spacer"></div>
               <div class="p-mechanic"><span class="p-mech-label">Autonomy: Manual → Assisted</span></div>
@@ -988,17 +1001,17 @@
               <span class="p-num">05 · Racconta</span>
               <div class="p-name">Report ambientale</div>
               <div class="p-divider"></div>
-              <div class="p-scenario">Fine mese: il Value Center genera un report narrativo. Chiara lo salva nel suo archivio di ricerca.</div>
+              <div class="p-scenario">Fine mese: report narrativo con CO2 evitata. Chiara lo salva nel suo archivio di ricerca.</div>
               <div class="p-spacer"></div>
               <div class="p-metric">−14 kg CO2 · Air Quality 22/30 gg ✓</div>
               <div class="p-mechanic"><span class="p-mech-label">Value Center · Narrazione CO2</span></div>
             </div>
           </div>
-          <div class="trust-statement"><strong>Chiara:</strong> "Non mi dice cosa fare. Mi mostra cosa succede — e lascia che sia io a scegliere. È esattamente come dovrebbe funzionare."</div>
+          <div class="trust-statement"><strong>Chiara:</strong> "Non mi dice cosa fare. Mi mostra cosa succede e lascia che scelga io. Come dovrebbe funzionare."</div>
         </div>
         <div class="journey-panel" id="content-pina">
           <div class="journey-meta">
-            <div class="journey-goal"><strong>Goal:</strong> Sicurezza domestica senza sentirsi sorvegliata — il figlio informato solo quando serve.</div>
+            <div class="journey-goal"><strong>Goal:</strong> Sicurezza domestica senza sentirsi sorvegliata — figlio informato solo quando serve.</div>
             <div class="journey-tags"><span class="jtag">Safety graduata</span><span class="jtag">Continuità offline</span><span class="jtag">Inclusion by Design</span></div>
           </div>
           <div class="journey-phases">
@@ -1007,8 +1020,8 @@
               <span class="p-num">01 · Accoglie</span>
               <div class="p-name">Benvenuto accessibile</div>
               <div class="p-divider"></div>
-              <div class="p-scenario">Il figlio installa l'app con Pina presente: testo grande, italiano semplice, zero tecnicismi.</div>
-              <div class="p-bubble">"Ciao Pina, sono l'Agente di Casa. Ti avviso se succede qualcosa. Non faccio niente senza prima dirtelo."</div>
+              <div class="p-scenario">Il figlio installa l'app con Pina. Testo grande, italiano semplice, zero tecnicismi.</div>
+              <div class="p-bubble">"Ciao Pina, sono l'Agente di Casa. Non faccio niente senza prima dirtelo."</div>
               <div class="p-spacer"></div>
               <div class="p-mechanic"><span class="p-mech-label">Inclusion by Design · Onboarding</span></div>
             </div>
@@ -1018,27 +1031,27 @@
               <div class="p-name">Dialogo quotidiano</div>
               <div class="p-divider"></div>
               <div class="p-scenario">Nei primi giorni solo buongiorno e promemoria facoltativi. Pina inizia a rispondere.</div>
-              <div class="p-bubble">"Buongiorno Pina! Il termostato è a 21°, tutto ok. C'è una buona finestra per arieggiare, se vuoi."</div>
+              <div class="p-bubble">"Buongiorno Pina! Termostato a 21°, tutto ok. Buona finestra per arieggiare oggi."</div>
               <div class="p-spacer"></div>
               <div class="p-mechanic"><span class="p-mech-label">Learning · Calibrazione al ritmo</span></div>
             </div>
             <div class="p-col critical">
-              <span class="p-crit-badge">⚡ Momento critico</span>
+              <span class="p-crit-badge">⚡ Critical</span>
               <span class="p-num">03 · Percepisce</span>
               <div class="p-name">Emergenza graduata</div>
               <div class="p-divider"></div>
-              <div class="p-scenario">Fumo in cucina: l'AI avvisa prima Pina. Attende 60 secondi, poi informa il figlio solo dell'esito risolto.</div>
-              <div class="p-bubble">"Pina, c'è del fumo in cucina. Vai a controllare — se tutto ok, premi 'Sto bene'."</div>
+              <div class="p-scenario">Fumo in cucina. L'AI avvisa prima Pina. Aspetta 60 s, poi informa il figlio solo dell'esito.</div>
+              <div class="p-bubble">"Fumo in cucina, Pina — vai a controllare. Se ok, premi 'Sto bene'."</div>
               <div class="p-spacer"></div>
-              <div class="p-mechanic"><span class="p-mech-label">Safety · Notification Center graduato</span></div>
+              <div class="p-mechanic"><span class="p-mech-label">Safety · Notification graduato</span></div>
             </div>
             <div class="p-col">
               
               <span class="p-num">04 · Protegge</span>
               <div class="p-name">Resilienza offline</div>
               <div class="p-divider"></div>
-              <div class="p-scenario">Temporale notturno: il Wi-Fi cade per 3 ore. I sensori continuano via RF locale. Pina non se ne accorge.</div>
-              <div class="p-bubble">"Stanotte la connessione è caduta 3h 32m. I sensori hanno continuato a funzionare — tutto ok."</div>
+              <div class="p-scenario">Wi-Fi cade per 3 ore. I sensori continuano via RF locale. Pina non se ne accorge.</div>
+              <div class="p-bubble">"Connessione caduta 3h 32m — i sensori hanno continuato. Tutto ok, tuo figlio sa già."</div>
               <div class="p-spacer"></div>
               <div class="p-mechanic"><span class="p-mech-label">Continuità Offline · Backup RF</span></div>
             </div>
@@ -1046,7 +1059,7 @@
               <span class="p-num">05 · Condivide</span>
               <div class="p-name">Orgoglio ritrovato</div>
               <div class="p-divider"></div>
-              <div class="p-scenario">Pina racconta al figlio l'episodio del fumo con orgoglio. Poi lo suggerisce all'amica Rosaria.</div>
+              <div class="p-scenario">Pina racconta al figlio l'episodio del fumo con orgoglio. Poi lo suggerisce a Rosaria.</div>
               <div class="p-spacer"></div>
               <div class="p-metric">Sicurezza offline · Autonomia ✓</div>
               <div class="p-mechanic"><span class="p-mech-label">Human-in-the-Loop + Inclusion</span></div>
@@ -1142,8 +1155,11 @@
   document.getElementById('tot').textContent=slides.length;
 
   function show(n){
+    slides[i].classList.remove('active');
     i=(n+slides.length)%slides.length;
-    slides.forEach((s,k)=>s.classList.toggle('active',k===i));
+    // Reset animation by forcing reflow
+    void slides[i].offsetWidth;
+    slides[i].classList.add('active');
     cur.textContent=i+1;
   }
   document.getElementById('next').onclick=()=>show(i+1);
@@ -1154,8 +1170,12 @@
   });
 
 
-  // Journey tab switcher
+  // Journey tab switcher (with fade)
   function switchJourney(name) {
+    document.querySelectorAll('.journey-panel').forEach(function(c){
+      c.classList.remove('active');
+      c.style.animation = 'none';
+    });
     document.querySelectorAll('.journey-panel').forEach(function(c){ c.classList.remove('active'); });
     document.querySelectorAll('.jtab-btn').forEach(function(b){ b.classList.remove('active'); });
     var p = document.getElementById('content-' + name);
