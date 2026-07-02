@@ -1606,9 +1606,23 @@
   }
   document.getElementById('next').onclick=()=>show(i+1);
   document.getElementById('prev').onclick=()=>show(i-1);
+  async function toggleFullscreen() {
+    if (!document.fullscreenElement && !document.webkitFullscreenElement) {
+      const root = document.documentElement;
+      if (root.requestFullscreen) await root.requestFullscreen();
+      else if (root.webkitRequestFullscreen) root.webkitRequestFullscreen();
+    } else {
+      if (document.exitFullscreen) await document.exitFullscreen();
+      else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
+    }
+  }
   document.addEventListener('keydown',e=>{
     if(e.key==='ArrowRight'||e.key==='PageDown'||e.key===' ') show(i+1);
     if(e.key==='ArrowLeft'||e.key==='PageUp') show(i-1);
+    if(e.key.toLowerCase()==='f' && !e.repeat) {
+      e.preventDefault();
+      toggleFullscreen();
+    }
   });
 
   // 1. Click-to-navigate (Right half -> Next, Left half -> Prev)
