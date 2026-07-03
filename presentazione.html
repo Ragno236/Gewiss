@@ -780,6 +780,10 @@
     overflow: hidden;
     height: calc(12px * 1.4 * 2);
   }
+  .p-scenario.full-copy {
+    -webkit-line-clamp: 3;
+    height: calc(12px * 1.4 * 3);
+  }
 
   /* AI speech bubble, 2 lines max */
   .p-bubble {
@@ -916,6 +920,124 @@
   body.slide-0 .global-header {
     opacity: 0;
     pointer-events: none;
+  }
+
+  /* ---------- Soluzioni · dal research al prototipo ---------- */
+  .solution-slide {
+    padding: 54px 64px 48px;
+    background:
+      radial-gradient(circle at 86% 12%, rgba(227,72,38,.09), transparent 30%),
+      linear-gradient(145deg, #fff 0%, #fdfbf9 100%);
+  }
+  .solution-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .solution-head .solution-index {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: .14em;
+    color: var(--brand);
+    text-transform: uppercase;
+    margin-right: 140px;
+  }
+  .solution-layout {
+    height: 570px;
+    display: grid;
+    grid-template-columns: minmax(340px, 1.12fr) minmax(210px, .7fr) minmax(210px, .7fr);
+    gap: 30px;
+    align-items: center;
+  }
+  .solution-copy {
+    align-self: center;
+    padding-right: 16px;
+  }
+  .solution-copy .eyebrow {
+    margin: 0 0 15px;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: .16em;
+    color: var(--brand);
+    text-transform: uppercase;
+  }
+  .solution-copy h2 {
+    margin: 0;
+    max-width: 11ch;
+    font-size: 48px;
+    line-height: 1.02;
+    letter-spacing: -.045em;
+    color: var(--ink);
+  }
+  .solution-copy .solution-lead {
+    max-width: 38ch;
+    margin: 22px 0 0;
+    font-size: 17px;
+    line-height: 1.52;
+    color: var(--muted);
+  }
+  .solution-points {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 24px;
+  }
+  .solution-points span {
+    padding: 7px 10px;
+    border: 1px solid var(--o2);
+    border-radius: 999px;
+    background: var(--o1);
+    color: var(--o7);
+    font-size: 10px;
+    font-weight: 700;
+  }
+  .solution-media {
+    position: relative;
+    height: 520px;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--line);
+    border-radius: 24px;
+    background: rgba(250,249,246,.82);
+    overflow: hidden;
+  }
+  .solution-media::before {
+    content: attr(data-label);
+    position: absolute;
+    z-index: 2;
+    top: 14px;
+    left: 14px;
+    padding: 5px 8px;
+    border-radius: 999px;
+    background: rgba(255,255,255,.88);
+    border: 1px solid var(--line);
+    color: var(--faint);
+    font-family: var(--mono);
+    font-size: 7px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    backdrop-filter: blur(8px);
+  }
+  .solution-media img,
+  .solution-media video {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+  }
+  .solution-media video {
+    background: #080808;
+  }
+  .solution-media.video {
+    border-color: rgba(227,72,38,.28);
+    box-shadow: 0 18px 44px rgba(83,44,31,.12);
+  }
+  .solution-media.video::before {
+    color: #fff;
+    border-color: rgba(255,255,255,.18);
+    background: rgba(26,25,24,.72);
   }
 </style></style>
 </head>
@@ -1317,7 +1439,7 @@
               </div>
               <div class="p-name">Prima proposta</div>
               <div class="p-divider"></div>
-              <div class="p-scenario">Rilevato riscaldamento attivo senza presenza nella seconda casa.</div>
+              <div class="p-scenario full-copy">Rilevato riscaldamento attivo senza presenza nella seconda casa.</div>
               <div class="p-bubble">"Seconda casa vuota ma riscaldamento attivo. Spegno?"</div>
               <div class="p-spacer"></div>
             </div>
@@ -1373,7 +1495,7 @@
               </div>
               <div class="p-name">Vista unificata</div>
               <div class="p-divider"></div>
-              <div class="p-scenario">CO2, umidità e consumi in un'unica schermata per la prima volta.</div>
+              <div class="p-scenario full-copy">CO2, umidità e consumi in un'unica schermata per la prima volta.</div>
               
               <div class="p-spacer"></div>
             </div>
@@ -1409,7 +1531,7 @@
               </div>
               <div class="p-name">Sprechi</div>
               <div class="p-divider"></div>
-              <div class="p-scenario">L'AI propone lo spegnimento notturno dei dispositivi inutilizzati.</div>
+              <div class="p-scenario full-copy">L'AI propone lo spegnimento notturno dei dispositivi inutilizzati.</div>
               <div class="p-bubble">"Spreco notturno rilevato. Posso spegnere alle 23:00?"</div>
               <div class="p-spacer"></div>
             </div>
@@ -1571,6 +1693,102 @@
       </div>
     </section>
 
+    <!-- ============ SLIDE 9 · SOLUZIONE DASHBOARD ============ -->
+    <section class="slide solution-slide" data-name="Soluzione · Dashboard">
+      <div class="solution-head">
+        <div class="kicker"><span class="dot"></span>07 · Le nostre soluzioni</div>
+        <span class="solution-index">01 / Dashboard</span>
+      </div>
+      <div class="solution-layout">
+        <div class="solution-copy">
+          <div class="eyebrow">Diagnosi, non numeri</div>
+          <h2>La Dashboard diventa il centro notifiche.</h2>
+          <p class="solution-lead">Non una griglia di dati da interpretare, ma un unico punto in cui la casa racconta ciò che conta. Casper sintetizza segnali, priorità e conseguenze, propone un’azione e lascia sempre all’utente la decisione finale.</p>
+          <div class="solution-points"><span>Priorità contestuali</span><span>Azioni immediate</span><span>Controllo umano</span></div>
+        </div>
+        <figure class="solution-media" data-label="Mockup statico">
+          <img src="assets/solutions/dashboard.png" alt="Mockup statico della Dashboard Casper">
+        </figure>
+        <figure class="solution-media video" data-label="Demo interattiva">
+          <video muted loop playsinline preload="metadata" poster="assets/solutions/dashboard.png">
+            <source src="assets/solutions/dashboard.mp4" type="video/mp4">
+          </video>
+        </figure>
+      </div>
+    </section>
+
+    <!-- ============ SLIDE 10 · SOLUZIONE APPRENDIMENTO ============ -->
+    <section class="slide solution-slide" data-name="Soluzione · Apprendimento">
+      <div class="solution-head">
+        <div class="kicker"><span class="dot"></span>07 · Le nostre soluzioni</div>
+        <span class="solution-index">02 / Apprendimento</span>
+      </div>
+      <div class="solution-layout">
+        <div class="solution-copy">
+          <div class="eyebrow">Una stanza alla volta</div>
+          <h2>La casa impara mentre la vivi.</h2>
+          <p class="solution-lead">Con il consenso dell’utente, l’app dialoga con Salute su iPhone e combina passi e posizione per riconoscere i percorsi ricorrenti. La casa viene mappata progressivamente, stanza per stanza, senza richiedere un onboarding rigido.</p>
+          <div class="solution-points"><span>Apple Salute</span><span>Passi e posizione</span><span>Mappa progressiva</span></div>
+        </div>
+        <figure class="solution-media" data-label="Mockup statico">
+          <img src="assets/solutions/apprendimento.png" alt="Mockup statico della funzione Apprendimento">
+        </figure>
+        <figure class="solution-media video" data-label="Demo interattiva">
+          <video muted loop playsinline preload="metadata" poster="assets/solutions/apprendimento.png">
+            <source src="assets/solutions/apprendimento.mp4" type="video/mp4">
+          </video>
+        </figure>
+      </div>
+    </section>
+
+    <!-- ============ SLIDE 11 · SOLUZIONE MODALITÀ ESSENZIALE ============ -->
+    <section class="slide solution-slide" data-name="Soluzione · Modalità essenziale">
+      <div class="solution-head">
+        <div class="kicker"><span class="dot"></span>07 · Le nostre soluzioni</div>
+        <span class="solution-index">03 / Modalità essenziale</span>
+      </div>
+      <div class="solution-layout">
+        <div class="solution-copy">
+          <div class="eyebrow">Continuità senza Wi-Fi</div>
+          <h2>La casa resta utilizzabile anche offline.</h2>
+          <p class="solution-lead">Se il Wi-Fi domestico si interrompe, lo smartphone o un assistente vocale disponibile attiva un hotspot temporaneo che replica nome e credenziali della rete. I dispositivi riconoscono la connessione e proseguono automaticamente con i controlli essenziali.</p>
+          <div class="solution-points"><span>Hotspot automatico</span><span>Stesso SSID</span><span>Controlli essenziali</span></div>
+        </div>
+        <figure class="solution-media" data-label="Mockup statico">
+          <img src="assets/solutions/modalita-essenziale.png" alt="Mockup statico della Modalità essenziale">
+        </figure>
+        <figure class="solution-media video" data-label="Demo interattiva">
+          <video muted loop playsinline preload="metadata" poster="assets/solutions/modalita-essenziale.png">
+            <source src="assets/solutions/modalita-essenziale.mp4" type="video/mp4">
+          </video>
+        </figure>
+      </div>
+    </section>
+
+    <!-- ============ SLIDE 12 · SOLUZIONE WIDGET ============ -->
+    <section class="slide solution-slide" data-name="Soluzione · Widget dinamici">
+      <div class="solution-head">
+        <div class="kicker"><span class="dot"></span>07 · Le nostre soluzioni</div>
+        <span class="solution-index">04 / Widget dinamici</span>
+      </div>
+      <div class="solution-layout">
+        <div class="solution-copy">
+          <div class="eyebrow">La casa sulla lock screen</div>
+          <h2>Il widget cambia insieme alla stanza.</h2>
+          <p class="solution-lead">La schermata di blocco mostra solo le funzioni utili nel contesto corrente. Entrando in una stanza, il widget aggiorna contenuti e azioni rapide: clima, luci, tapparelle e scenari diventano disponibili senza aprire l’app.</p>
+          <div class="solution-points"><span>Contesto ambientale</span><span>Azioni rapide</span><span>Zero navigazione</span></div>
+        </div>
+        <figure class="solution-media" data-label="Mockup statico">
+          <img src="assets/solutions/widget.png" alt="Mockup statico dei widget dinamici in schermata di blocco">
+        </figure>
+        <figure class="solution-media video" data-label="Demo interattiva">
+          <video muted loop playsinline preload="metadata" poster="assets/solutions/widget.png">
+            <source src="assets/solutions/widget.mp4" type="video/mp4">
+          </video>
+        </figure>
+      </div>
+    </section>
+
 
   </div>
 </div>
@@ -1609,6 +1827,16 @@
     void enterSlide.offsetWidth; // reflow to trigger cross-fade
     enterSlide.classList.add('active');
 
+    // Play only the demo video belonging to the active solution slide.
+    document.querySelectorAll('.solution-media video').forEach(function(video){
+      video.pause();
+    });
+    var activeDemo = enterSlide.querySelector('.solution-media video');
+    if (activeDemo) {
+      activeDemo.currentTime = 0;
+      activeDemo.play().catch(function(){});
+    }
+
     cur.textContent = i + 1;
     document.body.className = 'slide-' + i;
   }
@@ -1636,7 +1864,7 @@
   // 1. Click-to-navigate (Right half -> Next, Left half -> Prev)
   document.addEventListener('click', e => {
     // Do not navigate if clicking interactive elements
-    if (e.target.closest('button') || e.target.closest('.jtab-btn') || e.target.closest('.card') || e.target.closest('.opp-card') || e.target.closest('.ins')) {
+    if (e.target.closest('button') || e.target.closest('video') || e.target.closest('.jtab-btn') || e.target.closest('.card') || e.target.closest('.opp-card') || e.target.closest('.ins')) {
       return;
     }
     if (e.clientX > window.innerWidth / 2) {
