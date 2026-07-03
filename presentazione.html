@@ -998,27 +998,13 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 1px solid var(--line);
-    border-radius: 24px;
-    background: rgba(250,249,246,.82);
-    overflow: hidden;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    overflow: visible;
   }
   .solution-media::before {
-    content: attr(data-label);
-    position: absolute;
-    z-index: 2;
-    top: 14px;
-    left: 14px;
-    padding: 5px 8px;
-    border-radius: 999px;
-    background: rgba(255,255,255,.88);
-    border: 1px solid var(--line);
-    color: var(--faint);
-    font-family: var(--mono);
-    font-size: 7px;
-    letter-spacing: .12em;
-    text-transform: uppercase;
-    backdrop-filter: blur(8px);
+    display: none;
   }
   .solution-media img,
   .solution-media video {
@@ -1028,16 +1014,90 @@
     display: block;
   }
   .solution-media video {
-    background: #080808;
+    background: transparent;
+    border-radius: 42px;
   }
   .solution-media.video {
-    border-color: rgba(227,72,38,.28);
-    box-shadow: 0 18px 44px rgba(83,44,31,.12);
+    border: 0;
+    box-shadow: none;
   }
   .solution-media.video::before {
+    display: none;
+  }
+
+  /* ---------- Chiusura ---------- */
+  .thanks-slide {
+    background:
+      radial-gradient(circle at 82% 18%, rgba(227,72,38,.28), transparent 34%),
+      radial-gradient(circle at 18% 88%, rgba(245,155,122,.4), transparent 38%),
+      linear-gradient(145deg, #fff 0%, #fdf4ef 100%);
+  }
+  .thanks-content {
+    height: 100%;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 72px;
+    align-items: center;
+  }
+  .thanks-copy h2 {
+    margin: 0;
+    max-width: 10ch;
+    font-size: 72px;
+    line-height: 1.02;
+    letter-spacing: -.05em;
+  }
+  .thanks-copy p {
+    max-width: 46ch;
+    margin: 24px 0 28px;
+    font-size: 18px;
+    line-height: 1.5;
+    color: var(--muted);
+  }
+  .prototype-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 20px;
+    border-radius: 999px;
+    background: var(--brand);
     color: #fff;
-    border-color: rgba(255,255,255,.18);
-    background: rgba(26,25,24,.72);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 700;
+    box-shadow: 0 12px 28px rgba(227,72,38,.22);
+  }
+  .prototype-cta::after {
+    content: "↗";
+    font-size: 18px;
+  }
+  .thanks-qr {
+    width: 246px;
+    padding: 22px;
+    border-radius: 28px;
+    background: rgba(255,255,255,.82);
+    border: 1px solid rgba(227,72,38,.18);
+    text-align: center;
+    box-shadow: 0 18px 50px rgba(83,44,31,.11);
+  }
+  .thanks-qr img {
+    display: block;
+    width: 200px;
+    height: 200px;
+    padding: 8px;
+    border-radius: 14px;
+    background: #fff;
+  }
+  .thanks-qr strong {
+    display: block;
+    margin-top: 14px;
+    font-size: 14px;
+  }
+  .thanks-qr span {
+    display: block;
+    margin-top: 5px;
+    color: var(--muted);
+    font-size: 11px;
+    line-height: 1.35;
   }
 </style></style>
 </head>
@@ -1706,10 +1766,10 @@
           <p class="solution-lead">Non una griglia di dati da interpretare, ma un unico punto in cui la casa racconta ciò che conta. Casper sintetizza segnali, priorità e conseguenze, propone un’azione e lascia sempre all’utente la decisione finale.</p>
           <div class="solution-points"><span>Priorità contestuali</span><span>Azioni immediate</span><span>Controllo umano</span></div>
         </div>
-        <figure class="solution-media" data-label="Mockup statico">
+        <figure class="solution-media">
           <img src="assets/solutions/dashboard.png" alt="Mockup statico della Dashboard Casper">
         </figure>
-        <figure class="solution-media video" data-label="Demo interattiva">
+        <figure class="solution-media video">
           <video muted loop playsinline preload="metadata" poster="assets/solutions/dashboard.png">
             <source src="assets/solutions/dashboard.mp4" type="video/mp4">
           </video>
@@ -1730,10 +1790,10 @@
           <p class="solution-lead">Con il consenso dell’utente, l’app dialoga con Salute su iPhone e combina passi e posizione per riconoscere i percorsi ricorrenti. La casa viene mappata progressivamente, stanza per stanza, senza richiedere un onboarding rigido.</p>
           <div class="solution-points"><span>Apple Salute</span><span>Passi e posizione</span><span>Mappa progressiva</span></div>
         </div>
-        <figure class="solution-media" data-label="Mockup statico">
+        <figure class="solution-media">
           <img src="assets/solutions/apprendimento.png" alt="Mockup statico della funzione Apprendimento">
         </figure>
-        <figure class="solution-media video" data-label="Demo interattiva">
+        <figure class="solution-media video">
           <video muted loop playsinline preload="metadata" poster="assets/solutions/apprendimento.png">
             <source src="assets/solutions/apprendimento.mp4" type="video/mp4">
           </video>
@@ -1754,10 +1814,10 @@
           <p class="solution-lead">Se il Wi-Fi domestico si interrompe, lo smartphone o un assistente vocale disponibile attiva un hotspot temporaneo che replica nome e credenziali della rete. I dispositivi riconoscono la connessione e proseguono automaticamente con i controlli essenziali.</p>
           <div class="solution-points"><span>Hotspot automatico</span><span>Stesso SSID</span><span>Controlli essenziali</span></div>
         </div>
-        <figure class="solution-media" data-label="Mockup statico">
+        <figure class="solution-media">
           <img src="assets/solutions/modalita-essenziale.png" alt="Mockup statico della Modalità essenziale">
         </figure>
-        <figure class="solution-media video" data-label="Demo interattiva">
+        <figure class="solution-media video">
           <video muted loop playsinline preload="metadata" poster="assets/solutions/modalita-essenziale.png">
             <source src="assets/solutions/modalita-essenziale.mp4" type="video/mp4">
           </video>
@@ -1778,14 +1838,31 @@
           <p class="solution-lead">La schermata di blocco mostra solo le funzioni utili nel contesto corrente. Entrando in una stanza, il widget aggiorna contenuti e azioni rapide: clima, luci, tapparelle e scenari diventano disponibili senza aprire l’app.</p>
           <div class="solution-points"><span>Contesto ambientale</span><span>Azioni rapide</span><span>Zero navigazione</span></div>
         </div>
-        <figure class="solution-media" data-label="Mockup statico">
+        <figure class="solution-media">
           <img src="assets/solutions/widget.png" alt="Mockup statico dei widget dinamici in schermata di blocco">
         </figure>
-        <figure class="solution-media video" data-label="Demo interattiva">
+        <figure class="solution-media video">
           <video muted loop playsinline preload="metadata" poster="assets/solutions/widget.png">
             <source src="assets/solutions/widget.mp4" type="video/mp4">
           </video>
         </figure>
+      </div>
+    </section>
+
+    <!-- ============ SLIDE 13 · GRAZIE ============ -->
+    <section class="slide thanks-slide" data-name="Grazie">
+      <div class="thanks-content">
+        <div class="thanks-copy">
+          <div class="kicker"><span class="dot"></span>GEWISS · CASPER</div>
+          <h2>Grazie dell’attenzione.</h2>
+          <p>Il prototipo interattivo è disponibile per esplorare direttamente da PC la Dashboard, l’Apprendimento, i Widget e la Modalità essenziale.</p>
+          <a class="prototype-cta" href="https://htmlpreview.github.io/?https://raw.githubusercontent.com/Ragno236/Gewiss/14cc7fbbbaecd95d7e4e6caf4281d95a9c1383e8/prototipo-iphone17.html" target="_blank" rel="noopener noreferrer">Visiona il prototipo su PC</a>
+        </div>
+        <div class="thanks-qr">
+          <img id="thanksQr" src="" alt="QR code per aprire il prototipo Casper da smartphone">
+          <strong>Aprilo dal telefono</strong>
+          <span>Inquadra il QR code per esplorare il prototipo mobile.</span>
+        </div>
       </div>
     </section>
 
@@ -1864,7 +1941,7 @@
   // 1. Click-to-navigate (Right half -> Next, Left half -> Prev)
   document.addEventListener('click', e => {
     // Do not navigate if clicking interactive elements
-    if (e.target.closest('button') || e.target.closest('video') || e.target.closest('.jtab-btn') || e.target.closest('.card') || e.target.closest('.opp-card') || e.target.closest('.ins')) {
+    if (e.target.closest('button') || e.target.closest('a') || e.target.closest('video') || e.target.closest('.jtab-btn') || e.target.closest('.card') || e.target.closest('.opp-card') || e.target.closest('.ins')) {
       return;
     }
     if (e.clientX > window.innerWidth / 2) {
@@ -1923,6 +2000,11 @@
     const protoUrl = currentUrl.replace('presentazione.html', 'prototipo-iphone17.html');
     presQrImg.src = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(protoUrl)}`;
     presQrImg.style.display = 'block';
+  }
+  const thanksQrImg = document.getElementById('thanksQr');
+  if (thanksQrImg) {
+    const finalPrototypeUrl = 'https://htmlpreview.github.io/?https://raw.githubusercontent.com/Ragno236/Gewiss/14cc7fbbbaecd95d7e4e6caf4281d95a9c1383e8/prototipo-iphone17.html';
+    thanksQrImg.src = `https://api.qrserver.com/v1/create-qr-code/?size=400x400&margin=8&data=${encodeURIComponent(finalPrototypeUrl)}`;
   }
 </script>
 </body>
